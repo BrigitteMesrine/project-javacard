@@ -17,6 +17,7 @@ public class App extends Application {
 
     private static Scene scene;
 
+<<<<<<< HEAD
     
 
     @Override
@@ -37,6 +38,15 @@ public class App extends Application {
         scene = new Scene(loadFXML("tableview"));
         stage.setMinWidth(600);
         stage.setMinHeight(300); 
+=======
+    // warning suppression for
+    // java:S2696 : asking for method to be static
+    @SuppressWarnings({"java:S2696"})
+    @Override
+    public void start(Stage stage) throws IOException {
+
+        scene = new Scene(loadFXML("tableview"), 1024, 768);
+>>>>>>> 63819de082be06295eb148a96a4be625ab7552c2
         stage.setScene(scene);
         stage.show();
     }
