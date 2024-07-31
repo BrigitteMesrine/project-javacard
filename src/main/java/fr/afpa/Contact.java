@@ -1,5 +1,6 @@
 package fr.afpa;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javafx.beans.property.ObjectProperty;
@@ -7,7 +8,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Contact {
+public class Contact implements Serializable{
 
     // attributes are declare as *Property objects
     // in order to be usable in TableView objects columns
