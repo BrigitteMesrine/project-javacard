@@ -37,6 +37,8 @@ public class ContactBinarySerializer implements Serializer<Contact>{
         }
     }
 
+    // defined but must not be called when updating contact list
+    // add single object to a List<> and call saveList instead
     @Override
     public void save(String filePath, Contact contact) {
         try {
