@@ -1,3 +1,5 @@
+// test class for serializazer
+
 package fr.afpa;
 
 import java.util.ArrayList;
@@ -12,11 +14,13 @@ public class Test {
         Contact contactTest2 = new Contact("Jean", "JEAN", "0707070707", "jean@jean.com",
         "37 rue du trente-sept", "33370", Contact.Gender.NON_BINARY, null, null, null, null);
 
+        // add new contacts to this list, modify existing objects from this list
         ArrayList<Contact> contacts = new ArrayList<>();
         contacts.add(contactTest);
         contacts.add(contactTest2);
 
-        ContactBinarySerializer contactBinarySerializer = new ContactBinarySerializer();
+        // then overwrite serial file with updated ArrayList<>
+        ContactBinarySerializer contactBinarySerializer = new ContactBinarySerializer(); // is there a way to make this static ?
         contactBinarySerializer.saveList("contacts.serial", contacts);
     }
 }
