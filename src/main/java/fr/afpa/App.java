@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.io.*;
 
 /**
  * JavaFX App
@@ -16,6 +15,9 @@ public class App extends Application {
 
     private static Scene scene;
 
+    // warning suppression for
+    // java:S2696 : asking for method to be static
+    @SuppressWarnings({"java:S2696"})
     @Override
     public void start(Stage stage) throws IOException {
 
