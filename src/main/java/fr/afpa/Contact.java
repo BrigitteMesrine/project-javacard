@@ -8,7 +8,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Contact implements Serializable{
+public class Contact implements Serializable {
 
     // attributes are declare as *Property objects
     // in order to be usable in TableView objects columns
@@ -22,7 +22,15 @@ public class Contact implements Serializable{
     private StringProperty email;
     private StringProperty address;
     private StringProperty zipCode;
-    private StringProperty gender;
+
+    // enum is public to avoid contructor warning
+    public enum Gender {
+        MALE,
+        FEMALE,
+        NON_BINARY
+    }
+
+    private ObjectProperty<Enum<Gender>> gender;
 
     // optional attributes
     private ObjectProperty<LocalDate> birthDate;
@@ -32,10 +40,10 @@ public class Contact implements Serializable{
 
     // warning suppression for
     // java:S107 too many parameters
-    // java:S2293 reminder of SimpleObjectProperty<> type -> LocalDate
+    // java:S2293 reminder of SimpleObjectProperty<> type -> Enum<Gender>, LocalDate
     @SuppressWarnings({ "java:S107", "java:S2293" })
     public Contact(String firstName, String lastName, String persoPhone, String email,
-            String address, String zipCode, String gender, LocalDate birthDate,
+            String address, String zipCode, Enum<Gender> gender, LocalDate birthDate,
             String proPhone, String pseudo, String gitLink) {
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
@@ -43,7 +51,7 @@ public class Contact implements Serializable{
         this.email = new SimpleStringProperty(email);
         this.address = new SimpleStringProperty(address);
         this.zipCode = new SimpleStringProperty(zipCode);
-        this.gender = new SimpleStringProperty(gender);
+        this.gender = new SimpleObjectProperty<Enum<Gender>>(gender);
         this.birthDate = new SimpleObjectProperty<LocalDate>(birthDate);
         this.proPhone = new SimpleStringProperty(proPhone);
         this.pseudo = new SimpleStringProperty(pseudo);
@@ -99,12 +107,15 @@ public class Contact implements Serializable{
         this.zipCode = new SimpleStringProperty(zipCode);
     }
 
-    public StringProperty getGender() {
+    public ObjectProperty<Enum<Gender>> getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
-        this.gender = new SimpleStringProperty(gender);
+    // warning suppression for
+    // java:S2293 reminder of SimpleObjectProperty<> type -> Enum<Gender>
+    @SuppressWarnings({ "java:S2293" })
+    public void setGender(Enum<Gender> gender) {
+        this.gender = new SimpleObjectProperty<Enum<Gender>>(gender);
     }
 
     public ObjectProperty<LocalDate> getBirthDate() {
