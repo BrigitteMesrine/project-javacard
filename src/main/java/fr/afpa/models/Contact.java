@@ -33,6 +33,9 @@ public class Contact implements Serializable {
     private String proPhone;
     private String pseudo;
     private String gitLink;
+
+    // TODO rework ID, why does it start at 1 and doesn't increment ?
+    // unique ID
     private int id;
     
     
@@ -40,7 +43,7 @@ public class Contact implements Serializable {
     // java:S107 too many parameters
     @SuppressWarnings({"java:S107"})
     public Contact(String firstName, String lastName, String persoPhone, String email, String address, String zipCode,
-            Enum<Gender> gender, LocalDate birthDate, String proPhone, String pseudo, String gitLink, int id) {
+            Enum<Gender> gender, LocalDate birthDate, String proPhone, String pseudo, String gitLink) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.persoPhone = persoPhone;
@@ -52,7 +55,7 @@ public class Contact implements Serializable {
         this.proPhone = proPhone;
         this.pseudo = pseudo;
         this.gitLink = gitLink;
-        this.id = id;
+        this.id++;
     }
 
     public String getFirstName() {
