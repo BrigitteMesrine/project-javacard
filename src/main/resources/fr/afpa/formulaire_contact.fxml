@@ -1,130 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 
-<BorderPane xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.afpa.TableViewController">
-   <top>
-      <HBox alignment="CENTER_LEFT" maxHeight="47.0" maxWidth="600.0" minHeight="47.0" minWidth="600.0" prefHeight="47.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label alignment="TOP_LEFT" text="Contact" textOverrun="CLIP">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-               <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </HBox.margin>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </Label>
-         </children>
-      </HBox>
-   </top>
-   <left>
-      <TableView fx:id="personnesTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="333.0" minWidth="431.0" prefHeight="333.0" prefWidth="431.0" BorderPane.alignment="CENTER">
-         <columns>
-            <TableColumn fx:id="prenomCol" prefWidth="138.0" text="Prénom" />
-            <TableColumn fx:id="nomCol" prefWidth="87.0" text="Nom" />
-            <TableColumn fx:id="villeCol" prefWidth="97.0" text="Ville" />
-         </columns>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-         <BorderPane.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </BorderPane.margin>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
-      </TableView>
-   </left>
-   <right>
-      <VBox maxHeight="343.0" maxWidth="199.0" minHeight="343.0" minWidth="120.0" prefHeight="343.0" prefWidth="199.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label minWidth="100.0" text="Prénom :">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </Label>
-            <TextField fx:id="prenomTextField" minWidth="100.0" promptText="Prénom...">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </TextField>
-            <Label minWidth="100.0" text="Nom :">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </Label>
-            <TextField fx:id="nomTextField" minWidth="100.0" promptText="Nom...">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </TextField>
-            <Label minWidth="100.0" text="Ville :">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </Label>
-            <TextField fx:id="villeTextField" minWidth="100.0" promptText="Ville...">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </TextField>
-            <HBox alignment="CENTER">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
-               <children>
-                  <Button fx:id="annulerButton" mnemonicParsing="false" text="Annuler">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="sauverButton" mnemonicParsing="false" text="Sauver">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER">
-               <VBox.margin>
-                  <Insets bottom="5.0" top="5.0" />
-               </VBox.margin>
-               <children>
-                  <Button fx:id="supprimerButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Supprimer" textAlignment="CENTER">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </Button>
-               </children>
-            </HBox>
-         </children>
-         <BorderPane.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </BorderPane.margin>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-      </VBox>
-   </right>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="mon.application.MonControleur">
+    <top>
+        <HBox spacing="10">
+            <Label text="Logo / Afpa"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button text="Accueil"/>
+            <Button text="Contacts"/>
+            <Button text="Aide"/>
+        </HBox>
+    </top>
+    <left>
+        <VBox spacing="10">
+            <Button text="Select All" fx:id="selectAllButton"/>
+            <Button text="Clear" fx:id="clearButton"/>
+            <Button text="vCard" fx:id="vCardButton"/>
+            <Button text="JSON" fx:id="jsonButton"/>
+        </VBox>
+    </left>
+    <center>
+        <TableView fx:id="contactsTable">
+            <columns>
+                <TableColumn text="nom" fx:id="nomColumn"/>
+                <TableColumn text="prénom" fx:id="prenomColumn"/>
+                <TableColumn text="tél" fx:id="telColumn"/>
+            </columns>
+        </TableView>
+    </center>
+    <right>
+        <VBox spacing="10">
+            <VBox spacing="10">
+                <TitledPane text="OBLIGATOIRE*" collapsible="false">
+                    <GridPane hgap="10" vgap="10" padding="10">
+                        <Label text="Nom:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <TextField fx:id="nomField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                        <Label text="Tél perso:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                        <TextField fx:id="telPersoField" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+                        <Label text="Prénom:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <TextField fx:id="prenomField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                        <Label text="Email:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                        <TextField fx:id="emailField" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+                        <Label text="Adresse:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <TextField fx:id="adresseField" GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="3"/>
+                        <Label text="Code postal:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <TextField fx:id="codePostalField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                        <Label text="Genre:" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+                        <HBox GridPane.rowIndex="3" GridPane.columnIndex="3" spacing="10">
+                            <RadioButton text="M" fx:id="genreM"/>
+                            <RadioButton text="F" fx:id="genreF"/>
+                            <RadioButton text="Autre" fx:id="genreAutre"/>
+                        </HBox>
+                    </GridPane>
+                </TitledPane>
+                <TitledPane text="OPTIONNEL" collapsible="false">
+                    <GridPane hgap="10" vgap="10" padding="10">
+                        <Label text="Date de naissance:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <DatePicker fx:id="dateNaissancePicker" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                        <Label text="Tél pro:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                        <TextField fx:id="telProField" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+                        <Label text="Pseudo:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <TextField fx:id="pseudoField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                        <Label text="Lien git:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <TextField fx:id="lienGitField" GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="3"/>
+                    </GridPane>
+                </TitledPane>
+            </VBox>
+            <VBox spacing="10">
+                <Button text="Nouveau" fx:id="nouveauButton"/>
+                <Button text="Modifier" fx:id="modifierButton"/>
+                <Button text="Sauvegarder" fx:id="sauvegarderButton"/>
+                <Button text="Supprimer" fx:id="supprimerButton"/>
+                <Button text="Quitter" fx:id="quitterButton"/>
+            </VBox>
+        </VBox>
+    </right>
 </BorderPane>

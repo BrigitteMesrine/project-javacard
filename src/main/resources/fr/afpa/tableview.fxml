@@ -13,7 +13,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.afpa.TableViewController">
    <top>
-      <HBox alignment="CENTER_LEFT" maxHeight="1080.0" maxWidth="1920.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="10240.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" maxHeight="47.0" maxWidth="600.0" minHeight="47.0" minWidth="600.0" prefHeight="47.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="TOP_LEFT" text="Tableau de personnes" textOverrun="CLIP">
                <font>
