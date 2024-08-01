@@ -67,6 +67,12 @@ public class FormulaireContactController {
         telColumn.setCellValueFactory(new PropertyValueFactory<>("tel"));
 
         // Ajouter les listeners et les handlers ici
+
+        // Code permettant aux colonnes de se redimensionner dynamiquement en fonction de la taille
+        // de la la TableView
+        nomColumn.prefWidthProperty().bind(contactsTable.widthProperty().divide(3));
+        prenomColumn.prefWidthProperty().bind(contactsTable.widthProperty().divide(3)); 
+        telColumn.prefWidthProperty().bind(contactsTable.widthProperty().divide(3)); 
     }
 
     @FXML

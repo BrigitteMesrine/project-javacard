@@ -70,7 +70,7 @@ public class TableViewController {
 
     @FXML
     private void handleSauverAction(ActionEvent event) {
-        // TODO Implémenter la logique de sauvegarde d'une nouvelle personne
+        // Todo Implémenter la logique de sauvegarde d'une nouvelle personne
 
         // 1 instancier une nouvelle personne en utilisant les informations contenues dans les "TextField"
         // Pour obtenir la valeur contenue dans un "TextField" il est possible d'utiliser la méthode ".getText()". Par exemple "prenomTextField.getText()"
@@ -97,7 +97,7 @@ public class TableViewController {
 
     @FXML
     private void handleSupprimerAction(ActionEvent event) {
-        // TODO Implémenter la logique de suppression d'une personne sélectionnée
+        // Todo Implémenter la logique de suppression d'une personne sélectionnée
 
         // 1 retrouver la personne à supprimer du tableau (sauvegarder dans une variable)
         // personnesTable.getSelectionModel().getSelectedItem()

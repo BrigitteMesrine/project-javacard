@@ -110,49 +110,6 @@
             </HBox>
             <HBox prefHeight="655.0" prefWidth="1024.0">
                <children>
-                  <VBox layoutX="921.0" layoutY="10.0" prefHeight="567.0" prefWidth="93.0">
-                     <children>
-                        <Button fx:id="selectAllButton11" mnemonicParsing="false" text="Select All">
-                           <VBox.margin>
-                              <Insets bottom="50.0" left="10.0" right="10.0" top="50.0" />
-                           </VBox.margin>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </Button>
-                        <Button fx:id="clearButton11" mnemonicParsing="false" text="Clear">
-                           <VBox.margin>
-                              <Insets bottom="50.0" left="10.0" right="10.0" top="50.0" />
-                           </VBox.margin>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </Button>
-                        <Button fx:id="vCardButton11" mnemonicParsing="false" text="vCard">
-                           <VBox.margin>
-                              <Insets bottom="50.0" left="10.0" right="10.0" top="50.0" />
-                           </VBox.margin>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </Button>
-                        <HBox>
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                           <children>
-                              <Button fx:id="jsonButton11" mnemonicParsing="false" text="JSON">
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                              </Button>
-                           </children>
-                        </HBox>
-                     </children>
-                     <HBox.margin>
-                        <Insets bottom="10.0" top="100.0" />
-                     </HBox.margin>
-                  </VBox>
                   <TableView prefHeight="631.0" prefWidth="416.0">
                     <columns>
                       <TableColumn prefWidth="141.0" text="Nom" />
@@ -160,7 +117,7 @@
                         <TableColumn prefWidth="142.0" text="Téléphone" />
                     </columns>
                      <HBox.margin>
-                        <Insets bottom="50.0" />
+                        <Insets />
                      </HBox.margin>
                   </TableView>
                   <VBox>
@@ -174,23 +131,17 @@
                                           <Font size="27.0" />
                                        </font>
                                        <VBox.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                          <Insets />
                                        </VBox.margin>
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
                                     </Label>
-                                    <HBox prefHeight="148.0" prefWidth="344.0">
+                                    <HBox prefHeight="108.0" prefWidth="380.0">
                                        <children>
                                           <VBox prefHeight="148.0" prefWidth="177.0">
                                              <children>
                                                 <Label text="Nom">
                                                    <VBox.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                      <Insets />
                                                    </VBox.margin>
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </padding>
                                                 </Label>
                                                 <TextField fx:id="nomField" promptText="Nom ...">
                                                    <VBox.margin>
@@ -202,11 +153,8 @@
                                                 </TextField>
                                                 <Label text="Prénom">
                                                    <VBox.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                      <Insets />
                                                    </VBox.margin>
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </padding>
                                                 </Label>
                                                 <TextField fx:id="prenomField" promptText="Prénom ...">
                                                    <VBox.margin>
@@ -222,11 +170,8 @@
                                              <children>
                                                 <Label fx:id="telPersoField" text="Téléphone Perso.">
                                                    <VBox.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                      <Insets />
                                                    </VBox.margin>
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </padding>
                                                 </Label>
                                                 <TextField fx:id="telephonePersonnelField" promptText="Téléphone Perso. ...">
                                                    <VBox.margin>
@@ -238,11 +183,8 @@
                                                 </TextField>
                                                 <Label text="Email">
                                                    <VBox.margin>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                      <Insets />
                                                    </VBox.margin>
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </padding>
                                                 </Label>
                                                 <TextField fx:id="emailField" promptText="Email ...">
                                                    <VBox.margin>
@@ -258,11 +200,8 @@
                                     </HBox>
                                     <Label fx:id="adresseField" text="Adresse">
                                        <VBox.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                          <Insets />
                                        </VBox.margin>
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
                                     </Label>
                                     <TextField fx:id="adresseField" prefHeight="27.0" prefWidth="322.0" promptText="Adresse ...">
                                        <VBox.margin>
@@ -281,11 +220,8 @@
                                              <children>
                                                 <Label fx:id="codePostalField" prefWidth="85.0" text="Code postal">
                                                    <VBox.margin>
-                                                      <Insets bottom="5.0" right="5.0" top="5.0" />
+                                                      <Insets />
                                                    </VBox.margin>
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </padding>
                                                 </Label>
                                                 <HBox>
                                                    <children>
@@ -293,24 +229,20 @@
                                                          <padding>
                                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                          </padding>
+                                                         <HBox.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </HBox.margin>
                                                       </TextField>
                                                    </children>
                                                 </HBox>
                                              </children>
                                              <HBox.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                <Insets />
                                              </HBox.margin>
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
                                           </VBox>
                                           <VBox>
                                              <children>
-                                                <Label fx:id="genreField1" text="Genre">
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </padding>
-                                                </Label>
+                                                <Label fx:id="genreField1" text="Genre" />
                                                 <HBox>
                                                    <children>
                                                       <RadioButton fx:id="hommeRadio" mnemonicParsing="false" text="M">
@@ -341,11 +273,8 @@
                                                 </HBox>
                                              </children>
                                              <HBox.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                <Insets />
                                              </HBox.margin>
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
                                           </VBox>
                                        </children>
                                     </HBox>
@@ -363,11 +292,8 @@
                                     <Font size="27.0" />
                                  </font>
                                  <VBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                    <Insets />
                                  </VBox.margin>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
                               </Label>
                               <HBox prefHeight="0.0" prefWidth="416.0">
                                  <children>
@@ -375,11 +301,8 @@
                                        <children>
                                           <Label fx:id="dateNaissanceField" text="Date de naissance">
                                              <VBox.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </VBox.margin>
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding></Label>
+                                                <Insets />
+                                             </VBox.margin></Label>
                                           <TextField fx:id="dateNaissanceField" promptText="Date de naissance ...">
                                              <VBox.margin>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -389,11 +312,8 @@
                                              </padding></TextField>
                                           <Label fx:id="pseudoField" text="Pseudo">
                                              <VBox.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </VBox.margin>
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding></Label>
+                                                <Insets />
+                                             </VBox.margin></Label>
                                           <TextField fx:id="pseudoField" promptText="Pseudo ...">
                                              <VBox.margin>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -407,11 +327,8 @@
                                        <children>
                                           <Label fx:id="telephoneProfessionnelField" text="Téléphone Pro.">
                                              <VBox.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </VBox.margin>
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding></Label>
+                                                <Insets />
+                                             </VBox.margin></Label>
                                           <TextField fx:id="telephoneProfessionnelField" promptText="Téléphone Perso. ...">
                                              <VBox.margin>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -425,15 +342,15 @@
                               </HBox>
                               <Label fx:id="lienDepotGitField" text="Lien git">
                                  <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin></Label>
+                              <TextField fx:id="lienDepotGitField" promptText="Lien git ...">
+                                 <VBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin>
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding></Label>
-                              <TextField fx:id="lienDepotGitField" promptText="Lien git ...">
-                                 <VBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </VBox.margin></TextField>
+                                 </padding></TextField>
                            </children>
                            <VBox.margin>
                               <Insets bottom="-30.0" />
@@ -444,81 +361,114 @@
                         <Insets />
                      </HBox.margin>
                   </VBox>
-                  <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <VBox>
-                           <children>
-                              <Button fx:id="selectAllButton1" mnemonicParsing="false" text="Nouveau">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                 <VBox.margin>
-                                    <Insets bottom="20.0" left="5.0" top="20.0" />
-                                 </VBox.margin>
-                              </Button>
-                              <Button fx:id="clearButton1" mnemonicParsing="false" text="Modifier">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                 <VBox.margin>
-                                    <Insets bottom="20.0" left="5.0" right="5.0" top="20.0" />
-                                 </VBox.margin>
-                              </Button>
-                              <Button fx:id="vCardButton1" mnemonicParsing="false" text="Supprimer">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                 <VBox.margin>
-                                    <Insets bottom="20.0" left="5.0" right="5.0" top="20.0" />
-                                 </VBox.margin>
-                              </Button>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="5.0" top="5.0" />
-                           </VBox.margin>
-                           <padding>
-                              <Insets bottom="5.0" top="5.0" />
-                           </padding>
-                        </VBox>
-                        <VBox>
-                           <children>
-                              <Button fx:id="jsonButton1" mnemonicParsing="false" text="Sauvegarder">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                 <VBox.margin>
-                                    <Insets bottom="100.0" left="5.0" right="5.0" top="100.0" />
-                                 </VBox.margin>
-                              </Button>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="5.0" top="5.0" />
-                           </VBox.margin>
-                           <padding>
-                              <Insets bottom="5.0" top="5.0" />
-                           </padding>
-                        </VBox>
-                        <VBox>
-                           <children>
-                              <Button fx:id="jsonButton11" mnemonicParsing="false" text="Quitter">
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                 <VBox.margin>
-                                    <Insets bottom="100.0" left="5.0" right="5.0" top="100.0" />
-                                 </VBox.margin>
-                              </Button>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </VBox.margin>
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                        </VBox>
-                     </children>
-                  </VBox>
                </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <HBox>
+                     <children>
+                        <Button fx:id="selectAllButton11" mnemonicParsing="false" text="Select All">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="50.0" right="50.0" top="5.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="clearButton11" mnemonicParsing="false" text="Clear">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="vCardButton11" mnemonicParsing="false" text="vCard">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="50.0" right="10.0" top="5.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <HBox.margin>
+                        <Insets right="100.0" />
+                     </HBox.margin>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <HBox>
+                           <children>
+                              <HBox>
+                                 <children>
+                                    <Button fx:id="selectAllButton1" mnemonicParsing="false" text="Nouveau">
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="20.0" right="50.0" top="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="clearButton1" mnemonicParsing="false" text="Modifier">
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="50.0" top="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="vCardButton1" mnemonicParsing="false" text="Supprimer">
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Button fx:id="jsonButton1" mnemonicParsing="false" text="Sauvegarder">
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="50.0" right="50.0" top="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Button fx:id="jsonButton11" mnemonicParsing="false" text="Quitter">
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </HBox>
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
             </HBox>
          </children>
       </VBox>
