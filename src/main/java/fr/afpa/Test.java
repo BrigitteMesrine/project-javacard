@@ -24,7 +24,9 @@ public class Test {
         contactBinarySerializer.saveList("contacts.serial", contacts);
 
         contacts = contactBinarySerializer.loadList("contacts.serial");
+        // Contact contact = null;
+        // contact = contactBinarySerializer.load("contacts.serial");
 
-        System.out.println(contacts.toString());
+        System.out.println(contacts.toString() + "\"");
     }
 }

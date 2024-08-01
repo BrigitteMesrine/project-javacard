@@ -104,8 +104,31 @@ public class ContactBinarySerializer implements Serializer<Contact>, Deserialize
 
     @Override
     public Contact load(String filePath) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'load'");
+        Contact contact = null;
+        try
+        {   
+            // Reading the object from a file
+            FileInputStream file = new FileInputStream(filePath);
+            ObjectInputStream in = new ObjectInputStream(file);
+             
+            // Method for deserialization of object
+            contact = (Contact) in.readObject();
+             
+            in.close();
+            file.close();
+
+        }
+         
+        catch(IOException ex)
+        {
+            System.out.println("IOException is caught");
+        }
+         
+        catch(ClassNotFoundException ex)
+        {
+            System.out.println("ClassNotFoundException is caught");
+        }
+        return contact;
     }
 
 }
