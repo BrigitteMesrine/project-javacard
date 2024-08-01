@@ -1,38 +1,42 @@
 package fr.afpa;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.afpa.models.Contact;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class ContactBinarySerializer implements Serializer<Contact>{
+public class ContactBinarySerializer implements Serializer<Contact>, Deserializer<Contact> {
 
     @Override
     public void saveList(String filePath, List<Contact> contactsToSave) {
         try {
             // ouverture d'un flux de sortie vers le fichier "contacts.serial"
-            FileOutputStream fos = new FileOutputStream("contacts.serial");
+            FileOutputStream fos = new FileOutputStream(filePath);
 
             // création d'un "flux objet" avec le flux fichier
-            ObjectOutputStream oos= new ObjectOutputStream(fos);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
             try {
                 // sérialisation : écriture de l'objet dans le flux de sortie
-                oos.writeObject(contactsToSave); 
+                oos.writeObject(contactsToSave);
                 // on vide le tampon
                 oos.flush();
-                System.out.println(contactsToSave + " a ete serialise");
+
             } finally {
-                //fermeture des flux
+                // fermeture des flux
                 try {
                     oos.close();
                 } finally {
                     fos.close();
                 }
             }
-        } catch(IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
@@ -43,27 +47,65 @@ public class ContactBinarySerializer implements Serializer<Contact>{
     public void save(String filePath, Contact contact) {
         try {
             // ouverture d'un flux de sortie vers le fichier "contacts.serial"
-            FileOutputStream fos = new FileOutputStream("contacts.serial");
+            FileOutputStream file = new FileOutputStream(filePath);
 
             // création d'un "flux objet" avec le flux fichier
-            ObjectOutputStream oos= new ObjectOutputStream(fos);
+            ObjectOutputStream out = new ObjectOutputStream(file);
             try {
                 // sérialisation : écriture de l'objet dans le flux de sortie
-                oos.writeObject(contact); 
+                out.writeObject(contact);
                 // on vide le tampon
-                oos.flush();
-                System.out.println(contact + " a ete serialise");
+                out.flush();
+
             } finally {
-                //fermeture des flux
+                // fermeture des flux
                 try {
-                    oos.close();
+                    out.close();
                 } finally {
-                    fos.close();
+                    file.close();
                 }
             }
-        } catch(IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
+    }
+
+    @Override
+    public ArrayList<Contact> loadList(String filePath) {
+
+        ArrayList<Contact> contacts = null;
+        try
+        {   
+            // Reading the object from a file
+            FileInputStream file = new FileInputStream(filePath);
+            ObjectInputStream in = new ObjectInputStream(file);
+             
+            // Method for deserialization of object
+            contacts = (ArrayList<Contact>) in.readObject();
+             
+            in.close();
+            file.close();
+
+        }
+         
+        catch(IOException ex)
+        {
+            System.out.println("IOException is caught");
+        }
+         
+        catch(ClassNotFoundException ex)
+        {
+            System.out.println("ClassNotFoundException is caught");
+        }
+        return contacts;
+    }
+
+
+
+    @Override
+    public Contact load(String filePath) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'load'");
     }
 
 }

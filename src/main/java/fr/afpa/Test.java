@@ -22,5 +22,9 @@ public class Test {
         // then overwrite serial file with updated ArrayList<>
         ContactBinarySerializer contactBinarySerializer = new ContactBinarySerializer(); // is there a way to make this static ?
         contactBinarySerializer.saveList("contacts.serial", contacts);
+
+        contacts = contactBinarySerializer.loadList("contacts.serial");
+
+        System.out.println(contacts.toString());
     }
 }
