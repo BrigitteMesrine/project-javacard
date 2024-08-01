@@ -1,4 +1,6 @@
 module fr.afpa {
+
+    requires json.simple;
     requires javafx.controls;
     requires transitive javafx.fxml;
     requires transitive javafx.graphics;
