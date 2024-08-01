@@ -46,7 +46,8 @@
                      <children>
                         <ImageView fitHeight="50.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../doc/images/logo.png" />
+                              <Image url="@images/logo.png" />
+                              <!--<Image url="C:\Users\diego\Documents\Evaluation\TP_evaluation_JavaFx\project-javacard\doc\images" /> -->
                            </image>
                            <HBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
