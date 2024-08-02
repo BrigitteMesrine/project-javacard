@@ -5,11 +5,11 @@ import java.io.Serializable;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 import com.github.cliftonlabs.json_simple.Jsonable;
-
 
 public class Contact implements Serializable, Jsonable {
 
@@ -44,11 +44,10 @@ public class Contact implements Serializable, Jsonable {
     // TODO rework ID, why does it start at 1 and doesn't increment ?
     // unique ID
     private int id;
-    
-    
+
     // warning suppression for
     // java:S107 too many parameters
-    @SuppressWarnings({"java:S107"})
+    @SuppressWarnings({ "java:S107" })
     public Contact(String firstName, String lastName, String persoPhone, String email, String address, String zipCode,
             Enum<Gender> gender, LocalDate birthDate, String proPhone, String pseudo, String gitLink) {
         this.firstName = firstName;
@@ -169,7 +168,7 @@ public class Contact implements Serializable, Jsonable {
                 + "]";
     }
 
-@Override
+    @Override
     public String toJson() {
         final StringWriter writable = new StringWriter();
         try {
@@ -183,22 +182,27 @@ public class Contact implements Serializable, Jsonable {
     @Override
     public void toJson(Writer writer) throws IOException {
         String genderString = "";
-                switch (this.gender) {
-                    case Contact.Gender.MALE:
-                        genderString = "MALE";
-                        break;
+        switch (this.gender) {
+            case Contact.Gender.MALE:
+                genderString = "MALE";
+                break;
 
-                    case Contact.Gender.FEMALE:
-                        genderString = "FEMALE";
-                        break;
+            case Contact.Gender.FEMALE:
+                genderString = "FEMALE";
+                break;
 
-                    case Contact.Gender.NON_BINARY:
-                        genderString = "NON_BINARY";
-                        break;
+            case Contact.Gender.NON_BINARY:
+                genderString = "NON_BINARY";
+                break;
 
-                    default:
-                        break;
-                }
+            default:
+                break;
+        }
+        String bDateString = null;
+        if (this.birthDate != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            bDateString = this.birthDate.format(formatter);
+        }
 
         JsonObject json = new JsonObject();
         json.put("firstName", this.firstName);
@@ -208,7 +212,7 @@ public class Contact implements Serializable, Jsonable {
         json.put("address", this.address);
         json.put("zipCode", this.zipCode);
         json.put("gender", genderString);
-        json.put("birthDate", this.birthDate);
+        json.put("birthDate", bDateString);
         json.put("proPhone", this.proPhone);
         json.put("pseudo", this.pseudo);
         json.put("gitLink", this.gitLink);
@@ -216,5 +220,4 @@ public class Contact implements Serializable, Jsonable {
         json.toJson(writer);
     }
 
-    
 }
