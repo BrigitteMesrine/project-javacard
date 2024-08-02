@@ -5,12 +5,13 @@ package fr.afpa;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import fr.afpa.ContactVerifier;
 import fr.afpa.models.Contact;
 
 public class Test {
     public static void main(String[] args) {
         
-        Contact contactTest = new Contact("Michel", "MICHEL", "0606060606", "miche@michel.com",
+        Contact contactTest = new Contact(null, "MICHEL", "0606060606", "miche@michel.com",
         "36 rue du trente-six", "33360", Contact.Gender.MALE, null, null, null, null);
         Contact contactTest2 = new Contact("Jean", "JEAN", "0707070707", "jean@jean.com",
         "37 rue du trente-sept", "33370", Contact.Gender.NON_BINARY, LocalDate.of(1985, 10, 26), null, null, null);
@@ -35,6 +36,9 @@ public class Test {
         ContactJSONSerializer contactJSONSerializer = new ContactJSONSerializer();
         contactJSONSerializer.saveList("contacts.json", contacts);
 
+
         System.out.println(contacts.toString() + "\"");
+        
+        System.out.println(ContactVerifier.verifyContact(contactTest));
     }
 }
