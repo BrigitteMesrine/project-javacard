@@ -30,7 +30,7 @@ public class Test {
         ContactVCardSerializer contactVCardSerializer = new ContactVCardSerializer();
         contactVCardSerializer.saveList(".vcf", contacts);
         ContactJSONSerializer contactJSONSerializer = new ContactJSONSerializer();
-        contactJSONSerializer.save("mescouilles.json", contactTest);
+        contactJSONSerializer.save("contacts.json", contactTest);
 
         System.out.println(contacts.toString() + "\"");
     }
