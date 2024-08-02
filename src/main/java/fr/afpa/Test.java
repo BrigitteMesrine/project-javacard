@@ -29,6 +29,8 @@ public class Test {
         // contact = contactBinarySerializer.load("contacts.serial");
         ContactVCardSerializer contactVCardSerializer = new ContactVCardSerializer();
         contactVCardSerializer.saveList(".vcf", contacts);
+        ContactJSONSerializer contactJSONSerializer = new ContactJSONSerializer();
+        contactJSONSerializer.save("mescouilles.json", contactTest);
 
         System.out.println(contacts.toString() + "\"");
     }
