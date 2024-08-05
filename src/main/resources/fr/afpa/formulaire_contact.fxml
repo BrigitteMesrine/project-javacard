@@ -164,7 +164,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </HBox>
-                        <TableView fx:id="contactsTable" prefHeight="605.0" prefWidth="442.0">
+                        <TableView fx:id="contactsTable" prefHeight="600.0">
                           <columns>
                             <TableColumn fx:id="nomColumn" prefWidth="141.0" text="Nom" />
                             <TableColumn fx:id="prenomColumn" maxWidth="300.0" prefWidth="141.0" resizable="false" text="Prénom" />
@@ -186,7 +186,7 @@
                   </VBox>
                   <VBox>
                      <children>
-                        <HBox>
+                        <HBox minWidth="530.0">
                            <children>
                               <Button fx:id="nouveauButton" mnemonicParsing="false" onAction="#handleNouveau" text="Nouveau">
                                  <padding>
