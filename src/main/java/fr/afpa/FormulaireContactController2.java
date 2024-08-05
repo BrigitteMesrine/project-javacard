@@ -2,6 +2,8 @@ package fr.afpa;
 
 import fr.afpa.models.Contact;
 import fr.afpa.models.ViewableContact;
+import javafx.beans.value.ObservableValue;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -63,13 +65,14 @@ public class FormulaireContactController2 {
 
     // Noms des RadioButtons
     // + ToggleGroup qui réunit les 3 boutons
-    private ToggleGroup genreGroup;
     @FXML
-    private RadioButton hommeRadio = new RadioButton();
+    private ToggleGroup genreGroup = new ToggleGroup();
     @FXML
-    private RadioButton femmeRadio = new RadioButton();
+    private RadioButton hommeRadio = new RadioButton("Homme");
     @FXML
-    private RadioButton nonBinaireRadio = new RadioButton();
+    private RadioButton femmeRadio = new RadioButton("Femme");
+    @FXML
+    private RadioButton nonBinaireRadio = new RadioButton("Non-binaire");
 
     // la partie de la fenêtre "Informations facultatives"
     @FXML
@@ -108,6 +111,10 @@ public class FormulaireContactController2 {
 
     private ViewableContact viewableContact;
 
+            // initialiser un contact "temporaire"
+    private Contact contactTemp = new Contact(null, null, null, null, null, null, null, null, null, null, null);
+
+
     public FormulaireContactController2() {
         // Ajouter des données d'exemple
 
@@ -116,9 +123,6 @@ public class FormulaireContactController2 {
     @FXML
     private void initialize() {
 
-        hommeRadio.setSelected(true);
-        femmeRadio.setSelected(false);
-        nonBinaireRadio.setSelected(false);
         hommeRadio.setToggleGroup(genreGroup);
         femmeRadio.setToggleGroup(genreGroup);
         nonBinaireRadio.setToggleGroup(genreGroup);
@@ -159,6 +163,36 @@ public class FormulaireContactController2 {
         pseudoColumn.setCellValueFactory(cellData -> cellData.getValue().pseudoProperty());
         liengitColumn.setCellValueFactory(cellData -> cellData.getValue().lienDepotGitProperty());
 
+
+        nomField.setOnKeyTyped(event -> contactTemp.setLastName(nomField.getText()));
+        prenomField.setOnKeyTyped(event -> contactTemp.setFirstName(prenomField.getText()));
+        telephonePersonnelField.setOnKeyTyped(event -> contactTemp.setPersoPhone(telephonePersonnelField.getText()));
+        emailField.setOnKeyTyped(event -> contactTemp.setEmail(emailField.getText()));
+        adresseField.setOnKeyTyped(event -> contactTemp.setAddress(adresseField.getText()));
+        codePostalField.setOnKeyTyped(event -> contactTemp.setZipCode(codePostalField.getText()));
+        sauvegarderButton.setOnAction(event -> System.out.println(contactTemp.toString()));
+
+        genreGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                if (newValue != null) {
+                    RadioButton checkedButton = (RadioButton) newValue.getToggleGroup().getSelectedToggle();
+                    switch (checkedButton.getText()) {
+                        case "Homme":
+                            contactTemp.setGender(Contact.Gender.MALE);
+                            break;
+                        case "Femme":
+                            contactTemp.setGender(Contact.Gender.FEMALE);
+                            break;
+                        case "Non-binaire":
+                            contactTemp.setGender(Contact.Gender.NON_BINARY);
+                            break;
+                    }
+
+                }
+            }
+        });
+
         nouveauButton.setOnAction(event -> handleNouveau());
     }
 
@@ -166,21 +200,24 @@ public class FormulaireContactController2 {
     @FXML
     private void handleNouveau() {
         // Logique pour créer un nouveau contact
-        Contact newContact = new Contact(nomField.getText(), prenomField.getText(), telephonePersonnelField.getText(),
-                emailColumn.getText(), adresseField.getText(), codePostalField.getText(), null, null,
-                getSelectedGenre(), getSelectedGenre(),
-                getSelectedGenre());
-        observableContactList.add(newContact);
-        viewableContactsList.clear();
-        for (Contact contact : observableContactList) {
-            viewableContactsList.add(new ViewableContact(contact.getLastName(), contact.getFirstName(),
-                    contact.getPersoPhone(), contact.getEmail(),
-                    contact.getAddress(), contact.getZipCode(), contact.getGender(), contact.getBirthDate(),
-                    contact.getProPhone(), contact.getPseudo(), contact.getGitLink()));
+
+        observableContactList.add(contactTemp);
+
+        if (contactTemp.verifyContact(contactTemp)) {
+            viewableContactsList.clear();
+            for (Contact contact : observableContactList) {
+                viewableContactsList.add(new ViewableContact(contact.getLastName(), contact.getFirstName(),
+                        contact.getPersoPhone(), contact.getEmail(),
+                        contact.getAddress(), contact.getZipCode(), contact.getGender(), contact.getBirthDate(),
+                        contact.getProPhone(), contact.getPseudo(), contact.getGitLink()));
+            }
+            contactsTable.setItems(viewableContactsList);
+            showContactDetails(contactTemp);
+            contactTemp = new Contact(null, null, null, null, null, null, null, null, null, null, null);
+            //clearFields();
+        } else {
+            System.out.println("Erreur");
         }
-        contactsTable.setItems(viewableContactsList);
-        showContactDetails(newContact);
-        clearFields();
     }
 
     @FXML
