@@ -72,13 +72,13 @@ public class Contact implements Serializable, Jsonable {
         // this.id = id;
     }
 
-    public  boolean verifyContact(Contact contact) {
+    public boolean verifyContact() {
 
         boolean isContact = false;
 
-        if (contact.getLastName() != null && contact.getFirstName() != null && contact.getPersoPhone() != null
-                && contact.getEmail() != null && contact.getAddress() != null && contact.getZipCode() != null
-                && contact.getGender() != null) {
+        if (this.firstName != null && this.lastName != null && this.persoPhone != null
+                && this.email != null && this.address != null && this.zipCode != null
+                && this.gender != null) {
             isContact = true;
         }
 
@@ -91,12 +91,12 @@ public class Contact implements Serializable, Jsonable {
         this.persoPhone = null;
         this.email = null;
         this.address = null;
-        this.lastName = null;
-        this.lastName = null;
-        this.lastName = null;
-        this.lastName = null;
-        this.lastName = null;
-        this.lastName = null;
+        this.zipCode = null;
+        this.gender = Contact.Gender.MALE;
+        this.birthDate = null;
+        this.proPhone = null;
+        this.pseudo = null;
+        this.gitLink = null;
     }
     
     public String getFirstName() {

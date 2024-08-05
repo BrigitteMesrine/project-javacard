@@ -112,7 +112,7 @@ public class FormulaireContactController2 {
     private ViewableContact viewableContact;
 
             // initialiser un contact "temporaire"
-    private Contact contactTemp = new Contact(null, null, null, null, null, null, null, null, null, null, null);
+    private Contact contactTemp = new Contact(null, null, null, null, null, null, Contact.Gender.MALE, null, null, null, null);
 
 
     public FormulaireContactController2() {
@@ -128,16 +128,16 @@ public class FormulaireContactController2 {
         nonBinaireRadio.setToggleGroup(genreGroup);
 
         // Ajouter des contacts fictifs pour le test
-        observableContactList.add(new Contact("Dupont", "Jean", "0123456789", "jean.dupont@example.com",
-                "1 rue de Paris",
-                "75000", Contact.Gender.NON_BINARY, null, "0987654321", "jdupont", "https://github.com/jdupont"));
-        observableContactList
-                .add(new Contact("Zannese", "Aurélie", "0987654321", "jean.dupont@example.com", "1 rue de Paris",
-                        "75000", Contact.Gender.FEMALE, null, "0987654321", "jdupont", "https://github.com/jdupont"));
-        observableContactList
-                .add(new Contact("Ford", "Mélanie", "0854796314", "jean.dupont@example.com", "1 rue de Paris",
-                        "75000", Contact.Gender.MALE, LocalDate.of(1985, 10, 26), "0987654321", "jdupont",
-                        "https://github.com/jdupont"));
+        // observableContactList.add(new Contact("Dupont", "Jean", "0123456789", "jean.dupont@example.com",
+        //         "1 rue de Paris",
+        //         "75000", Contact.Gender.NON_BINARY, null, "0987654321", "jdupont", "https://github.com/jdupont"));
+        // observableContactList
+        //         .add(new Contact("Zannese", "Aurélie", "0987654321", "jean.dupont@example.com", "1 rue de Paris",
+        //                 "75000", Contact.Gender.FEMALE, null, "0987654321", "jdupont", "https://github.com/jdupont"));
+        // observableContactList
+        //         .add(new Contact("Ford", "Mélanie", "0854796314", "jean.dupont@example.com", "1 rue de Paris",
+        //                 "75000", Contact.Gender.MALE, LocalDate.of(1985, 10, 26), "0987654321", "jdupont",
+        //                 "https://github.com/jdupont"));
 
         // convertir les Contact en ViewableContact
 
@@ -193,28 +193,24 @@ public class FormulaireContactController2 {
             }
         });
 
+
+
         nouveauButton.setOnAction(event -> handleNouveau());
+
     }
 
-    // Gestion des événements (à implémenter)
+    // Bouton ajouter :
     @FXML
     private void handleNouveau() {
-        // Logique pour créer un nouveau contact
-
-        observableContactList.add(contactTemp);
-
-        if (contactTemp.verifyContact(contactTemp)) {
-            viewableContactsList.clear();
-            for (Contact contact : observableContactList) {
-                viewableContactsList.add(new ViewableContact(contact.getLastName(), contact.getFirstName(),
-                        contact.getPersoPhone(), contact.getEmail(),
-                        contact.getAddress(), contact.getZipCode(), contact.getGender(), contact.getBirthDate(),
-                        contact.getProPhone(), contact.getPseudo(), contact.getGitLink()));
-            }
+        if (contactTemp.verifyContact()) {
+            observableContactList.add(contactTemp);
+                viewableContactsList.add(new ViewableContact(contactTemp.getLastName(), contactTemp.getFirstName(),
+                        contactTemp.getPersoPhone(), contactTemp.getEmail(),
+                        contactTemp.getAddress(), contactTemp.getZipCode(), contactTemp.getGender(), contactTemp.getBirthDate(),
+                        contactTemp.getProPhone(), contactTemp.getPseudo(), contactTemp.getGitLink()));
             contactsTable.setItems(viewableContactsList);
-            showContactDetails(contactTemp);
-            contactTemp = new Contact(null, null, null, null, null, null, null, null, null, null, null);
-            //clearFields();
+            contactTemp.reinitalize();
+            clearFields();
         } else {
             System.out.println("Erreur");
         }
