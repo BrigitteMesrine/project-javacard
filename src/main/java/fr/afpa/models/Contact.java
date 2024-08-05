@@ -12,6 +12,16 @@ public class Contact implements Serializable {
     // getter>)
 
     // mandatory attributes
+    // Ici les attributs sont de classe "String" et "Enum" et "LocalDate"
+    // elles ne peuvent pas être ajoutées à une TableView
+    // il faut d'abord convertir la valeur de ces attributs
+    // notamment avec
+    // StringProperty observableNom = new SimpleStringProperty(contact.getLastName);
+    // il faudra effectuer cette conversion dans le contrôleur ;
+    // par exemple en créant une méthode "toObservableContact(Contact contact)"
+    // qui convertira tous les attributs 
+    // (pas obligé de créer une méthode, c'est juste un exemple;
+    // tu peux effectuer la conversion directement dans l'initialisation de ton contrôleur)
     private String firstName;
     private String lastName;
     private String persoPhone;

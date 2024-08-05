@@ -1,42 +1,50 @@
 package fr.afpa.Model;
 
-import fr.afpa.Model.Contact2;
-
-//import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-//import javafx.beans.property.ObjectProperty;
-
-//import java.time.LocalDate;
+import java.time.LocalDate;
 
 public class Contact2 {
+
+    // Déclaration des attributs :
+    // la classe StringProperty permet d'afficher correctement
+    //la valeur d'un attribut dans une "ObservableList<>"
+    // pour JavaFX
     private final StringProperty nom;
     private final StringProperty prenom;
     private final StringProperty telephonePersonnel;
-    /*private final StringProperty email;
+    private final StringProperty email;
     private final StringProperty adresse;
     private final StringProperty codePostal;
     private final StringProperty genre;
-    private final ObjectProperty<LocalDate> dateNaissance;
+    private final ObjectProperty<LocalDate> dateDeNaissance;
     private final StringProperty telephoneProfessionnel;
     private final StringProperty pseudo;
-    private final StringProperty lienDepotGit;*/
+    private final StringProperty lienDepotGit;
 
-    public Contact2(String nom, String prenom, String telephonePersonnel) {
-    //public Contact2(String nom, String prenom, String telephonePersonnel/*, String email, String adresse, String codePostal, String genre, LocalDate dateNaissance, String telephoneProfessionnel, String pseudo, String lienDepotGit */) {
+    // Constructeurs :
+    //public Contact2(String nom, String prenom, String telephonePersonnel, String email, String adresse, String codePostal, String genre) {
+    public Contact2(String nom, String prenom, String telephonePersonnel, String email, String adresse, String codePostal, String genre, Object dateNaissance2, String telephoneProfessionnel, String pseudo, String lienDepotGit) {
 
         this.nom = new SimpleStringProperty(nom);
         this.prenom = new SimpleStringProperty(prenom);
         this.telephonePersonnel = new SimpleStringProperty(telephonePersonnel);
-        /*this.email = new SimpleStringProperty(email);
+        this.email = new SimpleStringProperty(email);
         this.adresse = new SimpleStringProperty(adresse);
         this.codePostal = new SimpleStringProperty(codePostal);
         this.genre = new SimpleStringProperty(genre);
-        this.dateNaissance = new SimpleObjectProperty<>(dateNaissance);
+        this.dateDeNaissance = new SimpleObjectProperty<>(dateDeNaissance);
         this.telephoneProfessionnel = new SimpleStringProperty(telephoneProfessionnel);
         this.pseudo = new SimpleStringProperty(pseudo);
         this.lienDepotGit = new SimpleStringProperty(lienDepotGit);
-        this.adresse = new StringProperty();*/
+    }
+
+    public Contact2(String nom2, String prenom2, String telephonepersonnel2, String email2, String adresse2,
+            String codePostal2, Object genreGroup, Object dateNaissance, String telephoneProfessionnel2, String pseudo2,
+            String lienDepotGit2) {
+        //TODO Auto-generated constructor stub
     }
 
     // Getters et setters pour chaque propriété
@@ -52,7 +60,7 @@ public class Contact2 {
     public void setTelephonePersonnel(String telephonePersonnel) { this.telephonePersonnel.set(telephonePersonnel); }
     public StringProperty telephonePersonnelProperty() { return telephonePersonnel; }
 
-    /*public String getEmail() { return email.get(); }
+    public String getEmail() { return email.get(); }
     public void setEmail(String email) { this.email.set(email); }
     public StringProperty emailProperty() { return email; }
 
@@ -68,9 +76,9 @@ public class Contact2 {
     public void setGenre(String genre) { this.genre.set(genre); }
     public StringProperty genreProperty() { return genre; }
 
-    public LocalDate getDateNaissance() { return dateNaissance.get(); }
-    public void setDateNaissance(LocalDate dateNaissance) { this.dateNaissance.set(dateNaissance); }
-    public ObjectProperty<LocalDate> dateNaissanceProperty() { return dateNaissance; }
+    public LocalDate getDateNaissance() { return dateDeNaissance.get(); }
+    public void setDateNaissance(LocalDate dateNaissance) { this.dateDeNaissance.set(dateNaissance); }
+    public ObjectProperty<LocalDate> dateNaissanceProperty() { return dateDeNaissance; }
 
     public String getTelephoneProfessionnel() { return telephoneProfessionnel.get(); }
     public void setTelephoneProfessionnel(String telephoneProfessionnel) { this.telephoneProfessionnel.set(telephoneProfessionnel); }
@@ -82,5 +90,10 @@ public class Contact2 {
 
     public String getLienDepotGit() { return lienDepotGit.get(); }
     public void setLienDepotGit(String lienDepotGit) { this.lienDepotGit.set(lienDepotGit); }
-    public StringProperty lienDepotGitProperty() { return lienDepotGit; }*/
+
+    @Override
+    public String toString() {
+        return "Personne [Nom=" + nom.getValue() + '\'' + ", Prénom=" + prenom.getValue() + '\'' + ", téléphone personnel=" + telephonePersonnel.getValue() + "]";
+    }
+
 }
