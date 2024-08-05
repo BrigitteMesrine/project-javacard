@@ -1,10 +1,17 @@
 package fr.afpa.models;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
+import com.github.cliftonlabs.json_simple.JsonArray;
+import com.github.cliftonlabs.json_simple.JsonObject;
+import com.github.cliftonlabs.json_simple.Jsonable;
 
-public class Contact implements Serializable {
+public class Contact implements Serializable, Jsonable {
 
     // attributes are declare as *Property objects
     // in order to be usable in TableView objects columns
@@ -48,7 +55,7 @@ public class Contact implements Serializable {
     
     // warning suppression for
     // java:S107 too many parameters
-    @SuppressWarnings({"java:S107"})
+    @SuppressWarnings({ "java:S107" })
     public Contact(String firstName, String lastName, String persoPhone, String email, String address, String zipCode,
             Enum<Gender> gender, LocalDate birthDate, String proPhone, String pseudo, String gitLink) {
         this.firstName = firstName;
@@ -153,23 +160,71 @@ public class Contact implements Serializable {
         this.gitLink = gitLink;
     }
 
-    public int getId() {
-        return id;
-    }
+    // public int getId() {
+    //     return id;
+    // }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    // public void setId(int id) {
+    //     this.id = id;
+    // }
 
     @Override
     public String toString() {
         return "Contact [firstName=" + firstName + ", lastName=" + lastName + ", persoPhone=" + persoPhone + ", email="
                 + email + ", address=" + address + ", zipCode=" + zipCode + ", gender=" + gender + ", birthDate="
-                + birthDate + ", proPhone=" + proPhone + ", pseudo=" + pseudo + ", gitLink=" + gitLink + ", id=" + id
+                + birthDate + ", proPhone=" + proPhone + ", pseudo=" + pseudo + ", gitLink=" + gitLink 
                 + "]";
     }
 
-    // warning suppression for
-    // java:S107 too many parameters
-    
+    @Override
+    public String toJson() {
+        final StringWriter writable = new StringWriter();
+        try {
+            this.toJson(writable);
+        } catch (final IOException caught) {
+            throw new RuntimeException(caught);
+        }
+        return writable.toString();
+    }
+
+    @Override
+    public void toJson(Writer writer) throws IOException {
+        String genderString = "";
+        switch (this.gender) {
+            case Contact.Gender.MALE:
+                genderString = "MALE";
+                break;
+
+            case Contact.Gender.FEMALE:
+                genderString = "FEMALE";
+                break;
+
+            case Contact.Gender.NON_BINARY:
+                genderString = "NON_BINARY";
+                break;
+
+            default:
+                break;
+        }
+        String bDateString = null;
+        if (this.birthDate != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            bDateString = this.birthDate.format(formatter);
+        }
+
+        JsonObject json = new JsonObject();
+        json.put("firstName", this.firstName);
+        json.put("lastName", this.lastName);
+        json.put("persoPhone", this.persoPhone);
+        json.put("email", this.email);
+        json.put("address", this.address);
+        json.put("zipCode", this.zipCode);
+        json.put("gender", genderString);
+        json.put("birthDate", bDateString);
+        json.put("proPhone", this.proPhone);
+        json.put("pseudo", this.pseudo);
+        json.put("gitLink", this.gitLink);
+        // json.put("id", this.id);
+        json.toJson(writer);
+    }
 }

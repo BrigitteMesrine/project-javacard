@@ -1,7 +1,7 @@
 package fr.afpa;
 
-import fr.afpa.Model.Contact2;
 import fr.afpa.models.Contact;
+import fr.afpa.models.ViewableContact;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,40 +10,41 @@ import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FormulaireContactController2 {
 
-    @FXML
-    private VBox mainVBox;
+    // @FXML
+    // private VBox mainVBox;
 
     // tableView
     @FXML
-    private TableView<Contact2> contactsTable;
+    private TableView<ViewableContact> contactsTable;
     @FXML
-    private TableColumn<Contact2, String> nomColumn;
+    private TableColumn<ViewableContact, String> nomColumn;
     @FXML
-    private TableColumn<Contact2, String> prenomColumn;
+    private TableColumn<ViewableContact, String> prenomColumn;
     @FXML
-    private TableColumn<Contact2, String> telephoneColumn;
+    private TableColumn<ViewableContact, String> telephoneColumn;
     @FXML
-    private TableColumn<Contact2, String> emailColumn;
+    private TableColumn<ViewableContact, String> emailColumn;
     @FXML
-    private TableColumn<Contact2, String> adresseColumn;
+    private TableColumn<ViewableContact, String> adresseColumn;
     @FXML
-    private TableColumn<Contact2, String> codepostaleColumn;
+    private TableColumn<ViewableContact, String> codepostaleColumn;
     @FXML
-    private TableColumn<Contact2, String> toggleButtonGroupColumn;
-
+    private TableColumn<ViewableContact, String> genreGroupColumn;
     @FXML
-    private TableColumn<Contact2, String> datedenaissanceColumn;
+    private TableColumn<ViewableContact, String> datedenaissanceColumn;
     @FXML
-    private TableColumn<Contact2, String> telephoneproColumn;
+    private TableColumn<ViewableContact, String> telephoneproColumn;
     @FXML
-    private TableColumn<Contact2, String> pseudoColumn;
+    private TableColumn<ViewableContact, String> pseudoColumn;
     @FXML
-    private TableColumn<Contact2, String> liengitColumn;
+    private TableColumn<ViewableContact, String> liengitColumn;
 
     // la partie de la fenêtre "Informations obligatoires"
     @FXML
@@ -59,19 +60,20 @@ public class FormulaireContactController2 {
     // il faut retrouver le Label adresseField
     @FXML
     private TextField codePostalField;
-    @FXML
-    private ToggleButtonGroup genreGroup;
 
     // Noms des RadioButtons
-    private RadioButton hommeRadio;
+    // + ToggleGroup qui réunit les 3 boutons
+    private ToggleGroup genreGroup;
     @FXML
-    private RadioButton femmeRadio;
+    private RadioButton hommeRadio = new RadioButton();
     @FXML
-    private RadioButton nonBinaireRadio;
+    private RadioButton femmeRadio = new RadioButton();
+    @FXML
+    private RadioButton nonBinaireRadio = new RadioButton();
 
     // la partie de la fenêtre "Informations facultatives"
     @FXML
-    private TextField dateNaissanceField;
+    private DatePicker dateNaissanceField;
     @FXML
     private TextField telephoneProfessionnelField;
     @FXML
@@ -101,9 +103,10 @@ public class FormulaireContactController2 {
     @FXML
     private Button quitterButton;
 
-    private ObservableList<Contact2> contactData = FXCollections.observableArrayList();
+    private ObservableList<Contact> observableContactList = FXCollections.observableArrayList();
+    private ObservableList<ViewableContact> viewableContactsList = FXCollections.observableArrayList();
 
-    private Contact2 contact2;
+    private ViewableContact viewableContact;
 
     public FormulaireContactController2() {
         // Ajouter des données d'exemple
@@ -113,6 +116,36 @@ public class FormulaireContactController2 {
     @FXML
     private void initialize() {
 
+        hommeRadio.setSelected(true);
+        femmeRadio.setSelected(false);
+        nonBinaireRadio.setSelected(false);
+        hommeRadio.setToggleGroup(genreGroup);
+        femmeRadio.setToggleGroup(genreGroup);
+        nonBinaireRadio.setToggleGroup(genreGroup);
+
+        // Ajouter des contacts fictifs pour le test
+        observableContactList.add(new Contact("Dupont", "Jean", "0123456789", "jean.dupont@example.com",
+                "1 rue de Paris",
+                "75000", Contact.Gender.NON_BINARY, null, "0987654321", "jdupont", "https://github.com/jdupont"));
+        observableContactList
+                .add(new Contact("Zannese", "Aurélie", "0987654321", "jean.dupont@example.com", "1 rue de Paris",
+                        "75000", Contact.Gender.FEMALE, null, "0987654321", "jdupont", "https://github.com/jdupont"));
+        observableContactList
+                .add(new Contact("Ford", "Mélanie", "0854796314", "jean.dupont@example.com", "1 rue de Paris",
+                        "75000", Contact.Gender.MALE, LocalDate.of(1985, 10, 26), "0987654321", "jdupont",
+                        "https://github.com/jdupont"));
+
+        // convertir les Contact en ViewableContact
+
+        for (Contact contact : observableContactList) {
+            viewableContactsList.add(new ViewableContact(contact.getLastName(), contact.getFirstName(),
+                    contact.getPersoPhone(), contact.getEmail(),
+                    contact.getAddress(), contact.getZipCode(), contact.getGender(), contact.getBirthDate(),
+                    contact.getProPhone(), contact.getPseudo(), contact.getGitLink()));
+        }
+        // Ajouter les données au TableView
+        contactsTable.setItems(viewableContactsList);
+
         // Initialiser les colonnes du TableView
         nomColumn.setCellValueFactory(cellData -> cellData.getValue().nomProperty());
         prenomColumn.setCellValueFactory(cellData -> cellData.getValue().prenomProperty());
@@ -120,39 +153,40 @@ public class FormulaireContactController2 {
         emailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
         adresseColumn.setCellValueFactory(cellData -> cellData.getValue().adresseProperty());
         codepostaleColumn.setCellValueFactory(cellData -> cellData.getValue().codePostalProperty());
-        toggleButtonGroupColumn.setCellValueFactory(cellData -> cellData.getValue().genreProperty());
-        datedenaissanceColumn.setCellValueFactory(cellData -> cellData.getValue().telephonePersonnelProperty());
-        telephoneproColumn.setCellValueFactory(cellData -> cellData.getValue().telephonePersonnelProperty());
-        pseudoColumn.setCellValueFactory(cellData -> cellData.getValue().telephonePersonnelProperty());
-        liengitColumn.setCellValueFactory(cellData -> cellData.getValue().telephonePersonnelProperty());
+        genreGroupColumn.setCellValueFactory(cellData -> cellData.getValue().genreProperty());
+        datedenaissanceColumn.setCellValueFactory(cellData -> cellData.getValue().dateNaissanceProperty());
+        telephoneproColumn.setCellValueFactory(cellData -> cellData.getValue().telephoneProfessionnelProperty());
+        pseudoColumn.setCellValueFactory(cellData -> cellData.getValue().pseudoProperty());
+        liengitColumn.setCellValueFactory(cellData -> cellData.getValue().lienDepotGitProperty());
 
-        // Ajouter des contacts fictifs pour le test
-        contactData.add(new Contact2("Dupont", "Jean", "0123456789", "jean.dupont@example.com", "1 rue de Paris",
-                "75000", "Homme", null, "0987654321", "jdupont", "https://github.com/jdupont"));
-        contactData.add(new Contact2("Zannese", "Aurélie", "0987654321", "jean.dupont@example.com", "1 rue de Paris",
-                "75000", "Homme", null, "0987654321", "jdupont", "https://github.com/jdupont"));
-        contactData.add(new Contact2("Ford", "Mélanie", "0854796314", "jean.dupont@example.com", "1 rue de Paris",
-                "75000", "Homme", null, "0987654321", "jdupont", "https://github.com/jdupont"));
-
-        // Ajouter les données au TableView
-        contactsTable.setItems(contactData);
+        nouveauButton.setOnAction(event -> handleNouveau());
     }
 
     // Gestion des événements (à implémenter)
     @FXML
     private void handleNouveau() {
         // Logique pour créer un nouveau contact
-        Contact2 newContact = new Contact2("", "", "", "", "", "", "", null, "", "", "");
-        contactData.add(newContact);
-        contactsTable.getSelectionModel().select(newContact);
+        Contact newContact = new Contact(nomField.getText(), prenomField.getText(), telephonePersonnelField.getText(),
+                emailColumn.getText(), adresseField.getText(), codePostalField.getText(), null, null,
+                getSelectedGenre(), getSelectedGenre(),
+                getSelectedGenre());
+        observableContactList.add(newContact);
+        viewableContactsList.clear();
+        for (Contact contact : observableContactList) {
+            viewableContactsList.add(new ViewableContact(contact.getLastName(), contact.getFirstName(),
+                    contact.getPersoPhone(), contact.getEmail(),
+                    contact.getAddress(), contact.getZipCode(), contact.getGender(), contact.getBirthDate(),
+                    contact.getProPhone(), contact.getPseudo(), contact.getGitLink()));
+        }
+        contactsTable.setItems(viewableContactsList);
         showContactDetails(newContact);
-        // clearFields();
+        clearFields();
     }
 
     @FXML
     private void handleModifier() {
         // Logique pour modifier un contact existant
-        Contact2 selectedContact = contactsTable.getSelectionModel().getSelectedItem();
+        ViewableContact selectedContact = contactsTable.getSelectionModel().getSelectedItem();
         if (selectedContact != null) {
             selectedContact.setNom(nomField.getText());
             selectedContact.setPrenom(prenomField.getText());
@@ -160,7 +194,7 @@ public class FormulaireContactController2 {
             selectedContact.setEmail(emailField.getText());
             selectedContact.setAdresse(adresseField.getText());
             selectedContact.setCodePostal(codePostalField.getText());
-            selectedContact.setGenre(getSelectedGenre());
+            // selectedContact.setGenre(getSelectedGenre());
             // Date de naissance et autres champs facultatifs
             selectedContact.setTelephoneProfessionnel(telephoneProfessionnelField.getText());
             selectedContact.setPseudo(pseudoField.getText());
@@ -197,17 +231,32 @@ public class FormulaireContactController2 {
         String email = emailField.getText();
         String adresse = adresseField.getText();
         String codePostal = codePostalField.getText();
-        
-        Object ToggleButtonGroup = oggleButtonGroup.getText();
-        Object dateNaissance = dateNaissanceField.getText();
+
+        // TODO déclarer le Togglegroup
+        Enum<Contact.Gender> genre = null;
+        // switch (genreGroup.getSelectedToggle()) {
+        // case hommeRadio.selectedProperty() == true:
+        // genre = Contact.Gender.MALE;
+        // break;
+        // case femmeRadio:
+        // genre = Contact.Gender.FEMALE;
+        // break;
+        // case nonBinaireRadio:
+        // genre = Contact.Gender.NON_BINARY;
+        // break;
+
+        // default:
+        // break;
+        // }
+
+        LocalDate dateNaissance = dateNaissanceField.getValue();
         String telephoneProfessionnel = telephoneProfessionnelField.getText();
         String pseudo = pseudoField.getText();
         String lienDepotGit = lienDepotGitField.getText();
 
-        
-        Contact2 contact = new Contact2(nom, prenom, telephonepersonnel, email, adresse, codePostal, genreGroup,
+        Contact contact = new Contact(nom, prenom, telephonepersonnel, email, adresse, codePostal, genre,
                 dateNaissance, telephoneProfessionnel, pseudo, lienDepotGit);
-        contactData.add(contact);
+        observableContactList.add(contact);
 
         // Vider le formulaire
         nomField.setText("");
@@ -215,24 +264,30 @@ public class FormulaireContactController2 {
         telephonePersonnelField.setText("");
         emailField.setText("");
         codePostalField.setText("");
-        dateNaissanceField.setText("");
+        dateNaissanceField.setValue(null);
         telephoneProfessionnelField.setText("");
         pseudoField.setText("");
         lienDepotGitField.setText("");
 
-        /*1. Gestion des Exceptions lors de la Sauvegarde
-        Ajoutez une gestion appropriée des exceptions dans les méthodes de sauvegarde pour gérer les erreurs d'entrée/sortie et autres problèmes :*/
-        /*FileChooser fileChooser = new FileChooser();
-        File file = fileChooser.showSaveDialog(null);
-        if (file != null) {
-            try {
-                // Sérialisation des contacts
-                ContactJsonSerializer serializer = new ContactJsonSerializer();
-                serializer.saveList(file.getAbsolutePath(), new ArrayList<>(contactList));
-            } catch (IOException e) {
-                showAlert("Error", "Could not save data", "Could not save data to file:\n" + file.getAbsolutePath() + "\n" + e.getMessage());
-            }
-        }*/
+        /*
+         * 1. Gestion des Exceptions lors de la Sauvegarde
+         * Ajoutez une gestion appropriée des exceptions dans les méthodes de sauvegarde
+         * pour gérer les erreurs d'entrée/sortie et autres problèmes :
+         */
+        /*
+         * FileChooser fileChooser = new FileChooser();
+         * File file = fileChooser.showSaveDialog(null);
+         * if (file != null) {
+         * try {
+         * // Sérialisation des contacts
+         * ContactJsonSerializer serializer = new ContactJsonSerializer();
+         * serializer.saveList(file.getAbsolutePath(), new ArrayList<>(contactList));
+         * } catch (IOException e) {
+         * showAlert("Error", "Could not save data", "Could not save data to file:\n" +
+         * file.getAbsolutePath() + "\n" + e.getMessage());
+         * }
+         * }
+         */
 
         // Création du contact avec les données des champs
         /*
@@ -241,70 +296,71 @@ public class FormulaireContactController2 {
          * de saisie dans le contrôleur. Voici comment intégrer ces validations dans la
          * méthode handleSaveContact() :
          */
-        TableColumnBase<Contact2, String> telephonePersoField;
-        Contact2 contact2 = new Contact2(
-                nomField.getText(),
-                prenomField.getText(),
-                telephonePersoField.getText(),
-                emailField.getText(),
-                adresseField.getText(),
-                codePostalField.getText(),
-                genreGroup.getSelectedToggle() != null ? ((RadioButton) genreGroup.getSelectedToggle()).getText() : "",
-                dateNaissanceField.getText(),
-                telephoneProfessionnelField.getText(),
-                pseudoField.getText(),
-                lienDepotGitField.getText());
+        TableColumnBase<ViewableContact, String> telephonePersoField;
+        viewableContact = new ViewableContact(
+                contact.getLastName(),
+                contact.getFirstName(),
+                contact.getPersoPhone(),
+                contact.getEmail(),
+                contact.getAddress(),
+                contact.getZipCode(),
+                contact.getGender(),
+                contact.getBirthDate(),
+                contact.getProPhone(),
+                contact.getPseudo(),
+                contact.getGitLink());
 
         // Validation des champs
-        String validationMessage = validateContact(contact2);
+        String validationMessage = validateContact(viewableContact);
 
         if (validationMessage == null) {
             // Ajouter le contact à la liste si valide
-            contactData.add(contact2);
+            observableContactList.add(contact);
             clearFields();
         } else {
             // Afficher un message d'erreur si la validation échoue
             showAlert("Validation Error", "Invalid Contact", validationMessage);
         }
+    }
 
-        /*
-        * 2. Méthode de Validation des Contacts
-        * Créez une méthode validateContact(Contact contact) pour vérifier chaque champ :
-        */
+    /*
+     * 2. Méthode de Validation des Contacts
+     * Créez une méthode validateContact(Contact contact) pour vérifier chaque champ
+     * :
+     */
 
-    private String validateContact(Contact2 contact2) {
+    private String validateContact(ViewableContact ViewableContact) {
         StringBuilder errors = new StringBuilder();
 
-        
         // Validation du nom
-        if (contact2.getNom().trim().isEmpty()) {
+        if (ViewableContact.getNom().trim().isEmpty()) {
             errors.append("Le nom est requis.\n");
         }
 
         // Validation du prénom
-        if (contact2.getPrenom().trim().isEmpty()) {
+        if (ViewableContact.getPrenom().trim().isEmpty()) {
             errors.append("Le prénom est requis.\n");
         }
 
         // Validation du téléphone personnel
-        if (!contact2.isPhoneValid()) {
+        if (!ViewableContact.isPhoneValid()) {
             errors.append("Numéro de téléphone personnel invalide. Il devrait y avoir 10 chiffres.\n");
         }
 
         // Validation de l'email
-        if (!contact2.isEmailValid()) {
+        if (!ViewableContact.isEmailValid()) {
             errors.append("Adresse e-mail invalide.\n");
         }
 
         // Validation du code postal (exemple simple)
-        if (contact2.getCodePostal().trim().isEmpty()) {
+        if (ViewableContact.getCodePostal().trim().isEmpty()) {
             errors.append("Postal code is required.\n");
         }
 
         // Validation de la date de naissance (exemple simple)
-        if (!contact2.getDateNaissance().matches("\\d{2}/\\d{2}/\\d{4}")) {
-            errors.append("Date of birth should be in the format dd/MM/yyyy.\n");
-        }
+        // if (!ViewableContact.getDateNaissance().matches("\\d{2}/\\d{2}/\\d{4}")) {
+        // errors.append("Date of birth should be in the format dd/MM/yyyy.\n");
+        // }
 
         // Autres validations selon les besoins
         // ...
@@ -323,9 +379,9 @@ public class FormulaireContactController2 {
 
         // 2 supprimer le contact de la liste des contacts (contactData)
 
-        Contact2 contact2 = contactsTable.getSelectionModel().getSelectedItem();
-        if (contact2 != null) {
-            contactData.remove(contact2);
+        ViewableContact ViewableContact = contactsTable.getSelectionModel().getSelectedItem();
+        if (ViewableContact != null) {
+            observableContactList.remove(ViewableContact);
         }
 
         /*
@@ -343,21 +399,25 @@ public class FormulaireContactController2 {
     }
 
     @FXML
-    private void showContactDetails(Contact2 contact) {
-        if (contact2 != null) {
-            nomField.setText(contact2.getNom());
-            prenomField.setText(contact2.getPrenom());
-            telephonePersonnelField.setText(contact2.getTelephonePersonnel());
-            emailField.setText(contact2.getEmail());
-            adresseField.setText(contact.getAdresse());
-            codePostalField.setText(contact.getCodePostal());
-            selectGenre(contact2.getGenre());
-            dateNaissanceField.setText(contact2.getDateNaissance() != null ?
-            contact2.getDateNaissance().toString() : "");
-            telephoneProfessionnelField.setText(contact.getTelephoneProfessionnel());
-            pseudoField.setText(contact.getPseudo());
-            lienDepotGitField.setText(contact.getLienDepotGit());
-            
+    private void showContactDetails(Contact newContact) {
+        if (viewableContact != null) {
+            nomField.setText(newContact.getLastName());
+            prenomField.setText(newContact.getFirstName());
+            telephonePersonnelField.setText(newContact.getPersoPhone());
+            emailField.setText(newContact.getEmail());
+            adresseField.setText(newContact.getAddress());
+            codePostalField.setText(newContact.getZipCode());
+            setselectGenre(newContact);
+
+            // formater la LocalDate en String
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+            String formattedBirthDate = newContact.getBirthDate().format(formatter);
+
+            dateNaissanceField.setValue(newContact.getBirthDate());
+            telephoneProfessionnelField.setText(newContact.getProPhone());
+            pseudoField.setText(newContact.getPseudo());
+            lienDepotGitField.setText(newContact.getGitLink());
+
         } else {
             nomField.setText("");
             prenomField.setText("");
@@ -368,7 +428,7 @@ public class FormulaireContactController2 {
             hommeRadio.setSelected(false);
             femmeRadio.setSelected(false);
             nonBinaireRadio.setSelected(false);
-            dateNaissanceField.setText("");
+            dateNaissanceField.setValue(null);
             telephoneProfessionnelField.setText("");
             pseudoField.setText("");
             lienDepotGitField.setText("");
@@ -389,12 +449,12 @@ public class FormulaireContactController2 {
     }
 
     @FXML
-    private void setselectGenre(String genre) {
-        if ("Homme".equals(genre)) {
+    private void setselectGenre(Contact contact) {
+        if (contact.getGender() == Contact.Gender.MALE) {
             hommeRadio.setSelected(true);
-        } else if ("Femme".equals(genre)) {
+        } else if (contact.getGender() == Contact.Gender.FEMALE) {
             femmeRadio.setSelected(true);
-        } else if ("Non binaire".equals(genre)) {
+        } else if (contact.getGender() == Contact.Gender.NON_BINARY) {
             nonBinaireRadio.setSelected(true);
         }
     }
@@ -412,7 +472,8 @@ public class FormulaireContactController2 {
     @FXML
     private void handleVCard() {
         // Logique pour exporter en vCard
-        showAlert("Pas mis en œuvre", "Fonctionnalité non implémentée", "L'exportation vCard n'est pas encore implémentée.");
+        showAlert("Pas mis en œuvre", "Fonctionnalité non implémentée",
+                "L'exportation vCard n'est pas encore implémentée.");
     }
 
     private void clearFields() {
@@ -422,25 +483,24 @@ public class FormulaireContactController2 {
         emailField.clear();
         adresseField.clear();
         codePostalField.clear();
-        dateNaissanceField.clear();
+        dateNaissanceField.setValue(null);
         telephoneProfessionnelField.clear();
         pseudoField.clear();
         lienDepotGitField.clear();
     }
 
-
-    private void populateFields(Contact2 contact2) {
-        nomField.setText(contact2.getNom());
-        prenomField.setText(contact2.getPrenom());
-        telephonePersonnelField.setText(contact2.getTelephonePersonnel());
-        emailField.setText(contact2.getEmail());
-        adresseField.setText(contact2.getAdresse());
-        codePostalField.setText(contact2.getCodePostal());
-        dateNaissanceField.setText(contact2.getDateNaissance());
-        telephoneProfessionnelField.setText(contact2.getTelephoneProfessionnel());
-        pseudoField.setText(contact2.getPseudo());
-        lienDepotGitField.setText(contact2.getLienDepotGit());
-    }
+    // private void populateFields(ViewableContact ViewableContact) {
+    // nomField.setText(ViewableContact.getNom());
+    // prenomField.setText(ViewableContact.getPrenom());
+    // telephonePersonnelField.setText(ViewableContact.getTelephonePersonnel());
+    // emailField.setText(ViewableContact.getEmail());
+    // adresseField.setText(ViewableContact.getAdresse());
+    // codePostalField.setText(ViewableContact.getCodePostal());
+    // dateNaissanceField.setText(ViewableContact.getDateNaissance());
+    // telephoneProfessionnelField.setText(ViewableContact.getTelephoneProfessionnel());
+    // pseudoField.setText(ViewableContact.getPseudo());
+    // lienDepotGitField.setText(ViewableContact.getLienDepotGit());
+    // }
 
     /*
      * Gestion des Erreurs dans l'Interface Utilisateur
@@ -459,23 +519,27 @@ public class FormulaireContactController2 {
     }
 
     /*
-     *  2. Gestion des Exceptions lors de la Chargement des Données
-    De même, gérez les exceptions lors du chargement des données depuis un fichier :
+     * 2. Gestion des Exceptions lors de la Chargement des Données
+     * De même, gérez les exceptions lors du chargement des données depuis un
+     * fichier :
      */
-   
-    /*@FXML
-    private void handleLoadContact() {
-        FileChooser fileChooser = new FileChooser();
-        File file = fileChooser.showOpenDialog(null);
-        if (file != null) {
-            try {
-                // Désérialisation des contacts
-                ContactJsonDeserializer deserializer = new ContactJsonDeserializer();
-                List<Contact> contacts = deserializer.loadList(file.getAbsolutePath());
-                contactList.setAll(contacts);
-            } catch (IOException e) {
-                showAlert("Error", "Could not load data", "Could not load data from file:\n" + file.getAbsolutePath() + "\n" + e.getMessage());
-            }
-        }
-    }*/
+
+    /*
+     * @FXML
+     * private void handleLoadContact() {
+     * FileChooser fileChooser = new FileChooser();
+     * File file = fileChooser.showOpenDialog(null);
+     * if (file != null) {
+     * try {
+     * // Désérialisation des contacts
+     * ContactJsonDeserializer deserializer = new ContactJsonDeserializer();
+     * List<Contact> contacts = deserializer.loadList(file.getAbsolutePath());
+     * contactList.setAll(contacts);
+     * } catch (IOException e) {
+     * showAlert("Error", "Could not load data", "Could not load data from file:\n"
+     * + file.getAbsolutePath() + "\n" + e.getMessage());
+     * }
+     * }
+     * }
+     */
 }

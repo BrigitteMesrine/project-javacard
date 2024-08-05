@@ -26,7 +26,7 @@ public class App extends Application {
         // Vous pouvez ensuite accéder et modifier les attributs de la personne en utilisant les getters et setters:
        //  StringProperty utilisateur = utilisateur.getName(); // Récupère l'utilsateur
 
-        scene = new Scene(loadFXML("formulaire_contact2"), 1024, 768);
+        scene = new Scene(loadFXML("formulaire_contact"), 1024, 768);
         stage.setScene(scene);
         stage.show();
     }
@@ -41,6 +41,7 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
+        
         launch();
     }
 
