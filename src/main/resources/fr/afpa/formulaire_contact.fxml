@@ -21,7 +21,7 @@
 
 <AnchorPane maxHeight="1080.0" maxWidth="1920.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.afpa.FormulaireContactController2">
    <children>
-      <MenuBar prefHeight="25.0" prefWidth="1024.0">
+      <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
@@ -40,11 +40,11 @@
           </Menu>
         </menus>
       </MenuBar>
-      <VBox layoutX="6.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
+      <VBox layoutX="6.0" minWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
          <children>
             <HBox style="-fx-background-color: #33ff6e;">
                <children>
-                  <HBox prefHeight="69.0" prefWidth="331.0">
+                  <HBox>
                      <children>
                         <Button alignment="TOP_RIGHT" contentDisplay="TOP" mnemonicParsing="false" text="Accueil">
                            <padding>
@@ -67,50 +67,51 @@
                         <Insets />
                      </HBox.margin>
                   </HBox>
-                  <HBox>
+                  <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets left="5.0" right="5.0" />
                      </HBox.margin>
                      <children>
-                        <Label text="Formulaire de Contact">
+                        <Label text="Formulaire de Contact" HBox.hgrow="ALWAYS">
                            <font>
                               <Font size="30.0" />
                            </font>
                            <padding>
-                              <Insets bottom="5.0" left="20.0" right="5.0" top="5.0" />
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                            <HBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="100.0" top="5.0" />
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </HBox.margin>
                         </Label>
                      </children>
                   </HBox>
                   <HBox>
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </HBox.margin>
                      <children>
-                        <Button fx:id="quitterButton" mnemonicParsing="false" onAction="#handleQuitter" text="Quitter">
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
-                  <HBox>
-                     <children>
-                        <ImageView fitHeight="50.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/logo.png" />
-                              <!--<Image url="C:\Users\diego\Documents\Evaluation\TP_evaluation_JavaFx\project-javacard\doc\images" /> -->
-                           </image>
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="50.0" right="5.0" top="5.0" />
-                           </HBox.margin>
-                        </ImageView>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Button fx:id="quitterButton" mnemonicParsing="false" onAction="#handleQuitter" text="Quitter">
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <ImageView fitHeight="50.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/logo.png" />
+                                    <!--<Image url="C:\Users\diego\Documents\Evaluation\TP_evaluation_JavaFx\project-javacard\doc\images" /> -->
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                           </children>
+                        </HBox>
                      </children>
                   </HBox>
                </children>
@@ -164,7 +165,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </HBox>
-                        <TableView fx:id="contactsTable" prefHeight="600.0">
+                        <TableView fx:id="contactsTable" prefHeight="580.0">
                           <columns>
                             <TableColumn fx:id="nomColumn" prefWidth="141.0" text="Nom" />
                             <TableColumn fx:id="prenomColumn" maxWidth="300.0" prefWidth="141.0" resizable="false" text="Prénom" />
@@ -500,6 +501,11 @@
             </HBox>
          </children>
       </VBox>
+      <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="650.0">
+         <children>
+            <Label text="Aout 2024 @ AFPA - Stagiaire: Vincent KEO &amp; Diego SANCHEZ" />
+         </children>
+      </HBox>
    </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
