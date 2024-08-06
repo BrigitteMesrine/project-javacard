@@ -7,6 +7,8 @@ import javafx.beans.property.StringProperty;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import fr.afpa.models.Contact.Gender;
+
 public class ViewableContact {
 
     // Déclaration des attributs :
@@ -20,7 +22,9 @@ public class ViewableContact {
     private StringProperty adresse;
     private StringProperty codePostal;
     private StringProperty genre;
+    private Enum<Gender> rawGender;
     private StringProperty dateDeNaissance;
+    private LocalDate rawBirthDate;
     private StringProperty telephoneProfessionnel;
     private StringProperty pseudo;
     private StringProperty lienDepotGit;
@@ -37,6 +41,7 @@ public class ViewableContact {
         this.adresse = new SimpleStringProperty(contact.getAddress());
         this.codePostal = new SimpleStringProperty(contact.getZipCode());
 
+        this.rawGender = contact.getGender();
         // conversion de la valeur du genre en String
         String genreString = "";
         switch (contact.getGender()) {
@@ -54,6 +59,7 @@ public class ViewableContact {
                 break;
         }
 
+        this.rawBirthDate = contact.getBirthDate();
         // conversion de la LocalDate en String
         String dateDeNaissanceString = null;
         if (contact.getBirthDate() != null) {
@@ -153,6 +159,14 @@ public class ViewableContact {
         return genre;
     }
 
+    public Enum<Gender> getRawGender() {
+        return rawGender;
+    }
+
+    public void setRawGender(Enum<Gender> rawGender) {
+        this.rawGender = rawGender;
+    }
+
     public String getDateNaissance() {
         return dateDeNaissance.get();
     }
@@ -163,6 +177,14 @@ public class ViewableContact {
 
     public StringProperty dateNaissanceProperty() {
         return dateDeNaissance;
+    }
+
+    public LocalDate getRawBirthDate() {
+        return rawBirthDate;
+    }
+
+    public void setRawBirthDate(LocalDate rawBirthDate) {
+        this.rawBirthDate = rawBirthDate;
     }
 
     public String getTelephoneProfessionnel() {

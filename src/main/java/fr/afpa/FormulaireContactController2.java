@@ -182,8 +182,7 @@ public class FormulaireContactController2 {
         emailField.setOnKeyTyped(event -> contactTemp.setEmail(emailField.getText()));
         adresseField.setOnKeyTyped(event -> contactTemp.setAddress(adresseField.getText()));
         codePostalField.setOnKeyTyped(event -> contactTemp.setZipCode(codePostalField.getText()));
-        // codePostalField.setOnKeyTyped(event ->
-        // contactTemp.setZipCode(codePostalField.getText()));
+        dateNaissanceField.setOnAction(event -> contactTemp.setBirthDate(dateNaissanceField.getValue()));
         telephoneProfessionnelField
                 .setOnKeyTyped(event -> contactTemp.setProPhone(telephoneProfessionnelField.getText()));
         pseudoField.setOnKeyTyped(event -> contactTemp.setPseudo(pseudoField.getText()));
@@ -215,6 +214,8 @@ public class FormulaireContactController2 {
         sauvegarderButton.setOnAction(event -> handleEnregistrer());
         vCardButton.setOnAction(event -> handleVCard());
         jsonButton.setOnAction(event -> handleJson());
+        selectAllButton.setOnAction(event -> handleSelectAll());
+        clearButton.setOnAction(event -> handleClear());
 
         contactsTable.setOnMouseClicked(event -> showContactDetails());
 
@@ -246,8 +247,8 @@ public class FormulaireContactController2 {
                         contact.getTelephonePersonnel(),
                         contact.getEmail(), contact.getAdresse(),
                         contact.getCodePostal(),
-                        Contact.Gender.MALE,
-                        LocalDate.now(),
+                        contact.getRawGender(),
+                        contact.getRawBirthDate(),
                         contact.getTelephoneProfessionnel(),
                         contact.getPseudo(),
                         contact.getLienDepotGit()));
@@ -259,8 +260,8 @@ public class FormulaireContactController2 {
                     emailField.getText(), 
                     adresseField.getText(), 
                     codePostalField.getText(), 
-                    Contact.Gender.MALE, 
-                    LocalDate.now(), 
+                    contactTemp.getGender(), 
+                    dateNaissanceField.getValue(), 
                     telephoneProfessionnelField.getText(), 
                     pseudoField.getText(), 
                     lienDepotGitField.getText());
@@ -276,23 +277,6 @@ public class FormulaireContactController2 {
 
 
         }
-
-        // if (selectedContact != null) {
-        //     nomField.setText(selectedContact.getNom());
-        //     prenomField.setText(selectedContact.getPrenom());
-        //     adresseField.setText(selectedContact.getAdresse());
-        //     emailField.setText(selectedContact.getEmail());
-        //     codePostalField.setText(selectedContact.getCodePostal());
-        //     telephonePersonnelField.setText(selectedContact.getTelephonePersonnel());
-        //     // select the correponding toggle ; switch case probably
-        //     // genreGroup.getToggles()(selectedContact.getNom());
-
-        //     // select the date in DatePicker
-        //     // nomField.setText(selectedContact.getNom());
-        //     telephoneProfessionnelField.setText(selectedContact.getTelephoneProfessionnel());
-        //     pseudoField.setText(selectedContact.getPseudo());
-        //     lienDepotGitField.setText(selectedContact.getLienDepotGit());
-        // }
 
     }
 
@@ -318,8 +302,8 @@ public class FormulaireContactController2 {
                         contact.getTelephonePersonnel(),
                         contact.getEmail(), contact.getAdresse(),
                         contact.getCodePostal(),
-                        Contact.Gender.MALE,
-                        LocalDate.now(),
+                        contact.getRawGender(),
+                        contact.getRawBirthDate(),
                         contact.getTelephoneProfessionnel(),
                         contact.getPseudo(),
                         contact.getLienDepotGit()));
@@ -342,12 +326,7 @@ public class FormulaireContactController2 {
             adresseField.setText(selectedContact.getAdresse());
             codePostalField.setText(selectedContact.getCodePostal());
             // setselectGenre(newContact);
-
-            // formater la LocalDate en String
-            // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
-            // String formattedBirthDate = selectedContact.getBirthDate().format(formatter);
-
-            // dateNaissanceField.setValue(selectedContact.getBirthDate());
+            dateNaissanceField.setValue(selectedContact.getRawBirthDate());
             telephoneProfessionnelField.setText(selectedContact.getTelephoneProfessionnel());
             pseudoField.setText(selectedContact.getPseudo());
             lienDepotGitField.setText(selectedContact.getLienDepotGit());
