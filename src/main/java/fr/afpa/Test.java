@@ -34,11 +34,10 @@ public class Test {
         ContactVCardSerializer contactVCardSerializer = new ContactVCardSerializer();
         contactVCardSerializer.saveList(".vcf", contacts);
         ContactJSONSerializer contactJSONSerializer = new ContactJSONSerializer();
-        contactJSONSerializer.saveList("contacts.json", contacts);
+        contactJSONSerializer.save("contacts.json", contactTest);
 
 
         System.out.println(contacts.toString() + "\"");
         
-        System.out.println(ContactVerifier.verifyContact(contactTest));
     }
 }
