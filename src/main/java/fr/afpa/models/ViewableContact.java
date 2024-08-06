@@ -7,6 +7,8 @@ import javafx.beans.property.StringProperty;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import fr.afpa.models.Contact.Gender;
+
 public class ViewableContact {
 
     // Déclaration des attributs :
@@ -20,7 +22,9 @@ public class ViewableContact {
     private StringProperty adresse;
     private StringProperty codePostal;
     private StringProperty genre;
+    private Enum<Gender> rawGender;
     private StringProperty dateDeNaissance;
+    private LocalDate rawBirthDate;
     private StringProperty telephoneProfessionnel;
     private StringProperty pseudo;
     private StringProperty lienDepotGit;
@@ -28,21 +32,19 @@ public class ViewableContact {
     // Constructeurs :
     // public ViewableContact(String nom, String prenom, String telephonePersonnel,
     // String email, String adresse, String codePostal, String genre) {
-    public ViewableContact(String nom, String prenom, String telephonePersonnel, String email, String adresse,
-            String codePostal, Enum<Contact.Gender> genre, LocalDate dateDeNaissance, String telephoneProfessionnel,
-            String pseudo,
-            String lienDepotGit) {
+    public ViewableContact(Contact contact) {
 
-        this.nom = new SimpleStringProperty(nom);
-        this.prenom = new SimpleStringProperty(prenom);
-        this.telephonePersonnel = new SimpleStringProperty(telephonePersonnel);
-        this.email = new SimpleStringProperty(email);
-        this.adresse = new SimpleStringProperty(adresse);
-        this.codePostal = new SimpleStringProperty(codePostal);
+        this.nom = new SimpleStringProperty(contact.getLastName());
+        this.prenom = new SimpleStringProperty(contact.getFirstName());
+        this.telephonePersonnel = new SimpleStringProperty(contact.getPersoPhone());
+        this.email = new SimpleStringProperty(contact.getEmail());
+        this.adresse = new SimpleStringProperty(contact.getAddress());
+        this.codePostal = new SimpleStringProperty(contact.getZipCode());
 
+        this.rawGender = contact.getGender();
         // conversion de la valeur du genre en String
         String genreString = "";
-        switch (genre) {
+        switch (contact.getGender()) {
             case Contact.Gender.MALE:
                 genreString = "Homme";
                 break;
@@ -57,18 +59,19 @@ public class ViewableContact {
                 break;
         }
 
+        this.rawBirthDate = contact.getBirthDate();
         // conversion de la LocalDate en String
         String dateDeNaissanceString = null;
-        if (dateDeNaissance != null) {
+        if (contact.getBirthDate() != null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
-            dateDeNaissanceString = dateDeNaissance.format(formatter);
+            dateDeNaissanceString = contact.getBirthDate().format(formatter);
         }
 
         this.genre = new SimpleStringProperty(genreString);
         this.dateDeNaissance = new SimpleStringProperty(dateDeNaissanceString);
-        this.telephoneProfessionnel = new SimpleStringProperty(telephoneProfessionnel);
-        this.pseudo = new SimpleStringProperty(pseudo);
-        this.lienDepotGit = new SimpleStringProperty(lienDepotGit);
+        this.telephoneProfessionnel = new SimpleStringProperty(contact.getPersoPhone());
+        this.pseudo = new SimpleStringProperty(contact.getPseudo());
+        this.lienDepotGit = new SimpleStringProperty(contact.getGitLink());
     }
 
     // Getters et setters pour chaque propriété
@@ -156,6 +159,14 @@ public class ViewableContact {
         return genre;
     }
 
+    public Enum<Gender> getRawGender() {
+        return rawGender;
+    }
+
+    public void setRawGender(Enum<Gender> rawGender) {
+        this.rawGender = rawGender;
+    }
+
     public String getDateNaissance() {
         return dateDeNaissance.get();
     }
@@ -166,6 +177,14 @@ public class ViewableContact {
 
     public StringProperty dateNaissanceProperty() {
         return dateDeNaissance;
+    }
+
+    public LocalDate getRawBirthDate() {
+        return rawBirthDate;
+    }
+
+    public void setRawBirthDate(LocalDate rawBirthDate) {
+        this.rawBirthDate = rawBirthDate;
     }
 
     public String getTelephoneProfessionnel() {

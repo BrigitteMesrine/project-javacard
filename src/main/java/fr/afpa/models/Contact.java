@@ -85,19 +85,7 @@ public class Contact implements Serializable, Jsonable {
         return isContact;
     }
 
-    public void reinitalize() {
-        this.lastName = null;
-        this.firstName = null;
-        this.persoPhone = null;
-        this.email = null;
-        this.address = null;
-        this.zipCode = null;
-        this.gender = Contact.Gender.MALE;
-        this.birthDate = null;
-        this.proPhone = null;
-        this.pseudo = null;
-        this.gitLink = null;
-    }
+    // TODO regex verifications for email and gitLink
     
     public String getFirstName() {
         return firstName;
