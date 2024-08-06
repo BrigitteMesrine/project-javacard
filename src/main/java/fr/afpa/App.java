@@ -16,15 +16,6 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        /*System.out.println("----------" + " 2.3 \t2.3\tCREATION D’UN MODELE "+"-----------------" );
-        Contact2 personne1 = new Contact2("Martin", "Dupont", "0635225912");
-        // Afficher les détails de la personne :
-        System.out.println(personne1);
-        Contact2 personne2 = new Contact2("Jean", "Zannese", "0635221578");
-        // Afficher les détails de la personne :
-        System.out.println(personne2);*/
-        // Vous pouvez ensuite accéder et modifier les attributs de la personne en utilisant les getters et setters:
-       //  StringProperty utilisateur = utilisateur.getName(); // Récupère l'utilsateur
 
         scene = new Scene(loadFXML("formulaire_contact"), 1024, 768);
         stage.setScene(scene);

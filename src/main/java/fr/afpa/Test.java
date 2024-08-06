@@ -5,7 +5,6 @@ package fr.afpa;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import fr.afpa.ContactVerifier;
 import fr.afpa.models.Contact;
 
 public class Test {

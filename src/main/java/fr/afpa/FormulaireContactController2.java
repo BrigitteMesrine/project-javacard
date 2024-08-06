@@ -128,8 +128,6 @@ public class FormulaireContactController2 {
         hommeRadio.setToggleGroup(genreGroup);
         femmeRadio.setToggleGroup(genreGroup);
         nonBinaireRadio.setToggleGroup(genreGroup);
-
-        // Ajouter des contacts fictifs pour le test
         // observableContactList.add(new Contact("Dupont", "Jean", "0123456789",
         // "jean.dupont@example.com",
         // "1 rue de Paris",
@@ -221,17 +219,42 @@ public class FormulaireContactController2 {
 
     }
 
-    // Bouton ajouter :
+    // TODO create method to prevent creating a existing contact
     @FXML
     private void handleNouveau() {
+
         if (contactTemp.verifyContact()) {
             contactsList.add(contactTemp);
             viewableContactsList.add(new ViewableContact(contactTemp));
             contactsTable.setItems(viewableContactsList);
+            for (Contact contact : contactsList) {
+                System.out.println(contact.getId());
+            }
             clearFields();
         } else {
             showAlert("Information erronée", "alerte");
         }
+    }
+
+    private boolean isNotInList() {
+        boolean isNotInList = false;
+        for (Contact contact : contactsList) {
+            if (nomField.getText() != contact.getLastName()
+                && prenomField.getText() != contact.getFirstName()
+                && adresseField.getText() != contact.getAddress()
+                && emailField.getText() != contact.getEmail()
+                // && genreGroup.getSelectedToggle().getUserData() != contact.getLastName()
+                && telephonePersonnelField.getText() != contact.getPersoPhone()
+                && dateNaissanceField.getValue() != contact.getBirthDate()
+                && telephoneProfessionnelField.getText() != contact.getProPhone()
+                && pseudoField.getText() != contact.getPseudo()
+                && lienDepotGitField.getText() != contact.getGitLink()) {
+                    isNotInList = true;
+            } else {
+                clearFields();
+            }
+        }
+        return isNotInList;
     }
 
     @FXML
@@ -254,16 +277,16 @@ public class FormulaireContactController2 {
                         contact.getLienDepotGit()));
             }
 
-            Contact modifiedContact = new Contact(prenomField.getText(), 
-                    nomField.getText(), 
-                    telephonePersonnelField.getText(), 
-                    emailField.getText(), 
-                    adresseField.getText(), 
-                    codePostalField.getText(), 
-                    contactTemp.getGender(), 
-                    dateNaissanceField.getValue(), 
-                    telephoneProfessionnelField.getText(), 
-                    pseudoField.getText(), 
+            Contact modifiedContact = new Contact(prenomField.getText(),
+                    nomField.getText(),
+                    telephonePersonnelField.getText(),
+                    emailField.getText(),
+                    adresseField.getText(),
+                    codePostalField.getText(),
+                    contactTemp.getGender(),
+                    dateNaissanceField.getValue(),
+                    telephoneProfessionnelField.getText(),
+                    pseudoField.getText(),
                     lienDepotGitField.getText());
 
             if (modifiedContact.verifyContact()) {
@@ -273,8 +296,6 @@ public class FormulaireContactController2 {
                 contactsList.add(modifiedContact);
                 contactsTable.setItems(viewableContactsList);
             }
-
-
 
         }
 

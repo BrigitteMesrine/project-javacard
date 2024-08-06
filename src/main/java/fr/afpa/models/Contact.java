@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import com.github.cliftonlabs.json_simple.JsonArray;
@@ -50,9 +51,11 @@ public class Contact implements Serializable, Jsonable {
     private String proPhone;
     private String pseudo;
     private String gitLink;
-    // private int id;
+    // private String id;
     
     
+
+
     // warning suppression for
     // java:S107 too many parameters
     @SuppressWarnings({ "java:S107" })
@@ -69,7 +72,9 @@ public class Contact implements Serializable, Jsonable {
         this.proPhone = proPhone;
         this.pseudo = pseudo;
         this.gitLink = gitLink;
-        // this.id = id;
+        // LocalDate idDateStamp = LocalDate.now();
+        // LocalTime idTimeStamp = LocalTime.now();
+        // this.id = idDateStamp.toString() + idTimeStamp.toString();
     }
 
     public boolean verifyContact() {
@@ -85,7 +90,7 @@ public class Contact implements Serializable, Jsonable {
         return isContact;
     }
 
-    // TODO regex verifications for email and gitLink
+    // TODO regex verifications for email and gitLink and other fields
     
     public String getFirstName() {
         return firstName;
@@ -175,13 +180,13 @@ public class Contact implements Serializable, Jsonable {
         this.gitLink = gitLink;
     }
 
-    // public int getId() {
-    //     return id;
-    // }
+    public String getId() {
+        return id;
+    }
 
-    // public void setId(int id) {
-    //     this.id = id;
-    // }
+    public void setId(String id) {
+        this.id = id;
+    }
 
     @Override
     public String toString() {
