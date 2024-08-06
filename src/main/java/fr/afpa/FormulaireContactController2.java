@@ -17,8 +17,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class FormulaireContactController2 {
 
     // @FXML
@@ -108,14 +106,17 @@ public class FormulaireContactController2 {
     @FXML
     private Button quitterButton;
 
+    // list of contacts ; is used by serializers
+    // is the list which is interacted with when pressing edition buttons
     private List<Contact> observableContactList = new ArrayList<>();
+
+    // ObservableList is an observable representation of the previous contacts list
     private ObservableList<ViewableContact> viewableContactsList = FXCollections.observableArrayList();
+
+    // serializers used in various methods
     private ContactBinarySerializer binarySerializer = new ContactBinarySerializer();
     private ContactVCardSerializer vCardSerializer = new ContactVCardSerializer();
     private ContactJSONSerializer jsonSerializer = new ContactJSONSerializer();
-    private MultipleSelectionModel<ViewableContact> multipleSelectionModel;
-
-    private ViewableContact viewableContact;
 
     // initialiser un contact "temporaire"
     private Contact contactTemp = new Contact(null, null, null, null, null, null, Contact.Gender.MALE, null, null, null,
@@ -123,8 +124,6 @@ public class FormulaireContactController2 {
 
     @FXML
     private void initialize() {
-
-        // multipleSelectionModel.setSelectionModel(SelectionMode.MULTIPLE);
 
         hommeRadio.setToggleGroup(genreGroup);
         femmeRadio.setToggleGroup(genreGroup);
@@ -159,10 +158,7 @@ public class FormulaireContactController2 {
         }
 
         for (Contact contact : observableContactList) {
-            viewableContactsList.add(new ViewableContact(contact.getLastName(), contact.getFirstName(),
-                    contact.getPersoPhone(), contact.getEmail(),
-                    contact.getAddress(), contact.getZipCode(), contact.getGender(), contact.getBirthDate(),
-                    contact.getProPhone(), contact.getPseudo(), contact.getGitLink()));
+            viewableContactsList.add(new ViewableContact(contact));
         }
         // Ajouter les données au TableView
         contactsTable.setItems(viewableContactsList);
@@ -186,11 +182,12 @@ public class FormulaireContactController2 {
         emailField.setOnKeyTyped(event -> contactTemp.setEmail(emailField.getText()));
         adresseField.setOnKeyTyped(event -> contactTemp.setAddress(adresseField.getText()));
         codePostalField.setOnKeyTyped(event -> contactTemp.setZipCode(codePostalField.getText()));
-        // codePostalField.setOnKeyTyped(event -> contactTemp.setZipCode(codePostalField.getText()));
-        telephoneProfessionnelField.setOnKeyTyped(event -> contactTemp.setProPhone(telephoneProfessionnelField.getText()));
+        // codePostalField.setOnKeyTyped(event ->
+        // contactTemp.setZipCode(codePostalField.getText()));
+        telephoneProfessionnelField
+                .setOnKeyTyped(event -> contactTemp.setProPhone(telephoneProfessionnelField.getText()));
         pseudoField.setOnKeyTyped(event -> contactTemp.setPseudo(pseudoField.getText()));
         lienDepotGitField.setOnKeyTyped(event -> contactTemp.setGitLink(lienDepotGitField.getText()));
-
 
         genreGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
@@ -219,6 +216,8 @@ public class FormulaireContactController2 {
         vCardButton.setOnAction(event -> handleVCard());
         jsonButton.setOnAction(event -> handleJson());
 
+        contactsTable.setOnMouseClicked(event -> showContactDetails());
+
     }
 
     // Bouton ajouter :
@@ -226,15 +225,11 @@ public class FormulaireContactController2 {
     private void handleNouveau() {
         if (contactTemp.verifyContact()) {
             observableContactList.add(contactTemp);
-            viewableContactsList.add(new ViewableContact(contactTemp.getLastName(), contactTemp.getFirstName(),
-                    contactTemp.getPersoPhone(), contactTemp.getEmail(),
-                    contactTemp.getAddress(), contactTemp.getZipCode(), contactTemp.getGender(),
-                    contactTemp.getBirthDate(),
-                    contactTemp.getProPhone(), contactTemp.getPseudo(), contactTemp.getGitLink()));
+            viewableContactsList.add(new ViewableContact(contactTemp));
             contactsTable.setItems(viewableContactsList);
             clearFields();
         } else {
-            System.out.println("Erreur");
+            showAlert("Information erronée", "alerte");
         }
     }
 
@@ -276,10 +271,16 @@ public class FormulaireContactController2 {
             viewableContactsList.remove(selectedContact);
             ArrayList<Contact> newViewableContactsList = new ArrayList<>();
             for (ViewableContact contact : viewableContactsList) {
-                newViewableContactsList.add(new Contact(contact.getPrenom(), contact.getNom(),
-                        contact.getTelephonePersonnel(), contact.getEmail(), contact.getAdresse(),
-                        contact.getCodePostal(), Contact.Gender.MALE, LocalDate.now(),
-                        contact.getTelephoneProfessionnel(), contact.getPseudo(), contact.getLienDepotGit()));
+                newViewableContactsList.add(new Contact(contact.getPrenom(),
+                        contact.getNom(),
+                        contact.getTelephonePersonnel(),
+                        contact.getEmail(), contact.getAdresse(),
+                        contact.getCodePostal(),
+                        Contact.Gender.MALE,
+                        LocalDate.now(),
+                        contact.getTelephoneProfessionnel(),
+                        contact.getPseudo(),
+                        contact.getLienDepotGit()));
             }
 
             this.contactsTable.setItems(viewableContactsList);
@@ -291,25 +292,25 @@ public class FormulaireContactController2 {
     }
 
     @FXML
-    private void showContactDetails(Contact newContact) {
-        if (viewableContact != null) {
-            nomField.setText(newContact.getLastName());
-            prenomField.setText(newContact.getFirstName());
-            telephonePersonnelField.setText(newContact.getPersoPhone());
-            emailField.setText(newContact.getEmail());
-            adresseField.setText(newContact.getAddress());
-            codePostalField.setText(newContact.getZipCode());
-            setselectGenre(newContact);
+    private void showContactDetails() {
+        ViewableContact selectedContact = contactsTable.getSelectionModel().getSelectedItem();
+        if (selectedContact != null) {
+            nomField.setText(selectedContact.getNom());
+            prenomField.setText(selectedContact.getPrenom());
+            telephonePersonnelField.setText(selectedContact.getTelephonePersonnel());
+            emailField.setText(selectedContact.getEmail());
+            adresseField.setText(selectedContact.getAdresse());
+            codePostalField.setText(selectedContact.getCodePostal());
+            // setselectGenre(newContact);
 
             // formater la LocalDate en String
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
-            String formattedBirthDate = newContact.getBirthDate().format(formatter);
+            // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+            // String formattedBirthDate = selectedContact.getBirthDate().format(formatter);
 
-            dateNaissanceField.setValue(newContact.getBirthDate());
-            telephoneProfessionnelField.setText(newContact.getProPhone());
-            pseudoField.setText(newContact.getPseudo());
-            lienDepotGitField.setText(newContact.getGitLink());
-
+            // dateNaissanceField.setValue(selectedContact.getBirthDate());
+            telephoneProfessionnelField.setText(selectedContact.getTelephoneProfessionnel());
+            pseudoField.setText(selectedContact.getPseudo());
+            lienDepotGitField.setText(selectedContact.getLienDepotGit());
         } else {
             nomField.setText("");
             prenomField.setText("");
@@ -325,6 +326,7 @@ public class FormulaireContactController2 {
             pseudoField.setText("");
             lienDepotGitField.setText("");
         }
+
     }
 
     @FXML
@@ -334,15 +336,17 @@ public class FormulaireContactController2 {
 
     @FXML
     private void handleClear() {
-        contactsTable.getItems().clear();
+        contactsTable.getSelectionModel().clearSelection();
     }
 
     @FXML
     private void handleVCard() {
         ViewableContact selectedContact = contactsTable.getSelectionModel().getSelectedItem();
         for (Contact contact : observableContactList) {
-            if (contact.getLastName().equals(selectedContact.getNom()) && contact.getFirstName().equals(selectedContact.getPrenom()) && contact.getEmail().equals(selectedContact.getEmail())) {
-                vCardSerializer.save(selectedContact.getNom() + selectedContact.getPrenom() + ".vcf", contact); 
+            if (contact.getLastName().equals(selectedContact.getNom())
+                    && contact.getFirstName().equals(selectedContact.getPrenom())
+                    && contact.getEmail().equals(selectedContact.getEmail())) {
+                vCardSerializer.save(selectedContact.getNom() + selectedContact.getPrenom() + ".vcf", contact);
             }
         }
     }
@@ -351,8 +355,10 @@ public class FormulaireContactController2 {
     private void handleJson() {
         ViewableContact selectedContact = contactsTable.getSelectionModel().getSelectedItem();
         for (Contact contact : observableContactList) {
-            if (contact.getLastName().equals(selectedContact.getNom()) && contact.getFirstName().equals(selectedContact.getPrenom()) && contact.getEmail().equals(selectedContact.getEmail())) {
-                jsonSerializer.save(selectedContact.getNom() + selectedContact.getPrenom(), contact); 
+            if (contact.getLastName().equals(selectedContact.getNom())
+                    && contact.getFirstName().equals(selectedContact.getPrenom())
+                    && contact.getEmail().equals(selectedContact.getEmail())) {
+                jsonSerializer.save(selectedContact.getNom() + selectedContact.getPrenom(), contact);
             }
         }
     }
@@ -383,9 +389,8 @@ public class FormulaireContactController2 {
      * afficher des messages :
      */
 
-    private void showAlert(String title, String header, String content) {
+    private void showAlert(String header, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
         alert.setHeaderText(header);
         alert.setContentText(content);
         alert.showAndWait();
