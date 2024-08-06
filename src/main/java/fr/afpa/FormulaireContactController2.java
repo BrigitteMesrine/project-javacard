@@ -17,6 +17,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class FormulaireContactController2 {
 
     // @FXML
@@ -111,6 +113,7 @@ public class FormulaireContactController2 {
     private ContactBinarySerializer binarySerializer = new ContactBinarySerializer();
     private ContactVCardSerializer vCardSerializer = new ContactVCardSerializer();
     private ContactJSONSerializer jsonSerializer = new ContactJSONSerializer();
+    private MultipleSelectionModel<ViewableContact> multipleSelectionModel;
 
     private ViewableContact viewableContact;
 
@@ -121,7 +124,7 @@ public class FormulaireContactController2 {
     @FXML
     private void initialize() {
 
-        // contactsTable.setSelectionModel(null);
+        // multipleSelectionModel.setSelectionModel(SelectionMode.MULTIPLE);
 
         hommeRadio.setToggleGroup(genreGroup);
         femmeRadio.setToggleGroup(genreGroup);
@@ -183,6 +186,10 @@ public class FormulaireContactController2 {
         emailField.setOnKeyTyped(event -> contactTemp.setEmail(emailField.getText()));
         adresseField.setOnKeyTyped(event -> contactTemp.setAddress(adresseField.getText()));
         codePostalField.setOnKeyTyped(event -> contactTemp.setZipCode(codePostalField.getText()));
+        // codePostalField.setOnKeyTyped(event -> contactTemp.setZipCode(codePostalField.getText()));
+        telephoneProfessionnelField.setOnKeyTyped(event -> contactTemp.setProPhone(telephoneProfessionnelField.getText()));
+        pseudoField.setOnKeyTyped(event -> contactTemp.setPseudo(pseudoField.getText()));
+        lienDepotGitField.setOnKeyTyped(event -> contactTemp.setGitLink(lienDepotGitField.getText()));
 
 
         genreGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
