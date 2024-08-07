@@ -1,7 +1,5 @@
 package fr.afpa.models;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import java.time.LocalDate;
@@ -29,9 +27,6 @@ public class ViewableContact {
     private StringProperty pseudo;
     private StringProperty lienDepotGit;
 
-    // Constructeurs :
-    // public ViewableContact(String nom, String prenom, String telephonePersonnel,
-    // String email, String adresse, String codePostal, String genre) {
     public ViewableContact(Contact contact) {
 
         this.nom = new SimpleStringProperty(contact.getLastName());

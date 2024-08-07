@@ -14,6 +14,7 @@ public class App extends Application {
 
     private static Scene scene;
 
+    @SuppressWarnings({ "java:S2696" })
     @Override
     public void start(Stage stage) throws IOException {
 

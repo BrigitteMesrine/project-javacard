@@ -7,24 +7,13 @@ import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.layout.VBox;
 import javafx.scene.control.*;
-import javafx.stage.FileChooser;
-import java.io.File;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.log4j.*;;
-
+import org.apache.log4j.*;
 
 public class FormulaireContactController2 {
 
-    // @FXML
-    // private VBox mainVBox;
-
-    
     // tableView
     @FXML
     private TableView<ViewableContact> contactsTable;
@@ -126,7 +115,8 @@ public class FormulaireContactController2 {
             null,
             null);
 
-    // private static final Logger logger = Logger.getLogger(FormulaireContactController2.class);
+    // private static final Logger logger =
+    // Logger.getLogger(FormulaireContactController2.class);
 
     @FXML
     private void initialize() {
@@ -153,8 +143,6 @@ public class FormulaireContactController2 {
         // "https://github.com/jdupont"));
 
         // convertir les Contact en ViewableContact
-
-        ContactBinarySerializer binarySerializer = new ContactBinarySerializer();
         ArrayList<Contact> contacts = binarySerializer.loadList("contacts.serial");
         if (contacts != null) {
             for (Contact contact : contacts) {
@@ -217,7 +205,7 @@ public class FormulaireContactController2 {
     // TODO create method to prevent creating a existing contact
     @FXML
     private void handleNouveau() {
-        
+
         inputContact.setLastName(nomField.getText());
         inputContact.setFirstName(prenomField.getText());
         inputContact.setPersoPhone(telephonePersonnelField.getText());
@@ -228,20 +216,15 @@ public class FormulaireContactController2 {
         inputContact.setBirthDate(dateNaissanceField.getValue());
         inputContact.setPseudo(pseudoField.getText());
         inputContact.setGitLink(lienDepotGitField.getText());
-        System.out.println(inputContact);
-        if (
-            !nomField.getText().isEmpty() &&
-            !prenomField.getText().isEmpty() &&
-            !emailField.getText().isEmpty() &&
-            !adresseField.getText().isEmpty() &&
-            !codePostalField.getText().isEmpty()
-        ) {
+        if (!nomField.getText().isEmpty() &&
+                !prenomField.getText().isEmpty() &&
+                !emailField.getText().isEmpty() &&
+                !adresseField.getText().isEmpty() &&
+                !codePostalField.getText().isEmpty()) {
             contactsList.add(inputContact);
             viewableContactsList.add(new ViewableContact(inputContact));
             contactsTable.setItems(viewableContactsList);
             clearFields();
-        } else {
-            showAlert("Information erronée", "alerte");
         }
     }
 
@@ -395,7 +378,7 @@ public class FormulaireContactController2 {
             if (contact.getLastName().equals(selectedContact.getNom())
                     && contact.getFirstName().equals(selectedContact.getPrenom())
                     && contact.getEmail().equals(selectedContact.getEmail())) {
-                vCardSerializer.save(selectedContact.getNom() + selectedContact.getPrenom() + ".vcf", contact);
+                vCardSerializer.save(selectedContact.getPrenom() + ".vcf", contact);
             }
         }
     }
@@ -429,20 +412,4 @@ public class FormulaireContactController2 {
         pseudoField.clear();
         lienDepotGitField.clear();
     }
-
-    /*
-     * Gestion des Erreurs dans l'Interface Utilisateur
-     * 1. Affichage des Erreurs
-     * Utilisez les alertes pour informer l'utilisateur des erreurs de validation ou
-     * d'autres problèmes. Voici comment la méthode showAlert est utilisée pour
-     * afficher des messages :
-     */
-
-    private void showAlert(String header, String content) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
-
 }

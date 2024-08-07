@@ -5,31 +5,13 @@ import java.io.Serializable;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import com.github.cliftonlabs.json_simple.JsonArray;
 import com.github.cliftonlabs.json_simple.JsonObject;
 import com.github.cliftonlabs.json_simple.Jsonable;
 
 public class Contact implements Serializable, Jsonable {
 
-    // attributes are declare as *Property objects
-    // in order to be usable in TableView objects columns
-    // see columnName.setCellValueFactory(cellData -> cellData.getValue().<object
-    // getter>)
-
-    // mandatory attributes
-    // Ici les attributs sont de classe "String" et "Enum" et "LocalDate"
-    // elles ne peuvent pas être ajoutées à une TableView
-    // il faut d'abord convertir la valeur de ces attributs
-    // notamment avec
-    // StringProperty observableNom = new SimpleStringProperty(contact.getLastName);
-    // il faudra effectuer cette conversion dans le contrôleur ;
-    // par exemple en créant une méthode "toObservableContact(Contact contact)"
-    // qui convertira tous les attributs 
-    // (pas obligé de créer une méthode, c'est juste un exemple;
-    // tu peux effectuer la conversion directement dans l'initialisation de ton contrôleur)
     private String firstName;
     private String lastName;
     private String persoPhone;
@@ -51,7 +33,7 @@ public class Contact implements Serializable, Jsonable {
     private String proPhone;
     private String pseudo;
     private String gitLink;
-    // private String id;
+
     
     
 
@@ -72,9 +54,6 @@ public class Contact implements Serializable, Jsonable {
         this.proPhone = proPhone;
         this.pseudo = pseudo;
         this.gitLink = gitLink;
-        // LocalDate idDateStamp = LocalDate.now();
-        // LocalTime idTimeStamp = LocalTime.now();
-        // this.id = idDateStamp.toString() + idTimeStamp.toString();
     }
 
     public boolean verifyContact() {
@@ -180,14 +159,6 @@ public class Contact implements Serializable, Jsonable {
         this.gitLink = gitLink;
     }
 
-    // public String getId() {
-    //     return id;
-    // }
-
-    // public void setId(String id) {
-    //     this.id = id;
-    // }
-
     @Override
     public String toString() {
         return "Contact [firstName=" + firstName + ", lastName=" + lastName + ", persoPhone=" + persoPhone + ", email="
@@ -244,7 +215,6 @@ public class Contact implements Serializable, Jsonable {
         json.put("proPhone", this.proPhone);
         json.put("pseudo", this.pseudo);
         json.put("gitLink", this.gitLink);
-        // json.put("id", this.id);
         json.toJson(writer);
     }
 }
