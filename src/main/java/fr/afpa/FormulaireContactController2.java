@@ -16,12 +16,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.log4j.*;;
+
 
 public class FormulaireContactController2 {
 
     // @FXML
     // private VBox mainVBox;
 
+    
     // tableView
     @FXML
     private TableView<ViewableContact> contactsTable;
@@ -119,8 +122,11 @@ public class FormulaireContactController2 {
     private ContactJSONSerializer jsonSerializer = new ContactJSONSerializer();
 
     // initialiser un contact "temporaire"
-    private Contact contactTemp = new Contact(null, null, null, null, null, null, Contact.Gender.MALE, null, null, null,
+    private Contact inputContact = new Contact(null, null, null, null, null, null, Contact.Gender.MALE, null, null,
+            null,
             null);
+
+    // private static final Logger logger = Logger.getLogger(FormulaireContactController2.class);
 
     @FXML
     private void initialize() {
@@ -128,6 +134,7 @@ public class FormulaireContactController2 {
         hommeRadio.setToggleGroup(genreGroup);
         femmeRadio.setToggleGroup(genreGroup);
         nonBinaireRadio.setToggleGroup(genreGroup);
+
         // observableContactList.add(new Contact("Dupont", "Jean", "0123456789",
         // "jean.dupont@example.com",
         // "1 rue de Paris",
@@ -174,18 +181,6 @@ public class FormulaireContactController2 {
         pseudoColumn.setCellValueFactory(cellData -> cellData.getValue().pseudoProperty());
         liengitColumn.setCellValueFactory(cellData -> cellData.getValue().lienDepotGitProperty());
 
-        nomField.setOnKeyTyped(event -> contactTemp.setLastName(nomField.getText()));
-        prenomField.setOnKeyTyped(event -> contactTemp.setFirstName(prenomField.getText()));
-        telephonePersonnelField.setOnKeyTyped(event -> contactTemp.setPersoPhone(telephonePersonnelField.getText()));
-        emailField.setOnKeyTyped(event -> contactTemp.setEmail(emailField.getText()));
-        adresseField.setOnKeyTyped(event -> contactTemp.setAddress(adresseField.getText()));
-        codePostalField.setOnKeyTyped(event -> contactTemp.setZipCode(codePostalField.getText()));
-        dateNaissanceField.setOnAction(event -> contactTemp.setBirthDate(dateNaissanceField.getValue()));
-        telephoneProfessionnelField
-                .setOnKeyTyped(event -> contactTemp.setProPhone(telephoneProfessionnelField.getText()));
-        pseudoField.setOnKeyTyped(event -> contactTemp.setPseudo(pseudoField.getText()));
-        lienDepotGitField.setOnKeyTyped(event -> contactTemp.setGitLink(lienDepotGitField.getText()));
-
         genreGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
@@ -193,13 +188,13 @@ public class FormulaireContactController2 {
                     RadioButton checkedButton = (RadioButton) newValue.getToggleGroup().getSelectedToggle();
                     switch (checkedButton.getText()) {
                         case "Homme":
-                            contactTemp.setGender(Contact.Gender.MALE);
+                            inputContact.setGender(Contact.Gender.MALE);
                             break;
                         case "Femme":
-                            contactTemp.setGender(Contact.Gender.FEMALE);
+                            inputContact.setGender(Contact.Gender.FEMALE);
                             break;
                         case "Non-binaire":
-                            contactTemp.setGender(Contact.Gender.NON_BINARY);
+                            inputContact.setGender(Contact.Gender.NON_BINARY);
                             break;
                     }
 
@@ -222,14 +217,28 @@ public class FormulaireContactController2 {
     // TODO create method to prevent creating a existing contact
     @FXML
     private void handleNouveau() {
-
-        if (contactTemp.verifyContact()) {
-            contactsList.add(contactTemp);
-            viewableContactsList.add(new ViewableContact(contactTemp));
+        
+        inputContact.setLastName(nomField.getText());
+        inputContact.setFirstName(prenomField.getText());
+        inputContact.setPersoPhone(telephonePersonnelField.getText());
+        inputContact.setEmail(emailField.getText());
+        inputContact.setAddress(adresseField.getText());
+        inputContact.setZipCode(codePostalField.getText());
+        inputContact.setProPhone(telephoneProfessionnelField.getText());
+        inputContact.setBirthDate(dateNaissanceField.getValue());
+        inputContact.setPseudo(pseudoField.getText());
+        inputContact.setGitLink(lienDepotGitField.getText());
+        System.out.println(inputContact);
+        if (
+            !nomField.getText().isEmpty() &&
+            !prenomField.getText().isEmpty() &&
+            !emailField.getText().isEmpty() &&
+            !adresseField.getText().isEmpty() &&
+            !codePostalField.getText().isEmpty()
+        ) {
+            contactsList.add(inputContact);
+            viewableContactsList.add(new ViewableContact(inputContact));
             contactsTable.setItems(viewableContactsList);
-            for (Contact contact : contactsList) {
-                System.out.println(contact.getId());
-            }
             clearFields();
         } else {
             showAlert("Information erronée", "alerte");
@@ -240,16 +249,16 @@ public class FormulaireContactController2 {
         boolean isNotInList = false;
         for (Contact contact : contactsList) {
             if (nomField.getText() != contact.getLastName()
-                && prenomField.getText() != contact.getFirstName()
-                && adresseField.getText() != contact.getAddress()
-                && emailField.getText() != contact.getEmail()
-                // && genreGroup.getSelectedToggle().getUserData() != contact.getLastName()
-                && telephonePersonnelField.getText() != contact.getPersoPhone()
-                && dateNaissanceField.getValue() != contact.getBirthDate()
-                && telephoneProfessionnelField.getText() != contact.getProPhone()
-                && pseudoField.getText() != contact.getPseudo()
-                && lienDepotGitField.getText() != contact.getGitLink()) {
-                    isNotInList = true;
+                    && prenomField.getText() != contact.getFirstName()
+                    && adresseField.getText() != contact.getAddress()
+                    && emailField.getText() != contact.getEmail()
+                    // && genreGroup.getSelectedToggle().getUserData() != contact.getLastName()
+                    && telephonePersonnelField.getText() != contact.getPersoPhone()
+                    && dateNaissanceField.getValue() != contact.getBirthDate()
+                    && telephoneProfessionnelField.getText() != contact.getProPhone()
+                    && pseudoField.getText() != contact.getPseudo()
+                    && lienDepotGitField.getText() != contact.getGitLink()) {
+                isNotInList = true;
             } else {
                 clearFields();
             }
@@ -283,7 +292,7 @@ public class FormulaireContactController2 {
                     emailField.getText(),
                     adresseField.getText(),
                     codePostalField.getText(),
-                    contactTemp.getGender(),
+                    inputContact.getGender(),
                     dateNaissanceField.getValue(),
                     telephoneProfessionnelField.getText(),
                     pseudoField.getText(),
