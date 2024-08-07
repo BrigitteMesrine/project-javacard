@@ -13,7 +13,7 @@ public class ContactVCardSerializer implements Serializer<Contact> {
     @Override
     public void saveList(String filePath, List<Contact> contactsToSave) {
         try {
-            File vcfFile = new File("allcontacts" + filePath);
+            File vcfFile = new File(filePath);
             FileWriter fw = new FileWriter(vcfFile);
             for (Contact contact : contactsToSave) {
                 // converting Gender constants to chars as Strings
@@ -42,20 +42,20 @@ public class ContactVCardSerializer implements Serializer<Contact> {
                     bDate = contact.getBirthDate().format(formatter);
                 }
 
-                fw.write("BEGIN:VCARD\r\n");
-                fw.write("VERSION:3.0\r\n");
-                fw.write("N:" + contact.getLastName() + ";" + contact.getFirstName() + "\r\n");
-                fw.write("FN:" + contact.getFirstName() + " " + contact.getLastName() + "\r\n");
-                fw.write("TEL;TYPE=WORK,VOICE:" + contact.getProPhone() + "\r\n");
-                fw.write("TEL;TYPE=HOME,VOICE:" + contact.getPersoPhone() + "\r\n");
-                fw.write("ADR;TYPE=WORK:;;" + contact.getAddress() + ";" + contact.getZipCode() + "\r\n");
-                fw.write("EMAIL;TYPE=PREF,INTERNET:" + contact.getEmail() + "\r\n");
-                fw.write("GENDER:" + gender + "\r\n");
-                fw.write("BDAY:" + bDate + "\r\n");
-                fw.write("NICKNAME:" + contact.getPseudo() + "\r\n");
-                fw.write("URL:" + contact.getGitLink() + "\r\n");
-                fw.write("END:VCARD\r\n");
-                fw.write("\r\n");
+                fw.write("BEGIN:VCARD\n");
+                fw.write("VERSION:4.0\n");
+                fw.write("N:" + contact.getLastName() + ";" + contact.getFirstName() + "\n");
+                fw.write("FN:" + contact.getFirstName() + " " + contact.getLastName() + "\n");
+                fw.write("TEL;TYPE=WORK,VOICE:" + contact.getProPhone() + "\n");
+                fw.write("TEL;TYPE=HOME,VOICE:" + contact.getPersoPhone() + "\n");
+                fw.write("ADR;TYPE=WORK:;;" + contact.getAddress() + ";" + contact.getZipCode() + "\n");
+                fw.write("EMAIL;TYPE=PREF,INTERNET:" + contact.getEmail() + "\n");
+                fw.write("GENDER:" + gender + "\n");
+                fw.write("BDAY:" + bDate + "\n");
+                fw.write("NICKNAME:" + contact.getPseudo() + "\n");
+                fw.write("URL:" + contact.getGitLink() + "\n");
+                fw.write("END:VCARD\n");
+                fw.write("\n");
             }
             fw.close();
         } catch (IOException ioe) {
@@ -95,19 +95,19 @@ public class ContactVCardSerializer implements Serializer<Contact> {
         try {
             File vcfFile = new File(contact.getLastName() + filePath);
             FileWriter fw = new FileWriter(vcfFile);
-            fw.write("BEGIN:VCARD\r\n");
-            fw.write("VERSION:3.0\r\n");
-            fw.write("N:" + contact.getLastName() + ";" + contact.getFirstName() + "\r\n");
-            fw.write("FN:" + contact.getFirstName() + " " + contact.getLastName() + "\r\n");
-            fw.write("TEL;TYPE=WORK,VOICE:" + contact.getProPhone() + "\r\n");
-            fw.write("TEL;TYPE=HOME,VOICE:" + contact.getPersoPhone() + "\r\n");
-            fw.write("ADR;TYPE=WORK:;;" + contact.getAddress() + ";" + contact.getZipCode() + "\r\n");
-            fw.write("EMAIL;TYPE=PREF,INTERNET:" + contact.getEmail() + "\r\n");
-            fw.write("GENDER:" + gender + "\r\n");
-            fw.write("BDAY:" + bDate + "\r\n");
-            fw.write("NICKNAME:" + contact.getPseudo() + "\r\n");
-            fw.write("URL:" + contact.getGitLink() + "\r\n");
-            fw.write("END:VCARD\r\n");
+            fw.write("BEGIN:VCARD\n");
+            fw.write("VERSION:4.0\n");
+            fw.write("N:" + contact.getLastName() + ";" + contact.getFirstName() + "\n");
+            fw.write("FN:" + contact.getFirstName() + " " + contact.getLastName() + "\n");
+            fw.write("TEL;TYPE=WORK,VOICE:" + contact.getProPhone() + "\n");
+            fw.write("TEL;TYPE=HOME,VOICE:" + contact.getPersoPhone() + "\n");
+            fw.write("ADR;TYPE=WORK:;;" + contact.getAddress() + ";" + contact.getZipCode() + "\n");
+            fw.write("EMAIL;TYPE=PREF,INTERNET:" + contact.getEmail() + "\n");
+            fw.write("GENDER:" + gender + "\n");
+            fw.write("BDAY:" + bDate + "\n");
+            fw.write("NICKNAME:" + contact.getPseudo() + "\n");
+            fw.write("URL:" + contact.getGitLink() + "\n");
+            fw.write("END:VCARD\n");
             fw.close();
         } catch (IOException ioe) {
             ioe.printStackTrace();

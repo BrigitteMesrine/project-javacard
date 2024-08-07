@@ -69,6 +69,7 @@ public class ContactBinarySerializer implements Serializer<Contact>, Deserialize
         }
     }
 
+    @SuppressWarnings({"unchecked"})
     @Override
     public ArrayList<Contact> loadList(String filePath) {
 
@@ -89,7 +90,7 @@ public class ContactBinarySerializer implements Serializer<Contact>, Deserialize
          
         catch(IOException ex)
         {
-            System.out.println("IOException is caught");
+            System.out.println("IOException is caught from loadList(" + filePath + ")");
         }
          
         catch(ClassNotFoundException ex)

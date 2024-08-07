@@ -5,7 +5,6 @@ package fr.afpa;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import fr.afpa.ContactVerifier;
 import fr.afpa.models.Contact;
 
 public class Test {
@@ -34,11 +33,10 @@ public class Test {
         ContactVCardSerializer contactVCardSerializer = new ContactVCardSerializer();
         contactVCardSerializer.saveList(".vcf", contacts);
         ContactJSONSerializer contactJSONSerializer = new ContactJSONSerializer();
-        contactJSONSerializer.saveList("contacts.json", contacts);
+        contactJSONSerializer.save("contacts.json", contactTest);
 
 
         System.out.println(contacts.toString() + "\"");
         
-        System.out.println(ContactVerifier.verifyContact(contactTest));
     }
 }
