@@ -112,6 +112,7 @@ public class FormulaireContactController2 {
 
     // ObservableList is an observable representation of the previous contacts list
     private ObservableList<ViewableContact> viewableContactsList = FXCollections.observableArrayList();
+    
 
     // serializers used in various methods
     private ContactBinarySerializer binarySerializer = new ContactBinarySerializer();
@@ -128,22 +129,23 @@ public class FormulaireContactController2 {
         hommeRadio.setToggleGroup(genreGroup);
         femmeRadio.setToggleGroup(genreGroup);
         nonBinaireRadio.setToggleGroup(genreGroup);
-        // observableContactList.add(new Contact("Dupont", "Jean", "0123456789",
-        // "jean.dupont@example.com",
-        // "1 rue de Paris",
-        // "75000", Contact.Gender.NON_BINARY, null, "0987654321", "jdupont",
-        // "https://github.com/jdupont"));
-        // observableContactList
-        // .add(new Contact("Zannese", "Aurélie", "0987654321",
-        // "jean.dupont@example.com", "1 rue de Paris",
-        // "75000", Contact.Gender.FEMALE, null, "0987654321", "jdupont",
-        // "https://github.com/jdupont"));
-        // observableContactList
-        // .add(new Contact("Ford", "Mélanie", "0854796314", "jean.dupont@example.com",
-        // "1 rue de Paris",
-        // "75000", Contact.Gender.MALE, LocalDate.of(1985, 10, 26), "0987654321",
-        // "jdupont",
-        // "https://github.com/jdupont"));
+        
+        contactsList.add(new Contact("Dupont", "Jean", "0123456789",
+        "jean.dupont@example.com",
+        "1 rue de Paris",
+        "75000", Contact.Gender.NON_BINARY, null, "0987654321", "jdupont",
+        "https://github.com/jdupont"));
+        contactsList
+        .add(new Contact("Zannese", "Aurélie", "0987654321",
+        "jean.dupont@example.com", "1 rue de Paris",
+        "75000", Contact.Gender.FEMALE, null, "0987654321", "jdupont",
+        "https://github.com/jdupont"));
+        contactsList
+        .add(new Contact("Ford", "Mélanie", "0854796314", "jean.dupont@example.com",
+        "1 rue de Paris",
+        "75000", Contact.Gender.MALE, LocalDate.of(1985, 10, 26), "0987654321",
+        "jdupont",
+        "https://github.com/jdupont"));
 
         // convertir les Contact en ViewableContact
 

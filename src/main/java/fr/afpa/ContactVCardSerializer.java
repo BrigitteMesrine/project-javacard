@@ -43,7 +43,7 @@ public class ContactVCardSerializer implements Serializer<Contact> {
                 }
 
                 fw.write("BEGIN:VCARD\r\n");
-                fw.write("VERSION:3.0\r\n");
+                fw.write("VERSION:4.0\r\n");
                 fw.write("N:" + contact.getLastName() + ";" + contact.getFirstName() + "\r\n");
                 fw.write("FN:" + contact.getFirstName() + " " + contact.getLastName() + "\r\n");
                 fw.write("TEL;TYPE=WORK,VOICE:" + contact.getProPhone() + "\r\n");

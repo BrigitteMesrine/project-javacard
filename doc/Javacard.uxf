@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.1">
-  <zoom_level>8</zoom_level>
+  <zoom_level>7</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>608</x>
-      <y>264</y>
-      <w>168</w>
-      <h>72</h>
+      <x>756</x>
+      <y>329</y>
+      <w>147</w>
+      <h>63</h>
     </coordinates>
-    <panel_attributes>ContactJAsonSérializer
+    <panel_attributes>ContactJSONSérializer
 --
 
 --
@@ -19,10 +19,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>608</x>
-      <y>496</y>
-      <w>168</w>
-      <h>64</h>
+      <x>756</x>
+      <y>532</y>
+      <w>147</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>ContactVCardSerializer
 --
@@ -34,10 +34,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>608</x>
-      <y>696</y>
-      <w>168</w>
-      <h>72</h>
+      <x>756</x>
+      <y>707</y>
+      <w>147</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>ContactBinarySérializer
 --
@@ -49,10 +49,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1000</x>
-      <y>256</y>
-      <w>328</w>
-      <h>96</h>
+      <x>1099</x>
+      <y>322</y>
+      <w>287</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 Serialier&lt;T&gt;
@@ -66,10 +66,10 @@ Serialier&lt;T&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1016</x>
-      <y>704</y>
-      <w>168</w>
-      <h>88</h>
+      <x>1113</x>
+      <y>714</y>
+      <w>147</w>
+      <h>77</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 Deserializer&lt;T&gt;
@@ -83,14 +83,14 @@ Deserializer&lt;T&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>176</x>
-      <y>224</y>
-      <w>168</w>
-      <h>72</h>
+      <x>378</x>
+      <y>308</y>
+      <w>147</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>Contact
 --
-TODO à completer
+- 
 --
 </panel_attributes>
     <additional_attributes/>
@@ -98,10 +98,10 @@ TODO à completer
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>176</x>
-      <y>56</y>
-      <w>168</w>
-      <h>72</h>
+      <x>378</x>
+      <y>147</y>
+      <w>147</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 java.io.Serializable
@@ -114,58 +114,58 @@ java.io.Serializable
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>336</x>
-      <y>280</y>
-      <w>288</w>
-      <h>32</h>
+      <x>518</x>
+      <y>350</y>
+      <w>252</w>
+      <h>35</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;20.0;340.0;20.0</additional_attributes>
+    <additional_attributes>10.0;30.0;340.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>248</x>
-      <y>120</y>
-      <w>96</w>
-      <h>120</h>
+      <x>441</x>
+      <y>203</y>
+      <w>84</w>
+      <h>119</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 &lt;&lt;implements&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;130.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>336</x>
-      <y>288</y>
-      <w>288</w>
-      <h>248</h>
+      <x>518</x>
+      <y>364</y>
+      <w>252</w>
+      <h>203</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;340.0;290.0</additional_attributes>
+    <additional_attributes>10.0;10.0;340.0;270.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>336</x>
-      <y>288</y>
-      <w>288</w>
-      <h>472</h>
+      <x>518</x>
+      <y>364</y>
+      <w>252</w>
+      <h>399</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 &lt;&lt;uses&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;340.0;570.0</additional_attributes>
+    <additional_attributes>10.0;10.0;340.0;550.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>528</x>
-      <y>40</y>
-      <w>256</w>
-      <h>72</h>
+      <x>686</x>
+      <y>133</y>
+      <w>224</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>Note..
 Classes qui permettent d'effectuer
@@ -177,10 +177,10 @@ bg=orange</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>616</x>
-      <y>104</y>
-      <w>24</w>
-      <h>176</h>
+      <x>763</x>
+      <y>189</y>
+      <w>21</w>
+      <h>154</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;200.0;10.0;10.0</additional_attributes>
@@ -188,10 +188,10 @@ bg=orange</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>584</x>
-      <y>760</y>
-      <w>48</w>
-      <h>104</h>
+      <x>735</x>
+      <y>763</y>
+      <w>42</w>
+      <h>91</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>40.0;10.0;10.0;110.0</additional_attributes>
@@ -199,10 +199,10 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>384</x>
-      <y>848</y>
-      <w>256</w>
-      <h>72</h>
+      <x>560</x>
+      <y>840</y>
+      <w>224</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>Note..
 Classes qui permettent d'effectuer
@@ -214,10 +214,10 @@ bg=orange</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>768</x>
-      <y>728</y>
-      <w>264</w>
-      <h>32</h>
+      <x>896</x>
+      <y>735</y>
+      <w>231</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 &lt;&lt;implements&gt;&gt;</panel_attributes>
@@ -226,10 +226,10 @@ bg=orange</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>768</x>
-      <y>280</y>
-      <w>248</w>
-      <h>32</h>
+      <x>896</x>
+      <y>343</y>
+      <w>217</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 &lt;&lt;implements&gt;&gt;</panel_attributes>
@@ -238,10 +238,10 @@ bg=orange</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>768</x>
-      <y>304</y>
-      <w>248</w>
-      <h>216</h>
+      <x>896</x>
+      <y>364</y>
+      <w>217</w>
+      <h>189</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 &lt;&lt;implements&gt;&gt;</panel_attributes>
@@ -250,13 +250,80 @@ bg=orange</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>768</x>
-      <y>328</y>
-      <w>248</w>
-      <h>416</h>
+      <x>896</x>
+      <y>385</y>
+      <w>217</w>
+      <h>364</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 &lt;&lt;implements&gt;&gt;</panel_attributes>
     <additional_attributes>290.0;10.0;10.0;500.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>385</x>
+      <y>490</y>
+      <w>147</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>ViewableContact
+--
+TODO à completer
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>441</x>
+      <y>364</y>
+      <w>49</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>98</x>
+      <y>350</y>
+      <w>147</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>FormulaireContactController2
+--
+TODO à completer
+--
+- handleNouveau()
+- handleModifier()
+- handleEnregistrer()
+- handleSuppriumer()
+- showContactDetails()
+- handleSelectAll()
+- handleClear()
+- handleVCard()
+- handleJson()
+- handleQuitter()
+- clearFields()
+- showAlert()
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>238</x>
+      <y>329</y>
+      <w>154</w>
+      <h>119</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+&lt;&lt;uses&gt;&gt;</panel_attributes>
+    <additional_attributes>200.0;10.0;10.0;150.0</additional_attributes>
   </element>
 </diagram>
