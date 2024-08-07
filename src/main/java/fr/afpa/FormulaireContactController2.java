@@ -8,6 +8,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -99,6 +101,11 @@ public class FormulaireContactController2 {
     private Button sauvegarderButton;
     @FXML
     private Button quitterButton;
+    @FXML
+    private Label verif = new Label();
+
+    // Déclare une variable pour suivre l'état de disponibilité de l'action.
+    private boolean isActionAvailable = false;
 
     // list of contacts ; is used by serializers
     // is the list which is interacted with when pressing edition buttons
@@ -106,7 +113,6 @@ public class FormulaireContactController2 {
 
     // ObservableList is an observable representation of the previous contacts list
     private ObservableList<ViewableContact> viewableContactsList = FXCollections.observableArrayList();
-    
 
     // serializers used in various methods
     private ContactBinarySerializer binarySerializer = new ContactBinarySerializer();
@@ -114,36 +120,48 @@ public class FormulaireContactController2 {
     private ContactJSONSerializer jsonSerializer = new ContactJSONSerializer();
 
     // initialiser un contact "temporaire"
-    private Contact inputContact = new Contact(null, null, null, null, null, null, Contact.Gender.MALE, null, null,
+    private Contact inputContact = new Contact(null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            Contact.Gender.MALE,
+            null,
+            null,
             null,
             null);
 
-    // private static final Logger logger =
-    // Logger.getLogger(FormulaireContactController2.class);
+    private Stage stage;
 
     @FXML
     private void initialize() {
 
+        // Méthode appelée automatiquement après le chargement du FXML
+        // updateButtonState();
+        // Mise à jour de l'état du bouton pour refléter l'état initial de
+        // isActionAvailable
+
         hommeRadio.setToggleGroup(genreGroup);
         femmeRadio.setToggleGroup(genreGroup);
         nonBinaireRadio.setToggleGroup(genreGroup);
-        
-        contactsList.add(new Contact("Dupont", "Jean", "0123456789",
-        "jean.dupont@example.com",
-        "1 rue de Paris",
-        "75000", Contact.Gender.NON_BINARY, null, "0987654321", "jdupont",
-        "https://github.com/jdupont"));
-        contactsList
-        .add(new Contact("Zannese", "Aurélie", "0987654321",
-        "jean.dupont@example.com", "1 rue de Paris",
-        "75000", Contact.Gender.FEMALE, null, "0987654321", "jdupont",
-        "https://github.com/jdupont"));
-        contactsList
-        .add(new Contact("Ford", "Mélanie", "0854796314", "jean.dupont@example.com",
-        "1 rue de Paris",
-        "75000", Contact.Gender.MALE, LocalDate.of(1985, 10, 26), "0987654321",
-        "jdupont",
-        "https://github.com/jdupont"));
+
+        // contactsList.add(new Contact("Dupont", "Jean", "0123456789",
+        // "jean.dupont@example.com",
+        // "1 rue de Paris",
+        // "75000", Contact.Gender.NON_BINARY, null, "0987654321", "jdupont",
+        // "https://github.com/jdupont"));
+        // contactsList
+        // .add(new Contact("Zannese", "Aurélie", "0987654321",
+        // "jean.dupont@example.com", "1 rue de Paris",
+        // "75000", Contact.Gender.FEMALE, null, "0987654321", "jdupont",
+        // "https://github.com/jdupont"));
+        // contactsList
+        // .add(new Contact("Ford", "Mélanie", "0854796314", "jean.dupont@example.com",
+        // "1 rue de Paris",
+        // "75000", Contact.Gender.MALE, LocalDate.of(1985, 10, 26), "0987654321",
+        // "jdupont",
+        // "https://github.com/jdupont"));
 
         // convertir les Contact en ViewableContact
         ArrayList<Contact> contacts = binarySerializer.loadList("contacts.serial");
@@ -193,21 +211,15 @@ public class FormulaireContactController2 {
             }
         });
 
-        nouveauButton.setOnAction(event -> handleNouveau());
-        supprimerButton.setOnAction(event -> handleSupprimer());
-        sauvegarderButton.setOnAction(event -> handleEnregistrer());
-        vCardButton.setOnAction(event -> handleVCard());
-        jsonButton.setOnAction(event -> handleJson());
-        selectAllButton.setOnAction(event -> handleSelectAll());
-        clearButton.setOnAction(event -> handleClear());
-
-        contactsTable.setOnMouseClicked(event -> showContactDetails());
-
     }
 
     // TODO create method to prevent creating a existing contact
     @FXML
     private void handleNouveau() {
+
+        // Méthode appelée lorsque le bouton "actionButton" est cliqué
+        System.out.println("Bouton Nouveau validé!");
+        // Affiche un message dans la console pour indiquer que l'action a été réalisée
 
         inputContact.setLastName(nomField.getText());
         inputContact.setFirstName(prenomField.getText());
@@ -228,6 +240,7 @@ public class FormulaireContactController2 {
             viewableContactsList.add(new ViewableContact(inputContact));
             contactsTable.setItems(viewableContactsList);
             clearFields();
+
         }
     }
 
@@ -254,6 +267,10 @@ public class FormulaireContactController2 {
 
     @FXML
     private void handleModifier() {
+
+        // Méthode appelée lorsque le bouton "actionButton" est cliqué
+        System.out.println("Bouton Modifier validé!");
+        // Affiche un message dans la console pour indiquer que l'action a été réalisée
 
         ViewableContact selectedContact = contactsTable.getSelectionModel().getSelectedItem();
         if (selectedContact != null) {
@@ -299,6 +316,10 @@ public class FormulaireContactController2 {
     @FXML
     private void handleEnregistrer() {
 
+        // Méthode appelée lorsque le bouton "actionButton" est cliqué
+        System.out.println("Bouton Sauvegarder validé!");
+        // Affiche un message dans la console pour indiquer que l'action a été réalisée
+
         ArrayList<Contact> contactsToSave = new ArrayList<>();
         for (Contact contactLoop : contactsList) {
             contactsToSave.add(contactLoop);
@@ -308,6 +329,11 @@ public class FormulaireContactController2 {
 
     @FXML
     private void handleSupprimer() {
+
+        // Méthode appelée lorsque le bouton "actionButton" est cliqué
+        System.out.println("Bouton Supprimer validé!");
+        // Affiche un message dans la console pour indiquer que l'action a été réalisée
+
         ViewableContact selectedContact = contactsTable.getSelectionModel().getSelectedItem();
         if (selectedContact != null) {
             viewableContactsList.remove(selectedContact);
@@ -333,6 +359,7 @@ public class FormulaireContactController2 {
 
     @FXML
     private void showContactDetails() {
+
         ViewableContact selectedContact = contactsTable.getSelectionModel().getSelectedItem();
         if (selectedContact != null) {
             nomField.setText(selectedContact.getNom());
@@ -346,6 +373,10 @@ public class FormulaireContactController2 {
             telephoneProfessionnelField.setText(selectedContact.getTelephoneProfessionnel());
             pseudoField.setText(selectedContact.getPseudo());
             lienDepotGitField.setText(selectedContact.getLienDepotGit());
+
+            // cas où on a cliqué sur un "Contact", on active le bouton
+            sauvegarderButton.setDisable(false);
+
         } else {
             nomField.setText("");
             prenomField.setText("");
@@ -366,6 +397,11 @@ public class FormulaireContactController2 {
 
     @FXML
     private void handleSelectAll() {
+
+        // Méthode appelée lorsque le bouton "actionButton" est cliqué
+        System.out.println("Bouton Select All validé!");
+        // Affiche un message dans la console pour indiquer que l'action a été réalisée
+
         contactsTable.getSelectionModel().selectAll();
     }
 
@@ -376,18 +412,31 @@ public class FormulaireContactController2 {
 
     @FXML
     private void handleVCard() {
+
+        // Méthode appelée lorsque le bouton "actionButton" est cliqué
+        System.out.println("Bouton VCard validé!");
+        // Affiche un message dans la console pour indiquer que l'action a été réalisée
+
         ViewableContact selectedContact = contactsTable.getSelectionModel().getSelectedItem();
         for (Contact contact : contactsList) {
             if (contact.getLastName().equals(selectedContact.getNom())
                     && contact.getFirstName().equals(selectedContact.getPrenom())
                     && contact.getEmail().equals(selectedContact.getEmail())) {
                 vCardSerializer.save(selectedContact.getPrenom() + ".vcf", contact);
+                verif.setText("Contact créé");
+                verif.setVisible(true);
+                System.out.println(verif.getText());
             }
         }
     }
 
     @FXML
     private void handleJson() {
+
+        // Méthode appelée lorsque le bouton "actionButton" est cliqué
+        System.out.println("Bouton JSON validé!");
+        // Affiche un message dans la console pour indiquer que l'action a été réalisée
+
         ViewableContact selectedContact = contactsTable.getSelectionModel().getSelectedItem();
         for (Contact contact : contactsList) {
             if (contact.getLastName().equals(selectedContact.getNom())
@@ -400,10 +449,20 @@ public class FormulaireContactController2 {
 
     @FXML
     private void handleQuitter() {
+
+        // Méthode appelée lorsque le bouton "actionButton" est cliqué
+        System.out.println("Bouton Quitter validé!");
+        // Affiche un message dans la console pour indiquer que l'action a été réalisée
+
         System.exit(0);
     }
 
     private void clearFields() {
+
+        // Méthode appelée lorsque le bouton "actionButton" est cliqué
+        System.out.println("Bouton Clear validé!");
+        // Affiche un message dans la console pour indiquer que l'action a été réalisée
+
         nomField.clear();
         prenomField.clear();
         telephonePersonnelField.clear();
@@ -414,5 +473,162 @@ public class FormulaireContactController2 {
         telephoneProfessionnelField.clear();
         pseudoField.clear();
         lienDepotGitField.clear();
+    }
+
+    @FXML
+    private void toggleButtonState() {
+        // Méthode appelée lorsque le bouton "Toggle Button State" est cliqué
+        isActionAvailable = !isActionAvailable;
+        // Inverse l'état de isActionAvailable
+        updateButtonState();
+        // Met à jour l'état du bouton pour refléter le nouvel état de isActionAvailable
+    }
+
+    @FXML
+    public void handleTextFieldChanged(KeyEvent event) {
+
+        // Vérification des champs obligatoire du formulaire
+        // Si c'est pas vide, alors on active le bouton
+        // Règle d'inversion d'une expression booléenne :
+        // - les || deviennent des && (les "OU" deviennent des "ET")
+        // - on doit ajouter la négation sur chacune des opérandes booléennes
+        // Empty = Vide --> "" est vide
+        if (!nomField.getText().isEmpty() &&
+                !prenomField.getText().isEmpty() &&
+                !emailField.getText().isEmpty() &&
+                !adresseField.getText().isEmpty() &&
+                !codePostalField.getText().isEmpty()) {
+
+            // ici, les champs sont bien renseignés, on active le bouton !
+            sauvegarderButton.setDisable(false);
+            } else {
+            //sinon, on force la désactivation
+            sauvegarderButton.setDisable(true);
+        }
+
+        if (nomField.getText().isEmpty() && prenomField.getText().isEmpty()) {
+            // là on change la couleur
+            nomField.setStyle("-fx-background-color: red");
+            prenomField.setStyle("-fx-background-color: red");
+            telephonePersonnelField.setStyle("-fx-background-color: red");
+            emailField.setStyle("-fx-background-color: red");
+            adresseField.setStyle("-fx-background-color: red");
+            codePostalField.setStyle("-fx-background-color: red");
+            //App.popToast("Veuillez entrer un nom");
+        
+        
+        } else {
+            // sinon, on force la désactivation
+            nomField.setStyle("-fx-background-color: white");
+            prenomField.setStyle("-fx-background-color: white");
+            telephonePersonnelField.setStyle("-fx-background-color: white");
+            emailField.setStyle("-fx-background-color: white");
+            adresseField.setStyle("-fx-background-color: white");
+            codePostalField.setStyle("-fx-background-color: white");
+
+        
+        }
+    }
+    
+
+    /**
+     * Méthode qui sera appelée à chaque modification d'un champ de texte.
+     */
+    // @FXML
+    // public void handleNomTextFieldChanged(KeyEvent event) {
+
+    // // Vérification des champs obligatoire du formulaire
+    // // Si c'est pas vide, alors on active le bouton
+    // // Règle d'inversion d'une expression booléenne :
+    // // - les || deviennent des && (les "OU" deviennent des "ET")
+    // // - on doit ajouter la négation sur chacune des opérandes booléennes
+    // // Empty = Vide --> "" est vide
+    // if (!nomField.getText().isEmpty() &&
+    // !prenomField.getText().isEmpty() &&
+    // !emailField.getText().isEmpty() &&
+    // !adresseField.getText().isEmpty() &&
+    // !codePostalField.getText().isEmpty()) {
+
+    // // ici, les champs sont bien renseignés, on active le bouton !
+    // sauvegarderButton.setDisable(false);
+
+    // } else {
+    // // sinon, on force la désactivation
+    // sauvegarderButton.setDisable(true);
+
+    // }
+
+    // // Par exemple, pour la vérification du nom de famille
+    // if (nomField.getText().isEmpty() && prenomField.getText().isEmpty()) {
+    // // là on change la couleur
+    // nomField.setStyle("-fx-background-color: red");
+    // App.popToast("Veuillez entrer un nom");
+    // }
+
+    // else {
+    // nomField.setStyle("-fx-background-color: white");
+    // }
+
+    // }
+
+    // @FXML
+    // public void handlePrenomTextFieldChanged(KeyEvent event) {
+
+    // // Vérification des champs obligatoire du formulaire
+    // // Si c'est pas vide, alors on active le bouton
+    // // Règle d'inversion d'une expression booléenne :
+    // // - les || deviennent des && (les "OU" deviennent des "ET")
+    // // - on doit ajouter la négation sur chacune des opérandes booléennes
+    // // Empty = Vide --> "" est vide
+    // if (!nomField.getText().isEmpty() &&
+    // !prenomField.getText().isEmpty() &&
+    // !emailField.getText().isEmpty() &&
+    // !adresseField.getText().isEmpty() &&
+    // !codePostalField.getText().isEmpty()) {
+
+    // // ici, les champs sont bien renseignés, on active le bouton !
+    // sauvegarderButton.setDisable(false);
+
+    // } else {
+    // // sinon, on force la désactivation
+    // sauvegarderButton.setDisable(true);
+
+    // }
+
+    // // Par exemple, pour la vérification du nom de famille
+    // if (prenomField.getText().isEmpty()) {
+    // // là on change la couleur
+    // // nomField.setStyle("-fx-background-color: red");
+    // App.popToast("Veuillez entrer un prénom");
+    // }
+    // }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    /**
+     * Méthode qui va permettre d'activer ou de désactiver les boutons en fonction
+     * du contenu du formulaire.
+     * 
+     * Cette méthode sera appelée à chaque changement de contenu d'un champ de
+     * texte.
+     * Pour la déclencher à chaque modification de contenu, ajout de la gestion
+     * d'évènements.
+     * 
+     */
+    private void updateButtonState() {
+        // Méthode pour mettre à jour l'état du bouton "actionButton"
+        // Désactive le bouton si isActionAvailable est false, et l'active si true
+        // actionButton.setDisable(!isActionAvailable);
+        // if (isActionAvailable) {
+        // actionButton.getStyleClass().remove("disabled-button");
+        // actionButton.getStyleClass().add("enabled-button");
+        // statusLabel.setText("Status: Action Available");
+        // } else {
+        // actionButton.getStyleClass().remove("enabled-button");
+        // actionButton.getStyleClass().add("disabled-button");
+        // statusLabel.setText("Status: Action Unavailable");
+        // }
     }
 }

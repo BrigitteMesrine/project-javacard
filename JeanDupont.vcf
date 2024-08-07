@@ -1,0 +1,13 @@
+BEGIN:VCARD
+VERSION:4.0
+N:Jean;Dupont
+FN:Dupont Jean
+TEL;TYPE=WORK,VOICE:0123456789
+TEL;TYPE=HOME,VOICE:0123456789
+ADR;TYPE=WORK:;;1 rue de Paris;75000
+EMAIL;TYPE=PREF,INTERNET:jean.dupont@example.com
+GENDER:NB
+BDAY:null
+NICKNAME:jdupont
+URL:https://github.com/jdupont
+END:VCARD

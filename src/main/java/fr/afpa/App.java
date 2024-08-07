@@ -13,14 +13,29 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
+    private static Stage primaryStage;
 
     @SuppressWarnings({ "java:S2696" })
     @Override
     public void start(Stage stage) throws IOException {
-
+           
         scene = new Scene(loadFXML("formulaire_contact"), 1024, 768);
+        
+         // Ajout du fichier CSS à la scène
+        scene.getStylesheets().add(getClass().getResource("style/style.css").toExternalForm());
+       
         stage.setScene(scene);
         stage.show();
+        App.primaryStage = stage;
+
+    }
+
+    public static void popToast(String toastMessage) {
+        String toastMsg = toastMessage;
+        int toastMsgTime = 3500; // 3.5 seconds
+        int fadeInTime = 500; // 0.5 seconds
+        int fadeOutTime = 500; // 0.5 seconds
+        Toast.makeText(primaryStage, toastMsg, toastMsgTime, fadeInTime, fadeOutTime);
     }
 
     static void setRoot(String fxml) throws IOException {

@@ -62,7 +62,7 @@
                         <Insets />
                      </HBox.margin>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="65.0" prefWidth="544.0" HBox.hgrow="ALWAYS">
+                  <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets left="5.0" right="5.0" />
                      </HBox.margin>
@@ -84,28 +84,23 @@
                      <children>
                         <HBox alignment="CENTER">
                            <children>
-                              <Label onDragDetected="#handleEnregistrer" text="verif">
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Button fx:id="quitterButton" mnemonicParsing="false" onAction="#handleQuitter" style="-fx-background-color: #e5a2a2;" text="Quitter" textAlignment="CENTER" textFill="#0a0a0a">
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Button>
+                              <VBox alignment="CENTER">
+                                 <children>
+                                    <Label fx:id="statusLabel" text="Statut : Action indisponible" wrapText="true">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </Label>
+                                    <Button fx:id="actionButton" mnemonicParsing="false" onAction="#handleQuitter" style="-fx-background-color: #e5a2a2;" text="Quitter" textAlignment="CENTER" textFill="#0a0a0a">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </Button>
+                                 </children>
+                              </VBox>
                            </children>
                         </HBox>
                         <HBox>
@@ -136,56 +131,64 @@
                      <children>
                         <HBox>
                            <children>
-                              <Button fx:id="selectAllButton" mnemonicParsing="false" onAction="#handleSelectAll" style="-fx-background-color: #06ab22;" text="Select All" textAlignment="CENTER" textFill="WHITE">
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="35.0" right="20.0" top="10.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Button>
-                              <Button fx:id="clearButton" mnemonicParsing="false" onAction="#handleClear" style="-fx-background-color: #06ab22;" text="Clear" textAlignment="CENTER" textFill="WHITE">
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Button>
-                              <Button fx:id="vCardButton" mnemonicParsing="false" onAction="#handleVCard" style="-fx-background-color: #06ab22;" text="vCard" textAlignment="CENTER" textFill="WHITE">
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Button>
-                              <Button fx:id="jsonButton" mnemonicParsing="false" onAction="#handleJson" style="-fx-background-color: #06ab22;" text="JSON" textAlignment="CENTER" textFill="WHITE">
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Button>
+                              <VBox alignment="CENTER">
+                                 <children>
+                                    <Label fx:id="statusLabel" text="Status: Action Unavailable" textAlignment="CENTER" wrapText="true" />
+                                    <Button fx:id="actionButton" mnemonicParsing="false" onAction="#handleSelectAll" style="-fx-background-color: #06ab22;" text="Select All" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER">
+                                 <children>
+                                    <Label fx:id="statusLabel" text="Status: Action Unavailable" textAlignment="CENTER" wrapText="true" />
+                                    <Button fx:id="actionButton" mnemonicParsing="false" onAction="#handleClear" style="-fx-background-color: #06ab22;" text="Clear" textAlignment="CENTER" textFill="WHITE">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER">
+                                 <children>
+                                    <Label fx:id="statusLabel" text="Status: Action Unavailable" textAlignment="CENTER" wrapText="true" />
+                                    <Button fx:id="actionButton" mnemonicParsing="false" onAction="#handleVCard" style="-fx-background-color: #06ab22;" text="vCard" textAlignment="CENTER" textFill="WHITE">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER">
+                                 <children>
+                                    <Label fx:id="statusLabel" text="Status: Action Unavailable" wrapText="true" />
+                                    <Button fx:id="actionButton" mnemonicParsing="false" onAction="#handleJson" style="-fx-background-color: #06ab22;" text="JSON" textAlignment="CENTER" textFill="WHITE">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </VBox>
                            </children>
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </HBox>
-                        <TableView fx:id="contactsTable" editable="true" onMouseClicked="#showContactDetails" prefHeight="580.0">
+                        <TableView fx:id="contactsTable" editable="true" prefHeight="580.0">
                           <columns>
                             <TableColumn fx:id="nomColumn" prefWidth="141.0" text="Nom" />
                             <TableColumn fx:id="prenomColumn" maxWidth="300.0" prefWidth="141.0" text="Prénom" />
@@ -209,50 +212,58 @@
                      <children>
                         <HBox minWidth="530.0">
                            <children>
-                              <Button fx:id="nouveauButton" mnemonicParsing="false" onAction="#handleNouveau" style="-fx-background-color: #47e715;" text="Nouveau" textAlignment="CENTER">
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <HBox.margin>
-                                    <Insets left="50.0" right="20.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Button>
-                              <Button fx:id="modifierButton" mnemonicParsing="false" onAction="#handleModifier" style="-fx-background-color: #47e715;" text="Modifier">
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <HBox.margin>
-                                    <Insets left="20.0" right="20.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Button>
-                              <Button fx:id="supprimerButton" mnemonicParsing="false" onAction="#handleSupprimer" style="-fx-background-color: #47e715;" text="Supprimer" textAlignment="CENTER">
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <HBox.margin>
-                                    <Insets left="20.0" right="20.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Button>
-                              <Button fx:id="sauvegarderButton" disable="true" mnemonicParsing="false" onAction="#handleEnregistrer" style="-fx-background-color: #47e715;" text="Sauvegarder" textAlignment="CENTER">
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <HBox.margin>
-                                    <Insets left="20.0" right="20.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Button>
+                              <VBox alignment="CENTER">
+                                 <children>
+                                    <Label fx:id="statusLabel" text="Statut : Action indisponible" wrapText="true" />
+                                    <Button fx:id="actionButton" mnemonicParsing="false" onAction="#handleNouveau" style="-fx-background-color: #47e715;" text="Nouveau" textAlignment="CENTER">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER">
+                                 <children>
+                                    <Label fx:id="statusLabel" text="Status: Action Unavailable" wrapText="true" />
+                                    <Button fx:id="actionButton" mnemonicParsing="false" onAction="#handleModifier" style="-fx-background-color: #47e715;" text="Modifier">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER">
+                                 <children>
+                                    <Label fx:id="statusLabel" text="Status: Action Unavailable" wrapText="true" />
+                                    <Button fx:id="actionButton" mnemonicParsing="false" onAction="#handleSupprimer" style="-fx-background-color: #47e715;" text="Supprimer" textAlignment="CENTER" wrapText="true">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER">
+                                 <children>
+                                    <Label fx:id="statusLabel" text="Status: Action Unavailable" wrapText="true" />
+                                    <Button fx:id="actionButton" disable="true" mnemonicParsing="false" onAction="#handleEnregistrer" style="-fx-background-color: #47e715;" text="Sauvegarder" textAlignment="CENTER">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </VBox>
                            </children>
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -289,7 +300,7 @@
                                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                </padding>
                                                             </Label>
-                                                            <TextField fx:id="nomField" onKeyTyped="#handleTextFieldChanged" promptText="Nom ...">
+                                                            <TextField fx:id="nomField" promptText="Nom ...">
                                                                <VBox.margin>
                                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                </VBox.margin>
@@ -305,7 +316,7 @@
                                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                </padding>
                                                             </Label>
-                                                            <TextField fx:id="prenomField" onKeyTyped="#handleTextFieldChanged" promptText="Prénom ...">
+                                                            <TextField fx:id="prenomField" promptText="Prénom ...">
                                                                <VBox.margin>
                                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                </VBox.margin>
@@ -325,7 +336,7 @@
                                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                </padding>
                                                             </Label>
-                                                            <TextField fx:id="telephonePersonnelField" onKeyTyped="#handleTextFieldChanged" promptText="Téléphone Perso. ...">
+                                                            <TextField fx:id="telephonePersonnelField" promptText="Téléphone Perso. ...">
                                                                <VBox.margin>
                                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                </VBox.margin>
@@ -341,7 +352,7 @@
                                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                </padding>
                                                             </Label>
-                                                            <TextField fx:id="emailField" onKeyTyped="#handleTextFieldChanged" promptText="Email ...">
+                                                            <TextField fx:id="emailField" promptText="Email ...">
                                                                <VBox.margin>
                                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                </VBox.margin>
@@ -367,7 +378,7 @@
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </padding>
                                           </Label>
-                                          <TextField fx:id="adresseField" onKeyTyped="#handleTextFieldChanged" promptText="Adresse ...">
+                                          <TextField fx:id="adresseField" promptText="Adresse ...">
                                              <padding>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </padding>
@@ -386,7 +397,7 @@
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                    </padding>
                                                 </Label>
-                                                <TextField fx:id="codePostalField" onKeyTyped="#handleTextFieldChanged" promptText="Code postal ..." />
+                                                <TextField fx:id="codePostalField" promptText="Code postal ..." />
                                              </children>
                                              <HBox.margin>
                                                 <Insets />
@@ -404,7 +415,7 @@
                                                    <padding>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                    </padding></Label>
-                                                <HBox>
+                                                <HBox onDragDetected="#toggleButtonState">
                                                    <children>
                                                       <RadioButton mnemonicParsing="false" selected="true" text="Homme">
                                                          <padding>
@@ -477,7 +488,7 @@
                                              <padding>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </padding></Label>
-                                          <DatePicker fx:id="dateNaissanceField" promptText="xx / xx / xxxx" />
+                                          <DatePicker fx:id="dateNaissanceField" />
                                           <Label text="Pseudo">
                                              <VBox.margin>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

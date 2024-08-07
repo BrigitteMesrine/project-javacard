@@ -81,6 +81,7 @@ public class ContactBinarySerializer implements Serializer<Contact>, Deserialize
             ObjectInputStream in = new ObjectInputStream(file);
              
             // Method for deserialization of object
+            // sonarlint signale également un warning ici
             contacts = (ArrayList<Contact>) in.readObject();
              
             in.close();

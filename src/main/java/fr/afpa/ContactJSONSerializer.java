@@ -32,6 +32,7 @@ public class ContactJSONSerializer implements Serializer<Contact> {
             Jsoner.serialize(contact, fileWriter);
 
         } catch (IOException e) {
+            // sonarlint constate que c'est une erreur générique mais uqi n'affecte pas le code
             throw new RuntimeException(e);
         }
 
