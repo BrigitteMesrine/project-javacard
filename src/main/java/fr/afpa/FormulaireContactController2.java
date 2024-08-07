@@ -104,7 +104,6 @@ public class FormulaireContactController2 {
 
     // ObservableList is an observable representation of the previous contacts list
     private ObservableList<ViewableContact> viewableContactsList = FXCollections.observableArrayList();
-    
 
     // serializers used in various methods
     private ContactBinarySerializer binarySerializer = new ContactBinarySerializer();
@@ -138,6 +137,7 @@ public class FormulaireContactController2 {
             viewableContactsList.add(new ViewableContact(contact));
         }
         // Ajouter les données au TableView
+        contactsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         contactsTable.setItems(viewableContactsList);
 
         // Initialiser les colonnes du TableView
@@ -357,26 +357,26 @@ public class FormulaireContactController2 {
 
     @FXML
     private void handleVCard() {
-        ViewableContact selectedContact = contactsTable.getSelectionModel().getSelectedItem();
-        for (Contact contact : contactsList) {
-            if (contact.getLastName().equals(selectedContact.getNom())
-                    && contact.getFirstName().equals(selectedContact.getPrenom())
-                    && contact.getEmail().equals(selectedContact.getEmail())) {
-                vCardSerializer.save(selectedContact.getPrenom() + ".vcf", contact);
-            }
+
+        ObservableList<ViewableContact> viewableContactSelection = contactsTable.getSelectionModel().getSelectedItems();
+        List<Contact> contactSelection = new ArrayList<>();
+        for (ViewableContact contact : viewableContactSelection) {
+            contactSelection.add(contact.getContact());
         }
+        if (viewableContactSelection.size() == 1) {
+            for (ViewableContact selectedContact : viewableContactSelection) {
+                vCardSerializer.save(selectedContact.getPrenom() + ".vcf", selectedContact.getContact());
+            }
+        } else {
+            vCardSerializer.saveList(".vcf", contactSelection);
+        }
+
     }
 
     @FXML
     private void handleJson() {
         ViewableContact selectedContact = contactsTable.getSelectionModel().getSelectedItem();
-        for (Contact contact : contactsList) {
-            if (contact.getLastName().equals(selectedContact.getNom())
-                    && contact.getFirstName().equals(selectedContact.getPrenom())
-                    && contact.getEmail().equals(selectedContact.getEmail())) {
-                jsonSerializer.save(selectedContact.getNom() + selectedContact.getPrenom(), contact);
-            }
-        }
+        jsonSerializer.save(selectedContact.getPrenom() + ".json", selectedContact.getContact());
     }
 
     @FXML
