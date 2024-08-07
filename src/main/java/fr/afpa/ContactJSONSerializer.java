@@ -8,7 +8,7 @@ import com.github.cliftonlabs.json_simple.*;
 
 import fr.afpa.models.Contact;
 
-public class ContactJSONSerializer implements Serializer<Contact> {
+public class ContactJSONSerializer implements Serializer <Contact> {
 
     @Override
     public void saveList(String filePath, List<Contact> contactsToSave) {

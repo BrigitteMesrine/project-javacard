@@ -1,5 +1,33 @@
 BEGIN:VCARD
 VERSION:4.0
+N:Aurélie;Zannese
+FN:Zannese Aurélie
+TEL;TYPE=WORK,VOICE:0987654321
+TEL;TYPE=HOME,VOICE:0987654321
+ADR;TYPE=WORK:;;1 rue de Paris;75000
+EMAIL;TYPE=PREF,INTERNET:jean.dupont@example.com
+GENDER:F
+BDAY:null
+NICKNAME:jdupont
+URL:https://github.com/jdupont
+END:VCARD
+
+BEGIN:VCARD
+VERSION:4.0
+N:Mélanie;Ford
+FN:Ford Mélanie
+TEL;TYPE=WORK,VOICE:0987654321
+TEL;TYPE=HOME,VOICE:0854796314
+ADR;TYPE=WORK:;;1 rue de Paris;75000
+EMAIL;TYPE=PREF,INTERNET:jean.dupont@example.com
+GENDER:M
+BDAY:19851026
+NICKNAME:jdupont
+URL:https://github.com/jdupont
+END:VCARD
+
+BEGIN:VCARD
+VERSION:4.0
 N:htqegfdgre;hgfqgrqegfd
 FN:hgfqgrqegfd htqegfdgre
 TEL;TYPE=WORK,VOICE:gfdqhfdgsq
@@ -7,20 +35,6 @@ TEL;TYPE=HOME,VOICE:gfdqhfdgsq
 ADR;TYPE=WORK:;;dqhfdqgfdqgfdq;hfdqgqdfgfdq
 EMAIL;TYPE=PREF,INTERNET:<hfqfdgfqdhregf
 GENDER:M
-BDAY:null
-NICKNAME:
-URL:
-END:VCARD
-
-BEGIN:VCARD
-VERSION:4.0
-N:gfdsgfdgqgqg;gqdgfdqgf
-FN:gqdgfdqgf gfdsgfdgqgqg
-TEL;TYPE=WORK,VOICE:
-TEL;TYPE=HOME,VOICE:fqdgfqdgqdgfqd
-ADR;TYPE=WORK:;;qdgfdgqqdgqdg;dqgdqgfqdgdggqdgq
-EMAIL;TYPE=PREF,INTERNET:dqgfqdg
-GENDER:NB
 BDAY:null
 NICKNAME:
 URL:

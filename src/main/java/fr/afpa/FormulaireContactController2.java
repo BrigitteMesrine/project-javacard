@@ -109,8 +109,6 @@ public class FormulaireContactController2 {
 
     // serializers used in various methods
     private ContactBinarySerializer binarySerializer = new ContactBinarySerializer();
-    private ContactVCardSerializer vCardSerializer = new ContactVCardSerializer();
-    private ContactJSONSerializer jsonSerializer = new ContactJSONSerializer();
 
     // initialiser un contact "temporaire"
     private Contact inputContact = new Contact(null, null, null, null, null, null, Contact.Gender.MALE, null, null,
@@ -126,23 +124,23 @@ public class FormulaireContactController2 {
         hommeRadio.setToggleGroup(genreGroup);
         femmeRadio.setToggleGroup(genreGroup);
         nonBinaireRadio.setToggleGroup(genreGroup);
-        
+
         contactsList.add(new Contact("Dupont", "Jean", "0123456789",
-        "jean.dupont@example.com",
-        "1 rue de Paris",
-        "75000", Contact.Gender.NON_BINARY, null, "0987654321", "jdupont",
-        "https://github.com/jdupont"));
+                "jean.dupont@example.com",
+                "1 rue de Paris",
+                "75000", Contact.Gender.NON_BINARY, null, "0987654321", "jdupont",
+                "https://github.com/jdupont"));
         contactsList
-        .add(new Contact("Zannese", "Aurélie", "0987654321",
-        "jean.dupont@example.com", "1 rue de Paris",
-        "75000", Contact.Gender.FEMALE, null, "0987654321", "jdupont",
-        "https://github.com/jdupont"));
+                .add(new Contact("Zannese", "Aurélie", "0987654321",
+                        "jean.dupont@example.com", "1 rue de Paris",
+                        "75000", Contact.Gender.FEMALE, null, "0987654321", "jdupont",
+                        "https://github.com/jdupont"));
         contactsList
-        .add(new Contact("Ford", "Mélanie", "0854796314", "jean.dupont@example.com",
-        "1 rue de Paris",
-        "75000", Contact.Gender.MALE, LocalDate.of(1985, 10, 26), "0987654321",
-        "jdupont",
-        "https://github.com/jdupont"));
+                .add(new Contact("Ford", "Mélanie", "0854796314", "jean.dupont@example.com",
+                        "1 rue de Paris",
+                        "75000", Contact.Gender.MALE, LocalDate.of(1985, 10, 26), "0987654321",
+                        "jdupont",
+                        "https://github.com/jdupont"));
 
         // convertir les Contact en ViewableContact
         ArrayList<Contact> contacts = binarySerializer.loadList("contacts.serial");
@@ -196,8 +194,8 @@ public class FormulaireContactController2 {
         nouveauButton.setOnAction(event -> handleNouveau());
         supprimerButton.setOnAction(event -> handleSupprimer());
         sauvegarderButton.setOnAction(event -> handleEnregistrer());
-        vCardButton.setOnAction(event -> handleVCard());
-        jsonButton.setOnAction(event -> handleJson());
+        vCardButton.setOnAction(event -> export(".vcf"));
+        jsonButton.setOnAction(event -> export(".json"));
         selectAllButton.setOnAction(event -> handleSelectAll());
         clearButton.setOnAction(event -> handleClear());
 
@@ -374,29 +372,32 @@ public class FormulaireContactController2 {
         contactsTable.getSelectionModel().clearSelection();
     }
 
-    @FXML
-    private void handleVCard() {
-
+    private void export(String fileExtension) {
+        ContactVCardSerializer vCardSerializer = new ContactVCardSerializer();
+        ContactJSONSerializer jsonSerializer = new ContactJSONSerializer();
+        Serializer<Contact> superserializer = null;
         ObservableList<ViewableContact> viewableContactSelection = contactsTable.getSelectionModel().getSelectedItems();
         List<Contact> contactSelection = new ArrayList<>();
+        switch (fileExtension) {
+            case ".vcf":
+                superserializer = vCardSerializer;
+                break;
+
+            case ".json":
+                superserializer = jsonSerializer;
+                break;
+        }
         for (ViewableContact contact : viewableContactSelection) {
             contactSelection.add(contact.getContact());
         }
         if (viewableContactSelection.size() == 1) {
             for (ViewableContact selectedContact : viewableContactSelection) {
-                vCardSerializer.save(selectedContact.getPrenom() + ".vcf", selectedContact.getContact());
+                superserializer.save(selectedContact.getPrenom() + fileExtension, selectedContact.getContact());
             }
         } else {
-            vCardSerializer.saveList(".vcf", contactSelection);
+            superserializer.saveList("allcontacts" + fileExtension, contactSelection);
         }
-
-    }
-
-    @FXML
-    private void handleJson() {
-        ViewableContact selectedContact = contactsTable.getSelectionModel().getSelectedItem();
-        jsonSerializer.save(selectedContact.getPrenom() + ".json", selectedContact.getContact());
-    }
+    } 
 
     @FXML
     private void handleQuitter() {
