@@ -8,6 +8,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.*;
@@ -124,6 +126,23 @@ public class FormulaireContactController2 {
         hommeRadio.setToggleGroup(genreGroup);
         femmeRadio.setToggleGroup(genreGroup);
         nonBinaireRadio.setToggleGroup(genreGroup);
+        
+        contactsList.add(new Contact("Dupont", "Jean", "0123456789",
+        "jean.dupont@example.com",
+        "1 rue de Paris",
+        "75000", Contact.Gender.NON_BINARY, null, "0987654321", "jdupont",
+        "https://github.com/jdupont"));
+        contactsList
+        .add(new Contact("Zannese", "Aurélie", "0987654321",
+        "jean.dupont@example.com", "1 rue de Paris",
+        "75000", Contact.Gender.FEMALE, null, "0987654321", "jdupont",
+        "https://github.com/jdupont"));
+        contactsList
+        .add(new Contact("Ford", "Mélanie", "0854796314", "jean.dupont@example.com",
+        "1 rue de Paris",
+        "75000", Contact.Gender.MALE, LocalDate.of(1985, 10, 26), "0987654321",
+        "jdupont",
+        "https://github.com/jdupont"));
 
         // convertir les Contact en ViewableContact
         ArrayList<Contact> contacts = binarySerializer.loadList("contacts.serial");
