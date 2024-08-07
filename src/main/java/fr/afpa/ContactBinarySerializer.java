@@ -69,6 +69,7 @@ public class ContactBinarySerializer implements Serializer<Contact>, Deserialize
         }
     }
 
+    @SuppressWarnings({"unchecked"})
     @Override
     public ArrayList<Contact> loadList(String filePath) {
 
