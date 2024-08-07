@@ -111,14 +111,8 @@ public class FormulaireContactController2 {
 
     private ViewableContact viewableContact;
 
-            // initialiser un contact "temporaire"
+    // initialiser un contact "temporaire"
     private Contact contactTemp = new Contact(null, null, null, null, null, null, Contact.Gender.MALE, null, null, null, null);
-
-
-    public FormulaireContactController2() {
-        // Ajouter des données d'exemple
-
-    }
 
     @FXML
     private void initialize() {
@@ -126,20 +120,6 @@ public class FormulaireContactController2 {
         hommeRadio.setToggleGroup(genreGroup);
         femmeRadio.setToggleGroup(genreGroup);
         nonBinaireRadio.setToggleGroup(genreGroup);
-
-        // Ajouter des contacts fictifs pour le test
-        // observableContactList.add(new Contact("Dupont", "Jean", "0123456789", "jean.dupont@example.com",
-        //         "1 rue de Paris",
-        //         "75000", Contact.Gender.NON_BINARY, null, "0987654321", "jdupont", "https://github.com/jdupont"));
-        // observableContactList
-        //         .add(new Contact("Zannese", "Aurélie", "0987654321", "jean.dupont@example.com", "1 rue de Paris",
-        //                 "75000", Contact.Gender.FEMALE, null, "0987654321", "jdupont", "https://github.com/jdupont"));
-        // observableContactList
-        //         .add(new Contact("Ford", "Mélanie", "0854796314", "jean.dupont@example.com", "1 rue de Paris",
-        //                 "75000", Contact.Gender.MALE, LocalDate.of(1985, 10, 26), "0987654321", "jdupont",
-        //                 "https://github.com/jdupont"));
-
-        // convertir les Contact en ViewableContact
 
         for (Contact contact : observableContactList) {
             viewableContactsList.add(new ViewableContact(contact.getLastName(), contact.getFirstName(),
@@ -193,10 +173,7 @@ public class FormulaireContactController2 {
             }
         });
 
-
-
         nouveauButton.setOnAction(event -> handleNouveau());
-
     }
 
     // Bouton ajouter :
