@@ -104,6 +104,7 @@ public class FormulaireContactController2 {
 
     // ObservableList is an observable representation of the previous contacts list
     private ObservableList<ViewableContact> viewableContactsList = FXCollections.observableArrayList();
+    
 
     // serializers used in various methods
     private ContactBinarySerializer binarySerializer = new ContactBinarySerializer();
@@ -124,6 +125,25 @@ public class FormulaireContactController2 {
         hommeRadio.setToggleGroup(genreGroup);
         femmeRadio.setToggleGroup(genreGroup);
         nonBinaireRadio.setToggleGroup(genreGroup);
+<<<<<<< HEAD
+        
+        contactsList.add(new Contact("Dupont", "Jean", "0123456789",
+        "jean.dupont@example.com",
+        "1 rue de Paris",
+        "75000", Contact.Gender.NON_BINARY, null, "0987654321", "jdupont",
+        "https://github.com/jdupont"));
+        contactsList
+        .add(new Contact("Zannese", "Aurélie", "0987654321",
+        "jean.dupont@example.com", "1 rue de Paris",
+        "75000", Contact.Gender.FEMALE, null, "0987654321", "jdupont",
+        "https://github.com/jdupont"));
+        contactsList
+        .add(new Contact("Ford", "Mélanie", "0854796314", "jean.dupont@example.com",
+        "1 rue de Paris",
+        "75000", Contact.Gender.MALE, LocalDate.of(1985, 10, 26), "0987654321",
+        "jdupont",
+        "https://github.com/jdupont"));
+=======
 
         // observableContactList.add(new Contact("Dupont", "Jean", "0123456789",
         // "jean.dupont@example.com",
@@ -141,6 +161,7 @@ public class FormulaireContactController2 {
         // "75000", Contact.Gender.MALE, LocalDate.of(1985, 10, 26), "0987654321",
         // "jdupont",
         // "https://github.com/jdupont"));
+>>>>>>> b29b34da1f4aeb042e1c11c258b65930d5d82bb7
 
         // convertir les Contact en ViewableContact
         ArrayList<Contact> contacts = binarySerializer.loadList("contacts.serial");

@@ -26,6 +26,7 @@ public class ViewableContact {
     private StringProperty telephoneProfessionnel;
     private StringProperty pseudo;
     private StringProperty lienDepotGit;
+    private Contact contact;
 
     public ViewableContact(Contact contact) {
 
@@ -67,6 +68,7 @@ public class ViewableContact {
         this.telephoneProfessionnel = new SimpleStringProperty(contact.getPersoPhone());
         this.pseudo = new SimpleStringProperty(contact.getPseudo());
         this.lienDepotGit = new SimpleStringProperty(contact.getGitLink());
+        this.contact = contact;
     }
 
     // Getters et setters pour chaque propriété

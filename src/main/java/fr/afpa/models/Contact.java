@@ -217,4 +217,9 @@ public class Contact implements Serializable, Jsonable {
         json.put("gitLink", this.gitLink);
         json.toJson(writer);
     }
+
+    public char[] getId() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getId'");
+    }
 }
