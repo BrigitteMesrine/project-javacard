@@ -158,7 +158,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="vCardButton" mnemonicParsing="false" onAction="#handleVCard" style="-fx-background-color: #06ab22;" text="vCard" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="vCardButton" mnemonicParsing="false" style="-fx-background-color: #06ab22;" text="vCard" textAlignment="CENTER" textFill="WHITE">
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
@@ -169,7 +169,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="jsonButton" mnemonicParsing="false" onAction="#handleJson" style="-fx-background-color: #06ab22;" text="JSON" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="jsonButton" mnemonicParsing="false" style="-fx-background-color: #06ab22;" text="JSON" textAlignment="CENTER" textFill="WHITE">
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
@@ -185,17 +185,10 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </HBox>
-<<<<<<< HEAD
                         <TableView fx:id="contactsTable" editable="true" onMouseClicked="#showContactDetails" prefHeight="580.0">
                           <columns>
                             <TableColumn fx:id="nomColumn" prefWidth="141.0" text="Nom" />
                             <TableColumn fx:id="prenomColumn" maxWidth="300.0" prefWidth="141.0" text="Prénom" />
-=======
-                        <TableView fx:id="contactsTable" editable="true" prefHeight="580.0">
-                           <columns>
-                              <TableColumn fx:id="nomColumn" prefWidth="141.0" text="Nom" />
-                              <TableColumn fx:id="prenomColumn" maxWidth="300.0" prefWidth="141.0" text="Prénom" />
->>>>>>> a5278874ff186edb28cc2b58f37d9742013f73f9
                               <TableColumn fx:id="telephoneColumn" prefWidth="142.0" text="Téléphone" />
                               <TableColumn fx:id="emailColumn" prefWidth="142.0" text="Email" />
                               <TableColumn fx:id="adresseColumn" prefWidth="142.0" text="Adresse" />
@@ -484,14 +477,8 @@
                                              </VBox.margin>
                                              <padding>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-<<<<<<< HEAD
                                              </padding></Label>
                                           <DatePicker fx:id="dateNaissanceField" promptText="xx / xx / xxxx" />
-=======
-                                             </padding>
-                                          </Label>
-                                          <DatePicker fx:id="dateNaissanceField" />
->>>>>>> a5278874ff186edb28cc2b58f37d9742013f73f9
                                           <Label text="Pseudo">
                                              <VBox.margin>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
