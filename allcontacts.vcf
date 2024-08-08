@@ -1,19 +1,5 @@
 BEGIN:VCARD
 VERSION:4.0
-N:Aurélie;Zannese
-FN:Zannese Aurélie
-TEL;TYPE=WORK,VOICE:0987654321
-TEL;TYPE=HOME,VOICE:0987654321
-ADR;TYPE=WORK:;;1 rue de Paris;75000
-EMAIL;TYPE=PREF,INTERNET:jean.dupont@example.com
-GENDER:F
-BDAY:null
-NICKNAME:jdupont
-URL:https://github.com/jdupont
-END:VCARD
-
-BEGIN:VCARD
-VERSION:4.0
 N:Mélanie;Ford
 FN:Ford Mélanie
 TEL;TYPE=WORK,VOICE:0987654321
@@ -28,15 +14,15 @@ END:VCARD
 
 BEGIN:VCARD
 VERSION:4.0
-N:htqegfdgre;hgfqgrqegfd
-FN:hgfqgrqegfd htqegfdgre
-TEL;TYPE=WORK,VOICE:gfdqhfdgsq
-TEL;TYPE=HOME,VOICE:gfdqhfdgsq
-ADR;TYPE=WORK:;;dqhfdqgfdqgfdq;hfdqgqdfgfdq
-EMAIL;TYPE=PREF,INTERNET:<hfqfdgfqdhregf
+N:MICHEL;Michel
+FN:Michel MICHEL
+TEL;TYPE=WORK,VOICE:0606060606
+TEL;TYPE=HOME,VOICE:0606060606
+ADR;TYPE=WORK:;;36 quai des Michels;33000
+EMAIL;TYPE=PREF,INTERNET:michel@michel.com
 GENDER:M
 BDAY:null
-NICKNAME:
-URL:
+NICKNAME:null
+URL:null
 END:VCARD
 

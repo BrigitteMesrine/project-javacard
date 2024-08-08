@@ -8,17 +8,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+<<<<<<< HEAD
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+=======
+>>>>>>> a5278874ff186edb28cc2b58f37d9742013f73f9
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.*;
 
 public class FormulaireContactController2 {
 
-    // tableView
+    // <-- TABLEVIEW -->
     @FXML
     private TableView<ViewableContact> contactsTable;
     @FXML
@@ -44,7 +47,7 @@ public class FormulaireContactController2 {
     @FXML
     private TableColumn<ViewableContact, String> liengitColumn;
 
-    // la partie de la fenêtre "Informations obligatoires"
+    // <-- MANDATORY INFORMATIONS -->
     @FXML
     private TextField nomField;
     @FXML
@@ -54,13 +57,11 @@ public class FormulaireContactController2 {
     @FXML
     private TextField emailField;
     @FXML
-    private TextField adresseField; // il pense que c'est un Label
-    // il faut retrouver le Label adresseField
+    private TextField adresseField;
     @FXML
     private TextField codePostalField;
 
-    // Noms des RadioButtons
-    // + ToggleGroup qui réunit les 3 boutons
+    // RadioButton objects group
     @FXML
     private ToggleGroup genreGroup = new ToggleGroup();
     @FXML
@@ -70,7 +71,7 @@ public class FormulaireContactController2 {
     @FXML
     private RadioButton nonBinaireRadio = new RadioButton("Non-binaire");
 
-    // la partie de la fenêtre "Informations facultatives"
+    // <-- FACULTATIVE INFORMATIONS -->
     @FXML
     private DatePicker dateNaissanceField;
     @FXML
@@ -80,7 +81,7 @@ public class FormulaireContactController2 {
     @FXML
     private TextField lienDepotGitField;
 
-    // Noms des boutons à gauche
+    // <-- EXPORTS AND EDITION BUTTONS -->
     @FXML
     private Button selectAllButton;
     @FXML
@@ -89,8 +90,6 @@ public class FormulaireContactController2 {
     private Button vCardButton;
     @FXML
     private Button jsonButton;
-
-    // Noms des boutons à droite
     @FXML
     private Button nouveauButton;
     @FXML
@@ -107,16 +106,20 @@ public class FormulaireContactController2 {
     // Déclare une variable pour suivre l'état de disponibilité de l'action.
     private boolean isActionAvailable = false;
 
-    // list of contacts ; is used by serializers
-    // is the list which is interacted with when pressing edition buttons
+    // <-- ATTRIBUTES TO STORE DATA -->
+    // contactsList stores serializable Contact objects
     private List<Contact> contactsList = new ArrayList<>();
 
-    // ObservableList is an observable representation of the previous contacts list
+    // viewableContactsList stores displayable ViewableContact objects
     private ObservableList<ViewableContact> viewableContactsList = FXCollections.observableArrayList();
 
-    // serializers used in various methods
+    /**
+     * binarySerializer serves both ini initialize(), for loading contacts
+     * and in handleSauvegarder(), for saving contacts
+     */
     private ContactBinarySerializer binarySerializer = new ContactBinarySerializer();
 
+<<<<<<< HEAD
     // initialiser un contact "temporaire"
     private Contact inputContact = new Contact(null,
             null,
@@ -131,10 +134,18 @@ public class FormulaireContactController2 {
             null);
 
     private Stage stage;
+=======
+    /**
+     * inputContact is the contact currently defined by the value of TextFields ; used in
+     * listenToggleGroup(), handleNouveau(), handleModifier()
+     */
+    private Contact inputContact = new Contact(null, null, null, null, null, null, null, null, null, null, null);
+>>>>>>> a5278874ff186edb28cc2b58f37d9742013f73f9
 
     @FXML
     private void initialize() {
 
+<<<<<<< HEAD
         // Méthode appelée automatiquement après le chargement du FXML
         // updateButtonState();
         // Mise à jour de l'état du bouton pour refléter l'état initial de
@@ -143,25 +154,12 @@ public class FormulaireContactController2 {
         hommeRadio.setToggleGroup(genreGroup);
         femmeRadio.setToggleGroup(genreGroup);
         nonBinaireRadio.setToggleGroup(genreGroup);
+=======
+        // <-- BINARY DESERIALIZATION TO LOAD CONTACTS INTO LISTS -->
+>>>>>>> a5278874ff186edb28cc2b58f37d9742013f73f9
 
-        contactsList.add(new Contact("Dupont", "Jean", "0123456789",
-                "jean.dupont@example.com",
-                "1 rue de Paris",
-                "75000", Contact.Gender.NON_BINARY, null, "0987654321", "jdupont",
-                "https://github.com/jdupont"));
-        contactsList
-                .add(new Contact("Zannese", "Aurélie", "0987654321",
-                        "jean.dupont@example.com", "1 rue de Paris",
-                        "75000", Contact.Gender.FEMALE, null, "0987654321", "jdupont",
-                        "https://github.com/jdupont"));
-        contactsList
-                .add(new Contact("Ford", "Mélanie", "0854796314", "jean.dupont@example.com",
-                        "1 rue de Paris",
-                        "75000", Contact.Gender.MALE, LocalDate.of(1985, 10, 26), "0987654321",
-                        "jdupont",
-                        "https://github.com/jdupont"));
-
-        // convertir les Contact en ViewableContact
+        // serializable Contact objects are deserialized from persistent "contacts.serial"
+        // and loaded into an ArrayList
         ArrayList<Contact> contacts = binarySerializer.loadList("contacts.serial");
         if (contacts != null) {
             for (Contact contact : contacts) {
@@ -169,14 +167,19 @@ public class FormulaireContactController2 {
             }
         }
 
+        // conversion of deserialized Contact objects attributes
+        // to ObjectProperty attributes into ViewableContact
         for (Contact contact : contactsList) {
             viewableContactsList.add(new ViewableContact(contact));
         }
-        // Ajouter les données au TableView
-        contactsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        // <-- TABLEVIEW COLUMNS DATA INITIALIZATION -->
+
+        // setting ViewableContact objects into TableView
         contactsTable.setItems(viewableContactsList);
 
-        // Initialiser les colonnes du TableView
+        // 1 row = 1 ViewableContact
+        // 1 column = 1 attribute from ViewableContact
         nomColumn.setCellValueFactory(cellData -> cellData.getValue().nomProperty());
         prenomColumn.setCellValueFactory(cellData -> cellData.getValue().prenomProperty());
         telephoneColumn.setCellValueFactory(cellData -> cellData.getValue().telephonePersonnelProperty());
@@ -189,7 +192,31 @@ public class FormulaireContactController2 {
         pseudoColumn.setCellValueFactory(cellData -> cellData.getValue().pseudoProperty());
         liengitColumn.setCellValueFactory(cellData -> cellData.getValue().lienDepotGitProperty());
 
-        genreGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+        // setting TableView selection mode to multiple,
+        // in order to exports multiple contacts to vCard and JSON
+        contactsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        // <-- EVENTS LISTENERS -->
+
+        genreGroup.selectedToggleProperty().addListener(listenToggleGroup());
+        nouveauButton.setOnAction(event -> handleNouveau());
+        supprimerButton.setOnAction(event -> handleSupprimer());
+        sauvegarderButton.setOnAction(event -> handleEnregistrer());
+        vCardButton.setOnAction(event -> export(".vcf"));
+        jsonButton.setOnAction(event -> export(".json"));
+        selectAllButton.setOnAction(event -> handleSelectAll());
+        clearButton.setOnAction(event -> handleClear());
+        contactsTable.setOnMouseClicked(event -> showContactDetails());
+
+    }
+
+    /**
+     * Listens to changes from a ToggleGroup. The text associated with the Toggle is then
+     * used in a switch to set the value of an Object attribute.
+     * @return {@link ChangeListener}
+     */
+    public ChangeListener<Toggle> listenToggleGroup() {
+        return new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
                 if (newValue != null) {
@@ -208,11 +235,16 @@ public class FormulaireContactController2 {
 
                 }
             }
+<<<<<<< HEAD
         });
 
+=======
+        };
+>>>>>>> a5278874ff186edb28cc2b58f37d9742013f73f9
     }
 
-    // TODO create method to prevent creating a existing contact
+    // TODO implement Regex check to handleNouveau and handleModifier 
+
     @FXML
     private void handleNouveau() {
 
@@ -226,11 +258,12 @@ public class FormulaireContactController2 {
         inputContact.setEmail(emailField.getText());
         inputContact.setAddress(adresseField.getText());
         inputContact.setZipCode(codePostalField.getText());
+        // gender is set with listenGenreGroup()
         inputContact.setProPhone(telephoneProfessionnelField.getText());
         inputContact.setBirthDate(dateNaissanceField.getValue());
         inputContact.setPseudo(pseudoField.getText());
         inputContact.setGitLink(lienDepotGitField.getText());
-        if (!nomField.getText().isEmpty() &&
+        if (isRegexValid() && !nomField.getText().isEmpty() &&
                 !prenomField.getText().isEmpty() &&
                 !emailField.getText().isEmpty() &&
                 !adresseField.getText().isEmpty() &&
@@ -239,7 +272,11 @@ public class FormulaireContactController2 {
             viewableContactsList.add(new ViewableContact(inputContact));
             contactsTable.setItems(viewableContactsList);
             clearFields();
+<<<<<<< HEAD
 
+=======
+            genreGroup.getSelectedToggle().setSelected(false);
+>>>>>>> a5278874ff186edb28cc2b58f37d9742013f73f9
         }
     }
 
@@ -262,6 +299,15 @@ public class FormulaireContactController2 {
             }
         }
         return isNotInList;
+    }
+
+    private boolean isRegexValid() {
+        boolean isRegexValid = false;
+
+        isRegexValid = nomField.getText().toLowerCase().matches("[a-z]") 
+            && prenomField.getText().toLowerCase().matches("[a-z]");
+
+        return isRegexValid;
     }
 
     @FXML
@@ -300,7 +346,11 @@ public class FormulaireContactController2 {
                     pseudoField.getText(),
                     lienDepotGitField.getText());
 
-            if (modifiedContact.verifyContact()) {
+            if (!nomField.getText().isEmpty() &&
+            !prenomField.getText().isEmpty() &&
+            !emailField.getText().isEmpty() &&
+            !adresseField.getText().isEmpty() &&
+            !codePostalField.getText().isEmpty()) {
                 viewableContactsList.remove(selectedContact);
                 viewableContactsList.add(new ViewableContact(modifiedContact));
                 contactsList = newViewableContactsList;
@@ -367,7 +417,7 @@ public class FormulaireContactController2 {
             emailField.setText(selectedContact.getEmail());
             adresseField.setText(selectedContact.getAdresse());
             codePostalField.setText(selectedContact.getCodePostal());
-            // setselectGenre(newContact);
+            // genreGroup.;
             dateNaissanceField.setValue(selectedContact.getRawBirthDate());
             telephoneProfessionnelField.setText(selectedContact.getTelephoneProfessionnel());
             pseudoField.setText(selectedContact.getPseudo());
@@ -409,6 +459,7 @@ public class FormulaireContactController2 {
         contactsTable.getSelectionModel().clearSelection();
     }
 
+<<<<<<< HEAD
     @FXML
     private void handleVCard() {
 
@@ -444,6 +495,21 @@ public class FormulaireContactController2 {
                     && contact.getEmail().equals(selectedContact.getEmail())) {
                 jsonSerializer.save(selectedContact.getNom() + selectedContact.getPrenom(), contact);
             }
+=======
+    private void export(String fileExtension) {
+        ContactVCardSerializer vCardSerializer = new ContactVCardSerializer();
+        ContactJSONSerializer jsonSerializer = new ContactJSONSerializer();
+        Serializer<Contact> superserializer = null;
+        ObservableList<ViewableContact> viewableContactSelection = contactsTable.getSelectionModel().getSelectedItems();
+        List<Contact> contactSelection = new ArrayList<>();
+        switch (fileExtension) {
+            case ".vcf":
+                superserializer = vCardSerializer;
+                break;
+            case ".json":
+                superserializer = jsonSerializer;
+                break;
+>>>>>>> a5278874ff186edb28cc2b58f37d9742013f73f9
         }
         for (ViewableContact contact : viewableContactSelection) {
             contactSelection.add(contact.getContact());
@@ -455,7 +521,7 @@ public class FormulaireContactController2 {
         } else {
             superserializer.saveList("allcontacts" + fileExtension, contactSelection);
         }
-    } 
+    }
 
     @FXML
     private void handleQuitter() {
