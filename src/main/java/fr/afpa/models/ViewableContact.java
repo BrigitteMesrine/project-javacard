@@ -220,6 +220,14 @@ public class ViewableContact {
         return lienDepotGit;
     }
 
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
 
 
 }

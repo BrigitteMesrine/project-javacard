@@ -13,7 +13,7 @@ public class ContactVCardSerializer implements Serializer<Contact> {
     @Override
     public void saveList(String filePath, List<Contact> contactsToSave) {
         try {
-            File vcfFile = new File("allcontacts" + filePath);
+            File vcfFile = new File(filePath);
             FileWriter fw = new FileWriter(vcfFile);
             for (Contact contact : contactsToSave) {
                 // converting Gender constants to chars as Strings

@@ -116,8 +116,6 @@ public class FormulaireContactController2 {
 
     // serializers used in various methods
     private ContactBinarySerializer binarySerializer = new ContactBinarySerializer();
-    private ContactVCardSerializer vCardSerializer = new ContactVCardSerializer();
-    private ContactJSONSerializer jsonSerializer = new ContactJSONSerializer();
 
     // initialiser un contact "temporaire"
     private Contact inputContact = new Contact(null,
@@ -146,22 +144,22 @@ public class FormulaireContactController2 {
         femmeRadio.setToggleGroup(genreGroup);
         nonBinaireRadio.setToggleGroup(genreGroup);
 
-        // contactsList.add(new Contact("Dupont", "Jean", "0123456789",
-        // "jean.dupont@example.com",
-        // "1 rue de Paris",
-        // "75000", Contact.Gender.NON_BINARY, null, "0987654321", "jdupont",
-        // "https://github.com/jdupont"));
-        // contactsList
-        // .add(new Contact("Zannese", "Aurélie", "0987654321",
-        // "jean.dupont@example.com", "1 rue de Paris",
-        // "75000", Contact.Gender.FEMALE, null, "0987654321", "jdupont",
-        // "https://github.com/jdupont"));
-        // contactsList
-        // .add(new Contact("Ford", "Mélanie", "0854796314", "jean.dupont@example.com",
-        // "1 rue de Paris",
-        // "75000", Contact.Gender.MALE, LocalDate.of(1985, 10, 26), "0987654321",
-        // "jdupont",
-        // "https://github.com/jdupont"));
+        contactsList.add(new Contact("Dupont", "Jean", "0123456789",
+                "jean.dupont@example.com",
+                "1 rue de Paris",
+                "75000", Contact.Gender.NON_BINARY, null, "0987654321", "jdupont",
+                "https://github.com/jdupont"));
+        contactsList
+                .add(new Contact("Zannese", "Aurélie", "0987654321",
+                        "jean.dupont@example.com", "1 rue de Paris",
+                        "75000", Contact.Gender.FEMALE, null, "0987654321", "jdupont",
+                        "https://github.com/jdupont"));
+        contactsList
+                .add(new Contact("Ford", "Mélanie", "0854796314", "jean.dupont@example.com",
+                        "1 rue de Paris",
+                        "75000", Contact.Gender.MALE, LocalDate.of(1985, 10, 26), "0987654321",
+                        "jdupont",
+                        "https://github.com/jdupont"));
 
         // convertir les Contact en ViewableContact
         ArrayList<Contact> contacts = binarySerializer.loadList("contacts.serial");
@@ -175,6 +173,7 @@ public class FormulaireContactController2 {
             viewableContactsList.add(new ViewableContact(contact));
         }
         // Ajouter les données au TableView
+        contactsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         contactsTable.setItems(viewableContactsList);
 
         // Initialiser les colonnes du TableView
@@ -436,7 +435,8 @@ public class FormulaireContactController2 {
         // Méthode appelée lorsque le bouton "actionButton" est cliqué
         System.out.println("Bouton JSON validé!");
         // Affiche un message dans la console pour indiquer que l'action a été réalisée
-
+        ContactJSONSerializer jsonSerializer = new ContactJSONSerializer();
+ 
         ViewableContact selectedContact = contactsTable.getSelectionModel().getSelectedItem();
         for (Contact contact : contactsList) {
             if (contact.getLastName().equals(selectedContact.getNom())
@@ -445,7 +445,17 @@ public class FormulaireContactController2 {
                 jsonSerializer.save(selectedContact.getNom() + selectedContact.getPrenom(), contact);
             }
         }
-    }
+        for (ViewableContact contact : viewableContactSelection) {
+            contactSelection.add(contact.getContact());
+        }
+        if (viewableContactSelection.size() == 1) {
+            for (ViewableContact selectedContact : viewableContactSelection) {
+                superserializer.save(selectedContact.getPrenom() + fileExtension, selectedContact.getContact());
+            }
+        } else {
+            superserializer.saveList("allcontacts" + fileExtension, contactSelection);
+        }
+    } 
 
     @FXML
     private void handleQuitter() {
@@ -495,6 +505,7 @@ public class FormulaireContactController2 {
         // Empty = Vide --> "" est vide
         if (!nomField.getText().isEmpty() &&
                 !prenomField.getText().isEmpty() &&
+                !telephonePersonnelField.getText().isEmpty() &&
                 !emailField.getText().isEmpty() &&
                 !adresseField.getText().isEmpty() &&
                 !codePostalField.getText().isEmpty()) {
@@ -506,7 +517,12 @@ public class FormulaireContactController2 {
             sauvegarderButton.setDisable(true);
         }
 
-        if (nomField.getText().isEmpty() && prenomField.getText().isEmpty()) {
+        if (nomField.getText().isEmpty() && 
+            prenomField.getText().isEmpty() &&
+            telephonePersonnelField.getText().isEmpty() &&
+            emailField.getText().isEmpty() &&
+            adresseField.getText().isEmpty() &&
+            codePostalField.getText().isEmpty()) {
             // là on change la couleur
             nomField.setStyle("-fx-background-color: red");
             prenomField.setStyle("-fx-background-color: red");

@@ -12,6 +12,7 @@ import com.github.cliftonlabs.json_simple.Jsonable;
 
 public class Contact implements Serializable, Jsonable {
 
+    public static final Enum<Gender> Gender = null;
     private String firstName;
     private String lastName;
     private String persoPhone;
@@ -221,5 +222,10 @@ public class Contact implements Serializable, Jsonable {
     public char[] getId() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getId'");
+    }
+
+    public String getPrenom() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPrenom'");
     }
 }
