@@ -18,7 +18,8 @@ public class App extends Application {
     @SuppressWarnings({ "java:S2696" })
     @Override
     public void start(Stage stage) throws IOException {
-           
+        
+        stage.setTitle("FXML Java Card");
         scene = new Scene(loadFXML("formulaire_contact"), 1024, 768);
         
          // Ajout du fichier CSS à la scène

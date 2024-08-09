@@ -136,7 +136,7 @@
                      <children>
                         <HBox>
                            <children>
-                              <Button fx:id="selectAllButton" mnemonicParsing="false" onAction="#handleSelectAll" style="-fx-background-color: #06ab22;" text="Select All" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="selectAllButton" mnemonicParsing="false" onAction="#handleSelectAll" style="-fx-background-color: #24562d;" text="Select All" textAlignment="CENTER" textFill="WHITE">
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
@@ -147,7 +147,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="clearButton" mnemonicParsing="false" onAction="#handleClear" style="-fx-background-color: #06ab22;" text="Clear" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="clearButton" mnemonicParsing="false" onAction="#handleClear" style="-fx-background-color: #24562d;" text="Clear" textAlignment="CENTER" textFill="WHITE">
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
@@ -158,7 +158,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="vCardButton" mnemonicParsing="false" style="-fx-background-color: #06ab22;" text="vCard" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="vCardButton" mnemonicParsing="false" style="-fx-background-color: #24562d;" text="vCard" textAlignment="CENTER" textFill="WHITE">
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
@@ -169,7 +169,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="jsonButton" mnemonicParsing="false" style="-fx-background-color: #06ab22;" text="JSON" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="jsonButton" mnemonicParsing="false" style="-fx-background-color: #24562d;" text="JSON" textAlignment="CENTER" textFill="WHITE">
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
@@ -185,21 +185,41 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </HBox>
-                        <TableView fx:id="contactsTable" editable="true" onMouseClicked="#showContactDetails" prefHeight="580.0">
-                          <columns>
-                            <TableColumn fx:id="nomColumn" prefWidth="141.0" text="Nom" />
-                            <TableColumn fx:id="prenomColumn" maxWidth="300.0" prefWidth="141.0" text="Prénom" />
-                              <TableColumn fx:id="telephoneColumn" prefWidth="142.0" text="Téléphone" />
-                              <TableColumn fx:id="emailColumn" prefWidth="142.0" text="Email" />
-                              <TableColumn fx:id="adresseColumn" prefWidth="142.0" text="Adresse" />
-                              <TableColumn fx:id="codepostaleColumn" prefWidth="142.0" text="Code postal" />
-                              <TableColumn fx:id="genreGroupColumn" prefWidth="142.0" text="Genre" />
-                              <TableColumn fx:id="datedenaissanceColumn" prefWidth="142.0" text="Date de naissance" />
-                              <TableColumn fx:id="telephoneproColumn" prefWidth="142.0" text="Téléphone prof." />
-                              <TableColumn fx:id="pseudoColumn" prefWidth="142.0" text="Pseudo" />
-                              <TableColumn fx:id="liengitColumn" prefWidth="142.0" text="Lien Git" />
-                           </columns>
-                        </TableView>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label text="Rechercher">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <TextField fx:id="searchField" promptText="Liste de contact ..." />
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <TableView fx:id="contactsTable" editable="true" onMouseClicked="#showContactDetails" onSort="#showContactDetails" prefHeight="580.0" tableMenuButtonVisible="true">
+                                <columns>
+                                  <TableColumn fx:id="nomColumn" prefWidth="141.0" text="Nom" />
+                                  <TableColumn fx:id="prenomColumn" maxWidth="300.0" prefWidth="141.0" text="Prénom" />
+                                    <TableColumn fx:id="telephoneColumn" prefWidth="142.0" text="Téléphone" />
+                                    <TableColumn fx:id="emailColumn" prefWidth="142.0" text="Email" />
+                                    <TableColumn fx:id="adresseColumn" prefWidth="142.0" text="Adresse" />
+                                    <TableColumn fx:id="codepostaleColumn" prefWidth="142.0" text="Code postal" />
+                                    <TableColumn fx:id="genreGroupColumn" prefWidth="142.0" text="Genre" />
+                                    <TableColumn fx:id="datedenaissanceColumn" prefWidth="142.0" text="Date de naissance" />
+                                    <TableColumn fx:id="telephoneproColumn" prefWidth="142.0" text="Téléphone prof." />
+                                    <TableColumn fx:id="pseudoColumn" prefWidth="142.0" text="Pseudo" />
+                                    <TableColumn fx:id="liengitColumn" prefWidth="142.0" text="Lien Git" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </HBox>
                      </children>
                      <padding>
                         <Insets left="10.0" right="10.0" />
@@ -209,7 +229,7 @@
                      <children>
                         <HBox minWidth="530.0">
                            <children>
-                              <Button fx:id="nouveauButton" mnemonicParsing="false" onAction="#handleNouveau" style="-fx-background-color: #47e715;" text="Nouveau" textAlignment="CENTER">
+                              <Button fx:id="nouveauButton" disable="true" mnemonicParsing="false" onAction="#handleNouveau" style="-fx-background-color: #2ab300;" text="Nouveau" textAlignment="CENTER">
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
@@ -220,7 +240,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="modifierButton" mnemonicParsing="false" onAction="#handleModifier" style="-fx-background-color: #47e715;" text="Modifier">
+                              <Button fx:id="modifierButton" mnemonicParsing="false" onAction="#handleModifier" style="-fx-background-color: #2ab300;" text="Modifier">
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
@@ -231,7 +251,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="supprimerButton" mnemonicParsing="false" onAction="#handleSupprimer" style="-fx-background-color: #47e715;" text="Supprimer" textAlignment="CENTER">
+                              <Button fx:id="supprimerButton" mnemonicParsing="false" onAction="#handleSupprimer" style="-fx-background-color: #2ab300;" text="Supprimer" textAlignment="CENTER">
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
@@ -242,7 +262,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="sauvegarderButton" disable="true" mnemonicParsing="false" onAction="#handleEnregistrer" style="-fx-background-color: #47e715;" text="Sauvegarder" textAlignment="CENTER">
+                              <Button fx:id="sauvegarderButton" disable="true" mnemonicParsing="false" onAction="#handleEnregistrer" style="-fx-background-color: #2ab300;" text="Sauvegarder" textAlignment="CENTER">
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
@@ -478,7 +498,7 @@
                                              <padding>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </padding></Label>
-                                          <DatePicker fx:id="dateNaissanceField" promptText="xx / xx / xxxx" />
+                                          <DatePicker fx:id="dateNaissanceField" promptText="DD/ MM / YYYY" />
                                           <Label text="Pseudo">
                                              <VBox.margin>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

@@ -218,13 +218,4 @@ public class Contact implements Serializable, Jsonable {
         json.toJson(writer);
     }
 
-    public char[] getId() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getId'");
-    }
-
-    public String getPrenom() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPrenom'");
-    }
 }
