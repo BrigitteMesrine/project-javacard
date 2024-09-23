@@ -12,7 +12,6 @@ import javafx.scene.input.KeyEvent;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.log4j.*;
 
 public class FormulaireContactController2 {
 
@@ -128,11 +127,14 @@ public class FormulaireContactController2 {
         // serializable Contact objects are deserialized from persistent "contacts.serial"
         // and loaded into an ArrayList
         ArrayList<Contact> contacts = binarySerializer.loadList("contacts.serial");
+        // System.out.println(contacts.toString());
         if (contacts != null) {
             for (Contact contact : contacts) {
                 contactsList.add(contact);
             }
         }
+
+        System.out.println(contactsList);
 
         // conversion of deserialized Contact objects attributes
         // to ObjectProperty attributes into ViewableContact
@@ -166,9 +168,9 @@ public class FormulaireContactController2 {
         // <-- EVENTS LISTENERS -->
 
         genreGroup.selectedToggleProperty().addListener(listenToggleGroup());
-        nouveauButton.setOnAction(event -> handleNouveau());
-        supprimerButton.setOnAction(event -> handleSupprimer());
-        sauvegarderButton.setOnAction(event -> handleEnregistrer());
+        // nouveauButton.setOnAction(event -> handleNouveau());
+        // supprimerButton.setOnAction(event -> handleSupprimer());
+        // sauvegarderButton.setOnAction(event -> handleEnregistrer());
         vCardButton.setOnAction(event -> export(".vcf"));
         jsonButton.setOnAction(event -> export(".json"));
         selectAllButton.setOnAction(event -> handleSelectAll());
@@ -225,7 +227,7 @@ public class FormulaireContactController2 {
         inputContact.setBirthDate(dateNaissanceField.getValue());
         inputContact.setPseudo(pseudoField.getText());
         inputContact.setGitLink(lienDepotGitField.getText());
-        if (isRegexValid() && !nomField.getText().isEmpty() &&
+        if (!nomField.getText().isEmpty() &&
                 !prenomField.getText().isEmpty() &&
                 !emailField.getText().isEmpty() &&
                 !adresseField.getText().isEmpty() &&
@@ -275,23 +277,30 @@ public class FormulaireContactController2 {
         System.out.println("Bouton Modifier validé!");
         // Affiche un message dans la console pour indiquer que l'action a été réalisée
 
+        // on récupère le contact séléctionné dans la tableView -> selectedContact
         ViewableContact selectedContact = contactsTable.getSelectionModel().getSelectedItem();
+
+        // si le contact existe (par sécurité)
         if (selectedContact != null) {
 
-            ArrayList<Contact> newViewableContactsList = new ArrayList<>();
-            for (ViewableContact contact : viewableContactsList) {
-                newViewableContactsList.add(new Contact(contact.getPrenom(),
-                        contact.getNom(),
-                        contact.getTelephonePersonnel(),
-                        contact.getEmail(), contact.getAdresse(),
-                        contact.getCodePostal(),
-                        contact.getRawGender(),
-                        contact.getRawBirthDate(),
-                        contact.getTelephoneProfessionnel(),
-                        contact.getPseudo(),
-                        contact.getLienDepotGit()));
-            }
+            // on crée une nouvelle liste d'objets Contact
+            ArrayList<Contact> newContactsList = new ArrayList<>();
 
+            // // on remplit la liste avec les objets de l'"ancienne" liste de Contact contactsList
+            // for (ViewableContact contact : viewableContactsList) {
+            //     newContactsList.add(new Contact(contact.getPrenom(),
+            //             contact.getNom(),
+            //             contact.getTelephonePersonnel(),
+            //             contact.getEmail(), contact.getAdresse(),
+            //             contact.getCodePostal(),
+            //             contact.getRawGender(),
+            //             contact.getRawBirthDate(),
+            //             contact.getTelephoneProfessionnel(),
+            //             contact.getPseudo(),
+            //             contact.getLienDepotGit()));
+            // }
+
+            // on crée un nouveau contact à partir des champs modifiés
             Contact modifiedContact = new Contact(prenomField.getText(),
                     nomField.getText(),
                     telephonePersonnelField.getText(),
@@ -304,14 +313,22 @@ public class FormulaireContactController2 {
                     pseudoField.getText(),
                     lienDepotGitField.getText());
 
+            // si les champs modifiés sont valides (c'est là qu'il faudra mettre isRegexValid)      
             if (!nomField.getText().isEmpty() &&
             !prenomField.getText().isEmpty() &&
             !emailField.getText().isEmpty() &&
             !adresseField.getText().isEmpty() &&
             !codePostalField.getText().isEmpty()) {
+
+                // 1) on retire de la TableView le contact séléctionné qui a été modifié
                 viewableContactsList.remove(selectedContact);
+
+                // 2) on y ajoute la version modifiée du contact
                 viewableContactsList.add(new ViewableContact(modifiedContact));
-                contactsList = newViewableContactsList;
+
+                // on met à jour la liste de Contact sérialisable
+                // contactsList = newContactsList;
+
                 contactsList.add(modifiedContact);
                 contactsTable.setItems(viewableContactsList);
             }
@@ -430,18 +447,18 @@ public class FormulaireContactController2 {
             case ".json":
                 superserializer = jsonSerializer;
                 break;
-        }
-        for (ViewableContact contact : viewableContactSelection) {
-            contactSelection.add(contact.getContact());
-        }
-        if (viewableContactSelection.size() == 1) {
-            for (ViewableContact selectedContact : viewableContactSelection) {
-                superserializer.save(selectedContact.getPrenom() + fileExtension, selectedContact.getContact());
             }
-        } else {
-            superserializer.saveList("allcontacts" + fileExtension, contactSelection);
+            for (ViewableContact contact : viewableContactSelection) {
+                contactSelection.add(contact.getContact());
+            }
+            if (viewableContactSelection.size() == 1) {
+                for (ViewableContact selectedContact : viewableContactSelection) {
+                    superserializer.save(selectedContact.getPrenom() + fileExtension, selectedContact.getContact());
+                }
+            } else {
+                superserializer.saveList("allcontacts" + fileExtension, contactSelection);
+            }
         }
-    }
 
     @FXML
     private void handleQuitter() {
@@ -604,6 +621,7 @@ public class FormulaireContactController2 {
     // App.popToast("Veuillez entrer un prénom");
     // }
     // }
+
 
     /**
      * Méthode qui va permettre d'activer ou de désactiver les boutons en fonction

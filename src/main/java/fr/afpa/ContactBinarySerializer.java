@@ -43,7 +43,7 @@ public class ContactBinarySerializer implements Serializer<Contact>, Deserialize
     // defined but must not be called when updating contact list
     // add single object to a List<> and call saveList instead
     @Override
-    public void save(String filePath, boolean b) {
+    public void save(String filePath, Contact contact) {
         try {
             // ouverture d'un flux de sortie vers le fichier "contacts.serial"
             FileOutputStream file = new FileOutputStream(filePath);
@@ -52,7 +52,7 @@ public class ContactBinarySerializer implements Serializer<Contact>, Deserialize
             ObjectOutputStream out = new ObjectOutputStream(file);
             try {
                 // sérialisation : écriture de l'objet dans le flux de sortie
-                out.writeObject(b);
+                out.writeObject(contact);
                 // on vide le tampon
                 out.flush();
 
@@ -130,12 +130,6 @@ public class ContactBinarySerializer implements Serializer<Contact>, Deserialize
             System.out.println("ClassNotFoundException is caught");
         }
         return contact;
-    }
-
-    @Override
-    public void save(String filePath, Contact object) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
     }
 
 }
