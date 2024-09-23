@@ -217,4 +217,5 @@ public class Contact implements Serializable, Jsonable {
         json.put("gitLink", this.gitLink);
         json.toJson(writer);
     }
+
 }
